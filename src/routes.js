@@ -17,7 +17,6 @@
 */
 import Dashboard from "views/Dashboard.js";
 import Notifications from "views/Notifications.js";
-// import Icons from "views/Icons.js";
 // import Typography from "views/Typography.js";
 import TableList from "views/TableList.js";
 import OwnerManage from "views/OwnerManege";
@@ -57,13 +56,6 @@ var dashRoutes = [
     component: OwnerManage,
     layout: "/admin",
   },
-  // {
-  //   path: "/typography",
-  //   name: "Typography",
-  //   icon: "design-2_ruler-pencil",
-  //   component: Typography,
-  //   layout: "/admin",
-  // },
 
   {
     path: "/notifications",

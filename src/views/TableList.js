@@ -31,70 +31,52 @@ import {
 // core components
 import PanelHeader from "components/PanelHeader/PanelHeader.js";
 
-import { thead, tbody } from "variables/general";
+import { thead } from "variables/general";
+import axios from "axios";
 
 
 class RegularTables extends React.Component {
+
+  state = {
+    owenerData: []
+  }
+
+  componentDidMount = () => {
+   this.getOwernerData();
+  }
+
+  getOwernerData = () => {
+    axios.get('http://localhost:3000/api/ownerDisplay',
+    {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+      // console.log(response.data);
+      this.setState({owenerData: response.data})
+    });
+  }
+
   render() {
+    const { owenerData } = this.state;
     return (
       <>
         <PanelHeader size="sm" />
-        <div className="content">
+        <div className="content ">
           <Row>
-          <Col xs={12}>
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h4">All Propertys</CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <Table responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        {thead.map((prop, key) => {
-                          if (key === thead.length - 1)
-                            return (
-                              <th key={key} className="text-right">
-                                {prop}
-                              </th>
-                            );
-                          return <th key={key}>{prop}</th>;
-                        })}
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {tbody.map((prop, key) => {
-                        return (
-                          <tr key={key}>
-                            {prop.data.map((prop, key) => {
-                              if (key === thead.length - 1)
-                                return (
-                                  <td key={key} className="text-right">
-                                    {prop}
-                                  </td>
-                                );
-                              return <td key={key}>{prop}</td>;
-                            })}
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-            </Col>
             <Col xs={12}>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">All Deals</CardTitle>
+                  <CardTitle tag="h4" className="font-weight-bold">All Propertys owners</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table responsive>
-                    <thead className="text-primary">
+                    <thead className="text-primary font-weight-bold">
                       <tr>
                         {thead.map((prop, key) => {
                           if (key === thead.length - 1)
                             return (
-                              <th key={key} className="text-right">
+                              <th key={key} className="text-right font-weight-bold">
                                 {prop}
                               </th>
                             );
@@ -103,18 +85,21 @@ class RegularTables extends React.Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {tbody.map((prop, key) => {
+                      {owenerData.map((e, key) => {
                         return (
-                          <tr key={key}>
-                            {prop.data.map((prop, key) => {
-                              if (key === thead.length - 1)
-                                return (
-                                  <td key={key} className="text-right">
-                                    {prop}
-                                  </td>
-                                );
-                              return <td key={key}>{prop}</td>;
-                            })}
+                          <tr key={`${key}-key`} className="text-left">
+                           <td className="text-left font-weight-bold">
+                              {e.name}
+                            </td>
+                            <td className="text-left font-weight-bold">
+                              {e.email}
+                            </td>
+                            <td className="text-left font-weight-bold">
+                              {e.gender}
+                            </td>
+                            <td className="text-right font-weight-bold">
+                              {e.phone}
+                            </td>
                           </tr>
                         );
                       })}
@@ -123,7 +108,7 @@ class RegularTables extends React.Component {
                 </CardBody>
               </Card>
             </Col>
-                      </Row>
+          </Row>
         </div>
       </>
     );
