@@ -1,22 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { createBrowserHistory } from "history";
+import history from './history';
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "assets/scss/now-ui-dashboard.scss?v1.4.0";
 import "assets/css/demo.css";
-import App from './App';
-
 import AdminLayout from "layouts/Admin.js";
-
-const hist = createBrowserHistory();
-
+import Login from "./components/Login/Login"
+ 
 ReactDOM.render(
-  <Router history={hist}>
+  <Router history={history}>
     <Switch>
-      <App />
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+      <Route path="/Login"  component={Login} />
       <Redirect to="/admin/dashboard" />
     </Switch>
   </Router>,

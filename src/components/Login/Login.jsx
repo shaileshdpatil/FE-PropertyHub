@@ -1,34 +1,42 @@
-import React,{useState} from 'react';
+import React, { Component } from 'react';
 import './Login.css';
 import axios from "axios";
+import history from '../../history';
 
-function Login() {
-  const [email,setemail]= useState("");
-  const [password,setpassword]=useState("");
+ 
 
-  const LoginOwner = () => {
-    axios.get('http:localhost:3000/api/ownerLogin',
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then((response) => {;
-       alert('success')
-      });
+class Login extends Component {
+  state = {
+    owenerLogin :[],
+    email:'',
+    password:''
   }
-  return (
-    <div className="main">
-    <p className="sign" align="center" style={{fontSize:'30px'}}>Sign in</p>
-    <form className="form1">
 
-      <input className="un " type="text" align="center" placeholder="Username" value={email} onChange={(e)=>setemail(e.target.value)} />
-      <input className="pass" type="password" align="center" placeholder="Password" value={password} onChange={(e)=>setpassword(e.target.value)}  />
-      <button className="submit" align="center" onClick={LoginOwner}>Sign in</button>
-      <p className="forgot" align="center">Forgot Password?</p>
-         
-      </form>      
-    </div>
-  )
+  login = () => {
+    const {email,password} = this.state ;
+    const body = {email,password}
+    axios.post('http://localhost:3000/api/ownerLogin',body
+      ).then((res) => {
+       history.push("/admin/dashboard");
+      }).catch((e)=>{
+        console.log(e);
+        console.log("failed to login")
+      })
+  }
+
+  render() {
+    return (
+      <div className="main">
+        <p className="sign" align="center" style={{ fontSize: '30px' }}>Sign in</p>
+        <form className="form1">
+
+          <input className="un " type="text" align="center" placeholder="Username" onChange={(e) => this.setState({ email: e.target.value })} />
+          <input className="un " type="password" align="center" placeholder="Username" onChange={(e) => this.setState({ password: e.target.value })} />
+          <button className="submit" type="button" align="center" onClick={this.login}>Sign in</button>
+          <p className="forgot" align="center">Forgot Password?</p>
+        </form>
+      </div>
+    )
+  }
 }
-
 export default Login;

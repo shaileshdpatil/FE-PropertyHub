@@ -1,22 +1,9 @@
-/*!
 
-=========================================================
-* Now UI Dashboard React - v1.4.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/now-ui-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 /*eslint-disable*/
 import React, { Component } from "react";
+import Notifications from "../../views/feedback";
+import {Link} from 'react-router-dom';
+
 
 class FixedPlugin extends Component {
   constructor(props) {
@@ -40,22 +27,20 @@ class FixedPlugin extends Component {
           <div onClick={this.handleClick}>
             <i className="fa fa-cog fa-2x" />
           </div>
-          <ul className="dropdown-menu show">
-              <li className="button-container">
-              <a
-                href="https://www.creative-tim.com/product/now-ui-dashboard-pro-react?ref=nudr-fixed-plugin"
-                target="_blank"
+          <ul className="dropdown-menu show col-sm-6">
+              <li className="button-container" style={{padding:'none'}}>
+              <Link
+                to="/admin/dashboard"
                 className="btn btn-primary btn-block btn-round"
               >
                 Home
-              </a>
-              <a
-                href="https://www.creative-tim.com/product/now-ui-dashboard-react?ref=nudr-fixed-plugin"
-                target="_blank"
-                className="btn btn-warning btn-block btn-round"
+              </Link>
+              <Link
+                to="/admin/notifications"
+                className="btn btn-warning btn-block btn-round col-sm-12"
               >
                 Feedback
-              </a>
+              </Link>
             </li>
           </ul>
         </div>

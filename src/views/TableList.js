@@ -52,7 +52,7 @@ class RegularTables extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <Table responsive>
-                    <thead className="text-primary font-weight-bold">
+                    <thead className="text-primary font-weight-bold" style={{border: '1px solid black'}}>
                      
                       <tr>
                         <th className="text-left font-weight-bold">Owner Name</th>
@@ -63,7 +63,7 @@ class RegularTables extends React.Component {
                       </tr>
              
                     </thead>
-                    <tbody>
+                    <tbody style={{border: '1px solid black'}}>
                       {dealData.map((e, key) => {
                         return (
                           <tr key={`${key}-key`} className="text-left">
