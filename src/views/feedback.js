@@ -50,7 +50,6 @@ class Notifications extends React.Component {
                 <CardBody>
                   <Table responsive>
                     <thead className="text-primary font-weight-bold" style={{border: '1px solid black'}}>
-
                       <tr>
                         <th className="text-center font-weight-bold">Subject</th>
                         <th className="text-center font-weight-bold">Email</th>

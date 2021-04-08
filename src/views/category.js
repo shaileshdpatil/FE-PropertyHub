@@ -15,11 +15,14 @@ import {
 
 
 class category extends React.Component {
-    state = {
-        categoryData: [],
-        name:''
-    }
+    constructor(props) {
+        super(props);
 
+        this.state = {
+            categoryData: [],
+            name: ''
+        }
+    }
     componentDidMount = () => {
         this.getcategoryData();
     }
@@ -27,26 +30,34 @@ class category extends React.Component {
 
     getcategoryData = () => {
         axios.get('http://localhost:3000/api/categoryDisplay',
-        {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then((response) => {
-            this.setState({ categoryData: response.data })
-        });
+            {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then((response) => {
+                this.setState({ categoryData: response.data })
+            });
+    }
+
+
+    handleChange(e) {
+        const re = /[A-Za-z]+/g;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({ name: e.target.value });
+        }
     }
 
     submitForm = () => {
         const { name } = this.state;
         const body = {
-         name
+            name
         }
         axios.post("http://localhost:3000/api/insertcategory", body)
-        .then((resp) => {
-            this.getcategoryData();
-        }).catch((errs) => {
-            console.log(errs);
-        })
+            .then((resp) => {
+                this.getcategoryData();
+            }).catch((errs) => {
+                console.log(errs);
+            })
     }
 
 
@@ -66,7 +77,7 @@ class category extends React.Component {
                                     <form noValidate autoComplete="off" >
                                         <div style={{ alignItems: 'center' }}>
                                             <div>
-                                                <TextField id="outlined-basic" label="category name" variant="outlined"  onChange={(e) => this.setState({ name: e.target.value})} fullWidth={true} />
+                                                <TextField id="outlined-basic" error={this.state.name === ""}  helperText={this.state.name === "" ? 'Only charector values!' : ' '} label="category name" variant="outlined" value={this.state.name} onChange={this.handleChange} fullWidth={true} />
                                                 <Button variant="contained" fullWidth={true} color="primary" style={{ marginTop: '20px' }} onClick={this.submitForm}>Insert</Button>
                                             </div>
 
@@ -83,7 +94,7 @@ class category extends React.Component {
                                         <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
                                             <tr>
                                                 <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>category Name</th>
-                                                
+
                                                 <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Added date</th>
                                                 <th className="text-center font-weight-bold">Action</th>
                                             </tr>
@@ -105,7 +116,7 @@ class category extends React.Component {
                                                     </tr>
                                                 );
                                             })}
-                                            </tbody>
+                                        </tbody>
                                     </Table>
                                 </CardBody>
                             </Card>

@@ -58,6 +58,16 @@ class Packages extends React.Component {
             });
     }
 
+    delteData = (_id) =>{
+        console.log(this.state._id);
+        axios.delete(`http://localhost:3000/api/deletePackage/${_id}`).then((res)=>{
+            // alert("successfullt deleted")
+            this.getDealData();
+        }).catch((resspo)=>{
+            console.log("failed")
+        })
+    }
+
     render() {
         const { propertyData } = this.state;
         const marginfor = {
@@ -81,7 +91,7 @@ class Packages extends React.Component {
                                 <CardBody>
 
                                     <div>
-                                        <TextField id="outlined-basic" label="Package Name" variant="outlined"value={this.state.text1} onChange={(e) => this.setState({ name: e.target.value })} style={{ marginRight: 25 }} />
+                                        <TextField id="outlined-basic" label="Package Name" variant="outlined"  onChange={(e) => this.setState({ name: e.target.value })} style={{ marginRight: 25 }} />
                                         <TextField id="outlined-basic" label="Duration" variant="outlined" onChange={(e) => this.setState({ duration: e.target.value })} style={{ marginRight: 25 }} />
                                         <TextField id="outlined-basic" label="Description" onChange={(e) => this.setState({ description: e.target.value })} variant="outlined" />
                                     </div><br></br>
@@ -115,7 +125,9 @@ class Packages extends React.Component {
                                         </thead>
                                         <tbody style={{ border: '1px solid black' }}>
                                             {propertyData.map((e, key) => {
+                                                console.log(e);
                                                 return (
+                                                
                                                     <tr key={`${key}-key`} className="text-left">
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.name}
@@ -133,7 +145,7 @@ class Packages extends React.Component {
                                                             {e.description}
                                                         </td>
                                                         <td className="text-left font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <ButtonM variant="contained" color="secondary" size="large">Delete</ButtonM>
+                                                            <ButtonM variant="contained" color="secondary" size="large" onClick={(e)=>this.delteData(e._id)}>Delete</ButtonM>
                                                         </td>
                                                     </tr>
                                                 );

@@ -15,10 +15,17 @@ import {
 
 
 class subcategory extends React.Component {
-    state = {
+    constructor(props) {
+        super(props);
+
+    this.state = {
         subcategoryData: [],
         names: '',
+        subcategory:'',
+
     }
+    this.handleChange = this.handleChange.bind(this);
+}
 
     componentDidMount = () => {
         this.getsubcategoryData();
@@ -36,9 +43,11 @@ class subcategory extends React.Component {
             });
     }
 
+
     submitForm = () => {
-        const { names } = this.state;
-        const data = { names }
+        const { names,subcategory } = this.state;
+        const data = { names ,subcategory }
+        
         axios.post("http://localhost:3000/api/subcategoryadd", data)
             .then((response) => {
                 this.getsubcategoryData();
@@ -47,6 +56,13 @@ class subcategory extends React.Component {
             }).catch((error) => {
                 console.log(error);
             })
+    }
+
+    handleChange(e) {
+        const re = /[A-Za-z]+/g;
+        if (e.target.value === '' || re.test(e.target.value)) {
+            this.setState({ names: e.target.value });
+        }
     }
     render() {
         const { subcategoryData } = this.state;
@@ -75,11 +91,11 @@ class subcategory extends React.Component {
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
                                         <div style={{ alignItems: 'center' }}>
-                                            <div>
-                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ names: e.target.value })} label="sub category name" variant="outlined" style={marginfor.margin1} />
-                                                <TextField id="outlined-basic" label="category name" variant="outlined" style={marginfor.margin1} />
-                                                <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
-                                            </div>
+                                            <form>
+                                                <TextField id="outlined-basic" error={this.state.names === ""}  helperText={this.state.names === "" ? 'only charector values!' : ' '} placeholder='Type subcategory name' value={this.state.names} onChange={this.handleChange} label="sub category name" variant="outlined" style={marginfor.margin1} required/>
+                                                <TextField id="outlined-basic"  placeholder='Type category name' label="category name" variant="outlined" onChange={(e) => this.setState({ subcategory: e.target.value })} style={marginfor.margin1} required/>
+                                                <Button type="submit" variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
+                                            </form>
 
                                         </div>
                                     </form>
