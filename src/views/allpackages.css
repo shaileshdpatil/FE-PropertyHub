@@ -1,0 +1,14 @@
+.alert-msg{
+    color: red;
+}
+
+.btnInsert{
+    width: 20%;
+    height: 55px;
+    color: white;
+    background-color: darkblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}

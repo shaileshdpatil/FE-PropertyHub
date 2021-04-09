@@ -21,7 +21,7 @@ class subcategory extends React.Component {
     this.state = {
         subcategoryData: [],
         names: '',
-        subcategory:'',
+        category:'',
 
     }
     this.handleChange = this.handleChange.bind(this);
@@ -45,17 +45,21 @@ class subcategory extends React.Component {
 
 
     submitForm = () => {
-        const { names,subcategory } = this.state;
-        const data = { names ,subcategory }
-        
-        axios.post("http://localhost:3000/api/subcategoryadd", data)
-            .then((response) => {
-                this.getsubcategoryData();
-                alert("successfully inserted");
+        const { names,category } = this.state;
+        const data = { names ,category }
+        if(names?.lenght>=3 || category?.length>=4){
+            alert("please fill fields property")
+        }else{
+            axios.post("http://localhost:3000/api/subcategoryadd", data)
+                .then((response) => {
+                    this.getsubcategoryData();
+                    alert("successfully inserted");
+                   
+                }).catch((error) => {
+                    console.log(error);
+                })
 
-            }).catch((error) => {
-                console.log(error);
-            })
+        }
     }
 
     handleChange(e) {
@@ -64,6 +68,7 @@ class subcategory extends React.Component {
             this.setState({ names: e.target.value });
         }
     }
+    
     render() {
         const { subcategoryData } = this.state;
         const marginfor = {
@@ -91,11 +96,11 @@ class subcategory extends React.Component {
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
                                         <div style={{ alignItems: 'center' }}>
-                                            <form>
-                                                <TextField id="outlined-basic" error={this.state.names === ""}  helperText={this.state.names === "" ? 'only charector values!' : ' '} placeholder='Type subcategory name' value={this.state.names} onChange={this.handleChange} label="sub category name" variant="outlined" style={marginfor.margin1} required/>
-                                                <TextField id="outlined-basic"  placeholder='Type category name' label="category name" variant="outlined" onChange={(e) => this.setState({ subcategory: e.target.value })} style={marginfor.margin1} required/>
+                                    
+                                                <TextField id="outlined-basic" error={this.state.names === ""} placeholder='Type subcategory name' value={this.state.names} onChange={this.handleChange} label="sub category name" variant="outlined" style={marginfor.margin1} required/>
+                                                <TextField id="outlined-basic" error={this.state.category === ""} placeholder='Type category name' label="category name" onChange={(e) => this.setState({ category: e.target.value })} variant="outlined" style={marginfor.margin1} required/>
                                                 <Button type="submit" variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
-                                            </form>
+                                        
 
                                         </div>
                                     </form>
@@ -110,7 +115,8 @@ class subcategory extends React.Component {
                                         <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
                                             <tr>
                                                 <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Sub-category Name</th>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Added date</th>
+                                                {/* <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>category Name</th> */}
+                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Category</th>
                                                 <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Action</th>
                                             </tr>
 
@@ -122,9 +128,9 @@ class subcategory extends React.Component {
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.names}
                                                         </td>
-
+                                                
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            {e.added_date}
+                                                            {e.category}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             <Button variant="contained" color="secondary" className="btn-danger" onClick={this.submitForm}>Delete</Button>

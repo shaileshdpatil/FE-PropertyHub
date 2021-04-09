@@ -11,6 +11,8 @@ import Allpropertys from './views/Allproperty'
 import Packages from './views/allpackages' 
 import category from './views/category';
 import subcategory from './views/subcategory';
+import city from "./views/city";
+import state from "./views/state"
 
 var dashRoutes = [
   {
@@ -81,14 +83,14 @@ var dashRoutes = [
     path: "/state",
     name: "state",
     icon: "location_world",
-    component: Notifications,
+    component: state,
     layout: "/admin",
   },
   {
     path: "/city",
     name: "city",
     icon: "travel_istanbul",
-    component: Notifications,
+    component: city,
     layout: "/admin",
   },
   {

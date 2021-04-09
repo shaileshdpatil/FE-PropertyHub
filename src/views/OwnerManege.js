@@ -25,6 +25,12 @@ class RegularTables extends React.Component {
     this.getOwernerData();
   }
 
+  deleteData = () => {
+    axios.delete("localhost:3000/api/deleteOwner").then(
+      alert("Successfully deleted")
+    )
+  }
+
   getOwernerData = () => {
     axios.get('http://localhost:3000/api/ownerDisplay',
       {
@@ -40,11 +46,6 @@ class RegularTables extends React.Component {
 
     const { owenerData } = this.state;
 
-    const deleteData = () => {
-      axios.delete("localhost:3000/api/deleteOwner").then(
-        alert("Successfully deleted")
-      )
-    }
     return (
       <>
         <PanelHeader size="sm" />
@@ -83,7 +84,8 @@ class RegularTables extends React.Component {
                               {e.phone}
                             </td>
                             <td className="text-center">
-                              <Button className="btn-danger" onClick={deleteData}>Delete</Button>
+                              <Button className="btn-danger" onClick={this.deleteData}>Accept</Button>
+                              <Button className="btn-danger" onClick={this.deleteData}>Reject</Button>
                             </td>
                           </tr>
                         );

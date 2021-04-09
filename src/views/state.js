@@ -12,109 +12,107 @@ import {
     Row,
     Col,
 } from "reactstrap";
-import CustomizedDialogs from './Dailog/Dailogpackage'
 
 
-
-class category extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            categoryData: [],
-            name: ''
-        }
+class state extends React.Component {
+    state = {
+        stateData: [],
+        country: '',
+        states: ''
     }
+
     componentDidMount = () => {
-        this.getcategoryData();
+        this.getstateData();
     }
-    // http://localhost:3000/api/categoryDisplay
 
-    getcategoryData = () => {
-        axios.get('http://localhost:3000/api/categoryDisplay',
+    getstateData = () => {
+        axios.get('http://localhost:3000/api/statedisp',
             {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then((response) => {
-                this.setState({ categoryData: response.data })
+                // console.log(response.data);
+                this.setState({ stateData: response.data })
             });
     }
 
-
     submitForm = () => {
-        const { name } = this.state;
-        const body = {
-            name
-        }
-        if(name?.length >= 3){
-            alert("invalid data")
-        }else{
-            axios.post("http://localhost:3000/api/insertcategory", body)
-                .then((resp) => {
-                    this.getcategoryData();
-                }).catch((errs) => {
-                    console.log(errs);
-                })
+        const { country,states } = this.state;
+        const data = { country,states }
+        axios.post("http://localhost:3000/api/stateadd", data)
+            .then((response) => {
+                this.getstateData();
+                alert("successfully inserted");
 
-        }
+            }).catch((error) => {
+                console.log(error);
+            })
     }
-
-
     render() {
-        const { categoryData } = this.state;
+        const { stateData } = this.state;
+        const marginfor = {
+            margin1: {
+                marginRight: '15px',
+            },
+            btnsize: {
+                marginTop: '7px',
+                paddingTop: '10px',
+                paddingBottom: '10px',
+                paddingRight: '50px',
+                paddingLeft: '50px'
+            }
+        }
         return (
             <>
                 <PanelHeader size="sm" />
                 <div className="content">
                     <Row>
-                        <Col xs={12} md={12}>
+                        <Col xs={12}>
                             <Card>
                                 <CardHeader>
-                                    <CardTitle tag="h4" className="font-weight-bold">Add category</CardTitle>
+                                    <CardTitle tag="h4" className="font-weight-bold">state</CardTitle>
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
                                         <div style={{ alignItems: 'center' }}>
                                             <div>
-                                                <TextField id="outlined-basic" error={this.state.name === ""} label="category name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} fullWidth={true} required/>
-                                                <p className="alert-msg">{this.state.name?.length <= 3 && 'minimum length 3'}</p>
+                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ country: e.target.value })} label="country" variant="outlined" style={marginfor.margin1} required/>
+                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state name" variant="outlined" style={marginfor.margin1} required/>
+                                                <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
                                             </div>
-                                                <Button variant="contained" fullWidth={true} color="primary" style={{ marginTop: '20px' }} onClick={this.submitForm}>Insert</Button>
-                                            
-                                                
-                                             {/* <CustomizedDialogs /> */}
+
                                         </div>
                                     </form>
                                 </CardBody>
                             </Card>
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>All categorys</CardTitle>
+                                    <CardTitle tag="h4">All state</CardTitle>
                                 </CardHeader>
                                 <CardBody>
                                     <Table responsive>
                                         <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
                                             <tr>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>category Name</th>
-
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Added date</th>
-                                                <th className="text-center font-weight-bold">Action</th>
+                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>country</th>
+                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>state</th>
+                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Action</th>
                                             </tr>
 
                                         </thead>
                                         <tbody style={{ border: '1px solid black' }}>
-                                            {categoryData.map((e, key) => {
+                                            {stateData.map((e, key) => {
                                                 return (
-                                                    <tr key={`${key}-key`} className="text-left">
+                                                    <tr key={`${key}-key`} className="text-center">
+
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            {e.name}
+                                                            {e.country}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            {e.name}
+                                                            {e.states}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <Button variant="contained" color="secondary" size="large">Delete</Button>
+                                                            <Button variant="contained" color="secondary" className="btn-danger" onClick={this.submitForm}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );
@@ -131,4 +129,4 @@ class category extends React.Component {
     }
 }
 
-export default category;
+export default state;

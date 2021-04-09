@@ -12,109 +12,107 @@ import {
     Row,
     Col,
 } from "reactstrap";
-import CustomizedDialogs from './Dailog/Dailogpackage'
 
 
-
-class category extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            categoryData: [],
-            name: ''
-        }
+class city extends React.Component {
+    state = {
+        cityData: [],
+        citys: '',
+        states: ''
+        
     }
+
     componentDidMount = () => {
-        this.getcategoryData();
+        this.getcityData();
     }
-    // http://localhost:3000/api/categoryDisplay
 
-    getcategoryData = () => {
-        axios.get('http://localhost:3000/api/categoryDisplay',
+    getcityData = () => {
+        axios.get('http://localhost:3000/api/citydisp',
             {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             }).then((response) => {
-                this.setState({ categoryData: response.data })
+                // console.log(response.data);
+                this.setState({ cityData: response.data })
             });
     }
 
-
     submitForm = () => {
-        const { name } = this.state;
-        const body = {
-            name
-        }
-        if(name?.length >= 3){
-            alert("invalid data")
-        }else{
-            axios.post("http://localhost:3000/api/insertcategory", body)
-                .then((resp) => {
-                    this.getcategoryData();
-                }).catch((errs) => {
-                    console.log(errs);
-                })
+        const { citys,states} = this.state;
+        const data = {citys,states }
+        axios.post("http://localhost:3000/api/cityadd", data)
+            .then((response) => {
+                this.getcityData();
+                alert("successfully inserted");
 
-        }
+            }).catch((error) => {
+                console.log(error);
+            })
     }
-
-
     render() {
-        const { categoryData } = this.state;
+        const { cityData } = this.state;
+        const marginfor = {
+            margin1: {
+                marginRight: '15px',
+            },
+            btnsize: {
+                marginTop: '7px',
+                paddingTop: '10px',
+                paddingBottom: '10px',
+                paddingRight: '50px',
+                paddingLeft: '50px'
+            }
+        }
         return (
             <>
                 <PanelHeader size="sm" />
                 <div className="content">
                     <Row>
-                        <Col xs={12} md={12}>
+                        <Col xs={12}>
                             <Card>
                                 <CardHeader>
-                                    <CardTitle tag="h4" className="font-weight-bold">Add category</CardTitle>
+                                    <CardTitle tag="h4" className="font-weight-bold">city</CardTitle>
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
                                         <div style={{ alignItems: 'center' }}>
                                             <div>
-                                                <TextField id="outlined-basic" error={this.state.name === ""} label="category name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} fullWidth={true} required/>
-                                                <p className="alert-msg">{this.state.name?.length <= 3 && 'minimum length 3'}</p>
+                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ citys: e.target.value })} label="city" variant="outlined" style={marginfor.margin1} />
+                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state" variant="outlined" style={marginfor.margin1} />
+                                                <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
                                             </div>
-                                                <Button variant="contained" fullWidth={true} color="primary" style={{ marginTop: '20px' }} onClick={this.submitForm}>Insert</Button>
-                                            
-                                                
-                                             {/* <CustomizedDialogs /> */}
+
                                         </div>
                                     </form>
                                 </CardBody>
                             </Card>
                             <Card>
                                 <CardHeader>
-                                    <CardTitle>All categorys</CardTitle>
+                                    <CardTitle tag="h4">All city</CardTitle>
                                 </CardHeader>
                                 <CardBody>
                                     <Table responsive>
                                         <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
                                             <tr>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>category Name</th>
-
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Added date</th>
-                                                <th className="text-center font-weight-bold">Action</th>
+                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>city</th>
+                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>state</th>
+                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Action</th>
                                             </tr>
 
                                         </thead>
                                         <tbody style={{ border: '1px solid black' }}>
-                                            {categoryData.map((e, key) => {
+                                            {cityData.map((e, key) => {
                                                 return (
-                                                    <tr key={`${key}-key`} className="text-left">
+                                                    <tr key={`${key}-key`} className="text-center">
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            {e.name}
+                                                            {e.citys}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            {e.name}
+                                                            {e.states}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <Button variant="contained" color="secondary" size="large">Delete</Button>
+                                                            <Button variant="contained" color="secondary" className="btn-danger" onClick={this.submitForm}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );
@@ -131,4 +129,4 @@ class category extends React.Component {
     }
 }
 
-export default category;
+export default city;
