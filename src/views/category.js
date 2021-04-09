@@ -12,7 +12,7 @@ import {
     Row,
     Col,
 } from "reactstrap";
-import CustomizedDialogs from './Dailog/Dailogpackage'
+// import CustomizedDialogs from './Dailog/Dailogpackage'
 
 
 

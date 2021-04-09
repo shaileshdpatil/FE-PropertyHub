@@ -38,19 +38,24 @@ class state extends React.Component {
     }
 
     submitForm = () => {
-        const { country,states } = this.state;
-        const data = { country,states }
-        axios.post("http://localhost:3000/api/stateadd", data)
-            .then((response) => {
-                this.getstateData();
-                alert("successfully inserted");
+        const { country, states } = this.state;
+        const data = { country, states }
+        if (country <= 3 || states <= 3) {
+            alert("please fill fields property");
+        } else {
+            axios.post("http://localhost:3000/api/stateadd", data)
+                .then((response) => {
+                    this.getstateData();
+                    alert("successfully inserted");
 
-            }).catch((error) => {
-                console.log(error);
-            })
+                }).catch((error) => {
+                    console.log(error);
+                })
+
+        }
     }
     render() {
-        const { stateData } = this.state;
+        const { stateData, country,states } = this.state;
         const marginfor = {
             margin1: {
                 marginRight: '15px',
@@ -63,6 +68,7 @@ class state extends React.Component {
                 paddingLeft: '50px'
             }
         }
+ 
         return (
             <>
                 <PanelHeader size="sm" />
@@ -75,12 +81,19 @@ class state extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
-                                        <div style={{ alignItems: 'center' }}>
-                                            <div>
-                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ country: e.target.value })} label="country" variant="outlined" style={marginfor.margin1} required/>
-                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state name" variant="outlined" style={marginfor.margin1} required/>
+                                        <div style={{ alignItems: 'center',display:'flex' }}>
+                                            
+                                                <div>
+                                                    <TextField id="outlined-basic" onChange={(e) => this.setState({ country: e.target.value })} label="country" variant="outlined" style={marginfor.margin1} required />
+                                                    <p className="alert-msg">{country?.length <= 3 && 'minimum length 3'}</p>
+
+                                                </div>
+                                                <div>
+                                                    <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state name" variant="outlined" style={marginfor.margin1} required />
+                                                    <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p>
+                                                </div>
                                                 <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
-                                            </div>
+                                        
 
                                         </div>
                                     </form>

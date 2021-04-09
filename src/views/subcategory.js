@@ -47,7 +47,7 @@ class subcategory extends React.Component {
     submitForm = () => {
         const { names,category } = this.state;
         const data = { names ,category }
-        if(names?.lenght>=3 || category?.length>=4){
+        if(names?.lenght <= 3 || category?.length <= 3){
             alert("please fill fields property")
         }else{
             axios.post("http://localhost:3000/api/subcategoryadd", data)
@@ -70,7 +70,7 @@ class subcategory extends React.Component {
     }
     
     render() {
-        const { subcategoryData } = this.state;
+        const { subcategoryData,names,category } = this.state;
         const marginfor = {
             margin1: {
                 marginRight: '15px',
@@ -95,10 +95,15 @@ class subcategory extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
-                                        <div style={{ alignItems: 'center' }}>
-                                    
+                                        <div style={{display:'flex' }}>
+                                            <div>
                                                 <TextField id="outlined-basic" error={this.state.names === ""} placeholder='Type subcategory name' value={this.state.names} onChange={this.handleChange} label="sub category name" variant="outlined" style={marginfor.margin1} required/>
+                                                <p className="alert-msg">{names?.length <= 3 && 'minimum length 3'}</p>
+                                            </div>
+                                            <div>
                                                 <TextField id="outlined-basic" error={this.state.category === ""} placeholder='Type category name' label="category name" onChange={(e) => this.setState({ category: e.target.value })} variant="outlined" style={marginfor.margin1} required/>
+                                                <p className="alert-msg">{category?.length <= 3 && 'minimum length 3'}</p>
+                                            </div>
                                                 <Button type="submit" variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
                                         
 

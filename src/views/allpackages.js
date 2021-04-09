@@ -35,7 +35,7 @@ class Packages extends React.Component {
 
 
 	submitForm = () => {
-		const { name, duration, no_of_ads, amount, description, validations } = this.state;
+		const { name, duration, no_of_ads, amount, description } = this.state;
 
 		const body = {
 			name, duration, no_of_ads, amount, description
@@ -71,7 +71,7 @@ class Packages extends React.Component {
 
 	deleteData = (id) => {
 		axios.delete(`http://localhost:3000/api/deletePackage/${id}`).then((res) => {
-			// alert("successfullt deleted")
+			alert("successfully deleted")
 			this.getDealData();
 		}).catch((resspo) => {
 			console.log("failed")

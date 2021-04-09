@@ -17,10 +17,16 @@ class Login extends Component {
     const body = {email,password}
     axios.post('http://localhost:3000/api/ownerLogin',body
       ).then((res) => {
-       history.push("/admin/dashboard");
+        console.log(res);
+        const status = res.data.user.status;
+        if (status) {
+          history.push("/admin/dashboard");
+        } else {
+          alert('User is not verified');
+        }
       }).catch((e)=>{
-        console.log(e);
-        console.log("failed to login")
+        // console.log(e);
+        alert("failed to login")
       })
   }
 
@@ -29,11 +35,10 @@ class Login extends Component {
       <div className="main">
         <p className="sign" align="center" style={{ fontSize: '30px' }}>Sign in</p>
         <form className="form1">
-
           <input className="un " type="text" align="center" placeholder="Username" onChange={(e) => this.setState({ email: e.target.value })} />
-          <input className="un " type="password" align="center" placeholder="Username" onChange={(e) => this.setState({ password: e.target.value })} />
+          <input className="un " type="password" align="center" placeholder="password" onChange={(e) => this.setState({ password: e.target.value })} />
           <button className="submit" type="button" align="center" onClick={this.login}>Sign in</button>
-          <p className="forgot" align="center">Forgot Password?</p>
+          <a className="forgot" align="center" to="/owner/register-owner">Forgot Password?</a>
         </form>
       </div>
     )

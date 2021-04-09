@@ -93,12 +93,12 @@ var dashRoutes = [
     component: city,
     layout: "/admin",
   },
-  {
-    path: "/user-page",
-    name: "Profile",
-    icon: "users_single-02",
-    component: UserPage,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/user-page",
+  //   name: "Profile",
+  //   icon: "users_single-02",
+  //   component: UserPage,
+  //   layout: "/admin",
+  // },
 ];
 export default dashRoutes;

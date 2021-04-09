@@ -8,12 +8,16 @@ import "assets/scss/now-ui-dashboard.scss?v1.4.0";
 import "assets/css/demo.css";
 import AdminLayout from "layouts/Admin.js";
 import Login from "./components/Login/Login"
+import  {LoginOwner} from './components/OwnerPages/LoginOwner';
+import  {RegisterOwner} from './components/OwnerPages/RegisterOwner';
  
 ReactDOM.render(
   <Router history={history}>
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route path="/Login"  component={Login} />
+      <Route path="/owner/Login-owner"  component={LoginOwner} />
+      <Route path="/owner/register-owner"  component={RegisterOwner} />
       <Redirect to="/admin/dashboard" />
     </Switch>
   </Router>,

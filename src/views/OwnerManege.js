@@ -25,12 +25,25 @@ class RegularTables extends React.Component {
     this.getOwernerData();
   }
 
-  deleteData = () => {
-    axios.delete("localhost:3000/api/deleteOwner").then(
-      alert("Successfully deleted")
-    )
+  activateOwner = (id) =>{
+    axios.put(`http://localhost:3000/api/updateOwner/${id}/status`)
+    .then(
+      alert("successfullt Activted"),
+      this.getOwernerData()
+    ).catch((res)=>{
+      console.log("activation failed")
+    })
   }
 
+  deActivateOwner = (id) =>{
+    axios.put(`http://localhost:3000/api/deactivateOwner/${id}/status`)
+    .then(
+      alert("successfullt deActivted"),
+      this.getOwernerData()
+    ).catch((res)=>{
+      console.log("activation failed")
+    })
+  }
   getOwernerData = () => {
     axios.get('http://localhost:3000/api/ownerDisplay',
       {
@@ -84,8 +97,9 @@ class RegularTables extends React.Component {
                               {e.phone}
                             </td>
                             <td className="text-center">
-                              <Button className="btn-danger" onClick={this.deleteData}>Accept</Button>
-                              <Button className="btn-danger" onClick={this.deleteData}>Reject</Button>
+                              <Button className="btn-success" onClick={()=>this.activateOwner(e._id)} style={{marginRight:'10px'}}>Accept</Button>
+                              <Button className="btn-danger" onClick={()=>this.deActivateOwner(e._id)}>Reject</Button>
+                              
                             </td>
                           </tr>
                         );
