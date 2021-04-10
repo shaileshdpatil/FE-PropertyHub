@@ -1,37 +1,23 @@
-/*!
-
-=========================================================
-* Now UI Dashboard React - v1.4.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-dashboard-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/now-ui-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
   Container,
   InputGroup,
   InputGroupText,
   InputGroupAddon,
   Input,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle
 } from "reactstrap";
 
 import routes from "routes.js";
+
 
 class Header extends React.Component {
   state = {
@@ -158,7 +144,7 @@ class Header extends React.Component {
           >
             <form>
               <InputGroup className="no-border">
-                <Input placeholder="Search..." />
+                <Input placeholder="Search..." className="col=md-12"/>
                 <InputGroupAddon addonType="append">
                   <InputGroupText>
                     <i className="now-ui-icons ui-1_zoom-bold" />
@@ -167,38 +153,24 @@ class Header extends React.Component {
               </InputGroup>
             </form>
             <Nav navbar>
-              {/* <NavItem>
-                <Link to="#pablo" className="nav-link">
-                  <i className="now-ui-icons media-2_sound-wave" />
-                  <p>
-                    <span className="d-lg-none d-md-block">Stats</span>
-                  </p>
-                </Link>
-              </NavItem> */}
-              {/* <Dropdown
+             
+              <Dropdown
                 nav
                 isOpen={this.state.dropdownOpen}
                 toggle={(e) => this.dropdownToggle(e)}
               >
                 <DropdownToggle caret nav>
-                  <i className="now-ui-icons location_world" />
+                <i className="now-ui-icons users_single-02" />
                   <p>
                     <span className="d-lg-none d-md-block">Some Actions</span>
                   </p>
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem tag="a">Action</DropdownItem>
-                  <DropdownItem tag="a">Another Action</DropdownItem>
+                  <DropdownItem tag="a" href="http://localhost:3001/Login">Logout</DropdownItem>
+                  
                 </DropdownMenu>
-              </Dropdown> */}
-              <NavItem>
-                <Link to="user-page" className="nav-link">
-                  <i className="now-ui-icons users_single-02" />
-                  <p>
-                    <span className="d-lg-none d-md-block">Account</span>
-                  </p>
-                </Link>
-              </NavItem>
+              </Dropdown>
+        
             </Nav>
           </Collapse>
         </Container>

@@ -6,7 +6,7 @@ import Notifications from "views/feedback";
 import OwnerManage from "views/OwnerManege";
 import Maps from "views/Maps.js";
 // import Upgrade from "views/Upgrade.js";
-import UserPage from "views/UserPage.js";
+// import UserPage from "views/UserPage.js";
 import Allpropertys from './views/Allproperty'
 import Packages from './views/allpackages' 
 import category from './views/category';

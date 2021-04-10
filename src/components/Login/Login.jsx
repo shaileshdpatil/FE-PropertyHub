@@ -38,7 +38,7 @@ class Login extends Component {
           <input className="un " type="text" align="center" placeholder="Username" onChange={(e) => this.setState({ email: e.target.value })} />
           <input className="un " type="password" align="center" placeholder="password" onChange={(e) => this.setState({ password: e.target.value })} />
           <button className="submit" type="button" align="center" onClick={this.login}>Sign in</button>
-          <a className="forgot" align="center" to="/owner/register-owner">Forgot Password?</a>
+          <br></br><a className="forgot" align="center" href="abc" style={{marginLeft:'40px'}}>Forgot Password?</a>
         </form>
       </div>
     )

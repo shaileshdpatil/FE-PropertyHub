@@ -12,6 +12,7 @@ import {
     Row,
     Col,
 } from "reactstrap";
+import './allpackages.css'
 
 
 class state extends React.Component {
@@ -54,6 +55,14 @@ class state extends React.Component {
 
         }
     }
+    deleteData = (id) => {
+		axios.delete(`http://localhost:3000/api/deletestate/${id}`).then((res) => {
+			alert("successfully deleted")
+			this.getstateData();
+		}).catch((resspo) => {
+			console.log("failed")
+		})
+	}
     render() {
         const { stateData, country,states } = this.state;
         const marginfor = {
@@ -81,7 +90,7 @@ class state extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
-                                        <div style={{ alignItems: 'center',display:'flex' }}>
+                                        <div style={{ alignItems: 'center',display:'flex' }} className="anchor">
                                             
                                                 <div>
                                                     <TextField id="outlined-basic" onChange={(e) => this.setState({ country: e.target.value })} label="country" variant="outlined" style={marginfor.margin1} required />
@@ -92,6 +101,7 @@ class state extends React.Component {
                                                     <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state name" variant="outlined" style={marginfor.margin1} required />
                                                     <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p>
                                                 </div>
+                                                
                                                 <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
                                         
 
@@ -125,7 +135,7 @@ class state extends React.Component {
                                                             {e.states}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <Button variant="contained" color="secondary" className="btn-danger" onClick={this.submitForm}>Delete</Button>
+                                                            <Button variant="contained" color="secondary" className="btn-danger" onClick={() => this.deleteData(e._id)}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );

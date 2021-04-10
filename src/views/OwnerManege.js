@@ -25,24 +25,25 @@ class RegularTables extends React.Component {
     this.getOwernerData();
   }
 
-  activateOwner = (id) =>{
+  activateOwner = (id) => {
     axios.put(`http://localhost:3000/api/updateOwner/${id}/status`)
-    .then(
-      alert("successfullt Activted"),
-      this.getOwernerData()
-    ).catch((res)=>{
-      console.log("activation failed")
-    })
+      .then(
+        alert("successfullt Activted"),
+        this.getOwernerData()
+      ).catch((res) => {
+        console.log("activation failed")
+      })
   }
 
-  deActivateOwner = (id) =>{
+  deActivateOwner = (id) => {
+
     axios.put(`http://localhost:3000/api/deactivateOwner/${id}/status`)
-    .then(
-      alert("successfullt deActivted"),
-      this.getOwernerData()
-    ).catch((res)=>{
-      console.log("activation failed")
-    })
+      .then(
+        alert("successfullt deActivted"),
+        this.getOwernerData()
+      ).catch((res) => {
+        console.log("activation failed")
+      })
   }
   getOwernerData = () => {
     axios.get('http://localhost:3000/api/ownerDisplay',
@@ -71,35 +72,42 @@ class RegularTables extends React.Component {
                 </CardHeader>
                 <CardBody>
                   <Table responsive>
-                    <thead className="text-primary font-weight-bold" style={{border: '1px solid black'}}>
+                    <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
                       <tr>
                         <th className="text-center font-weight-bold">Name</th>
                         <th className="text-center font-weight-bold">Email</th>
-                        <th className="text-center font-weight-bold">Gender</th>
+                        {/* <th className="text-center font-weight-bold">Gender</th> */}
                         <th className="text-center font-weight-bold">Phone No</th>
                         <th className="text-center font-weight-bold">Action</th>
                       </tr>
                     </thead>
-                    <tbody style={{border: '1px solid black'}}>
+                    <tbody style={{ border: '1px solid black' }}>
                       {owenerData.map((e, key) => {
                         return (
                           <tr key={`${key}-key`} className="text-left">
                             <td className="text-center font-weight-bold">
-                              {e.name}
+                              {e.names}
                             </td>
                             <td className="text-center font-weight-bold">
                               {e.email}
                             </td>
                             <td className="text-center font-weight-bold">
-                              {e.gender}
-                            </td>
-                            <td className="text-center font-weight-bold">
                               {e.phone}
                             </td>
-                            <td className="text-center">
-                              <Button className="btn-success" onClick={()=>this.activateOwner(e._id)} style={{marginRight:'10px'}}>Accept</Button>
-                              <Button className="btn-danger" onClick={()=>this.deActivateOwner(e._id)}>Reject</Button>
+
+
+
+                            <td className="text-center" style={{ display: "flex", justifyContent: 'center' }}>
+                              {
+                                e.status
+                                  ? <p style={{ fontWeight: 'bold', marginRight: '12px' }}>Already verified</p>
+                                  : <Button type="submit" className="btn btn-success" onClick={() => this.activateOwner(e._id)} style={{marginRight:'23px'}}>Accept</Button>
+                              }
+                              <Button type="submit" className="btn btn-danger" onClick={() => this.deActivateOwner(e._id)} style={{ marginRight: '10px' }}>Reject</Button>
                               
+
+
+
                             </td>
                           </tr>
                         );

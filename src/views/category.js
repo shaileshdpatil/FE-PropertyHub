@@ -13,7 +13,7 @@ import {
     Col,
 } from "reactstrap";
 // import CustomizedDialogs from './Dailog/Dailogpackage'
-
+import './allpackages.css'
 
 
 class category extends React.Component {
@@ -47,11 +47,12 @@ class category extends React.Component {
         const body = {
             name
         }
-        if(name?.length >= 3){
+        if(name?.length <= 3){
             alert("invalid data")
         }else{
             axios.post("http://localhost:3000/api/insertcategory", body)
                 .then((resp) => {
+                    alert("successfully inserted");
                     this.getcategoryData();
                 }).catch((errs) => {
                     console.log(errs);
@@ -59,6 +60,14 @@ class category extends React.Component {
 
         }
     }
+    deleteCategory = (id) => {
+		axios.delete(`http://localhost:3000/api/deleteOcategory/${id}`).then((res) => {
+			alert("successfully deleted")
+			this.getcategoryData();
+		}).catch((resspo) => {
+			console.log("failed")
+		})
+	}
 
 
     render() {
@@ -76,7 +85,7 @@ class category extends React.Component {
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
                                         <div style={{ alignItems: 'center' }}>
-                                            <div>
+                                            <div className="anchor">
                                                 <TextField id="outlined-basic" error={this.state.name === ""} label="category name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} fullWidth={true} required/>
                                                 <p className="alert-msg">{this.state.name?.length <= 3 && 'minimum length 3'}</p>
                                             </div>
@@ -96,9 +105,9 @@ class category extends React.Component {
                                     <Table responsive>
                                         <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
                                             <tr>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>category Name</th>
+                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>sub-category Name</th>
 
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Added date</th>
+                                                {/* <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Added date</th> */}
                                                 <th className="text-center font-weight-bold">Action</th>
                                             </tr>
 
@@ -110,11 +119,11 @@ class category extends React.Component {
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.name}
                                                         </td>
+                                                        {/* <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
+                                                            {e.added_date}
+                                                        </td> */}
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            {e.name}
-                                                        </td>
-                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <Button variant="contained" color="secondary" size="large">Delete</Button>
+                                                            <Button variant="contained" color="secondary" size="large" onClick={() => this.deleteCategory(e._id)}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );

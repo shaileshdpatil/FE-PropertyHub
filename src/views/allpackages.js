@@ -15,6 +15,8 @@ import {
 	// Label,
 	// Input
 } from "reactstrap";
+import './allpackages.css'
+
 
 // core components
 import PanelHeader from "components/PanelHeader/PanelHeader.js";
@@ -41,7 +43,8 @@ class Packages extends React.Component {
 			name, duration, no_of_ads, amount, description
 		}
 
-		if (name?.length <= 3 || duration < 1 || no_of_ads < 3 || description?.length < 10 || amount < 1) {
+		if (name?.length <= 3 || name?.length >= 8 || duration < 1 || no_of_ads < 3 || description?.length < 10 || amount < 1) {
+			alert("fill properly");
 		} else {
 			axios.post("http://localhost:3000/api/packageadd", body)
 				.then((response) => {
@@ -93,10 +96,10 @@ class Packages extends React.Component {
 								</CardHeader>
 								<CardBody>
 
-									<div style={{ display: 'flex' }}>
+									<div style={{ display: 'flex' }} className="anchor">
 										<div>
 											<TextField id="outlined-basic" type="string" label="Package Name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} style={{ marginRight: 25 }} required />
-											<p className="alert-msg">{name?.length <= 3 && 'minimum length 3'}</p>
+											<p className="alert-msg">{name?.length <= 3  && 'minimum length 3' || name?.length >= 8  && 'maxium length 10'}</p>
 										</div>
 										<div>
 											<TextField id="outlined-basic" type="number" label="Duration" variant="outlined" onChange={(e) => this.setState({ duration: e.target.value })} style={{ marginRight: 25 }} required />
@@ -108,7 +111,7 @@ class Packages extends React.Component {
 										</div>
 									</div>
 
-									<div style={{ display: 'flex' }}>
+									<div style={{ display: 'flex' }} className="anchor">
 										<div>
 											<TextField id="outlined-basic" type="number" label="No of ads" onChange={(e) => this.setState({ no_of_ads: e.target.value })} variant="outlined" style={{ marginRight: 25 }} required />
 											<p className="alert-msg">{no_of_ads < 3 && 'minimum 3 Ads'}</p>
@@ -117,7 +120,7 @@ class Packages extends React.Component {
 											<TextField id="outlined-basic" type="number" label="Amount" onChange={(e) => this.setState({ amount: e.target.value })} variant="outlined" style={{ marginRight: 25 }} required />
 											<p className="alert-msg">{amount < 1 && 'must be more than 0'}</p>
 										</div>
-										<button className="btnInsert" onClick={this.submitForm}>Insert</button>
+										<button className="btnInsert" onClick={this.submitForm} style={{width:'220px',marginTop:'0px',marginBottom:'15px',height:'55px',borderRadius:'10px',backgroundColor:'skyblue',border:'none',fontWeight:'bolder'}}>Insert</button>
 									</div>
 								</CardBody>
 							</Card>
@@ -160,7 +163,7 @@ class Packages extends React.Component {
 															{e.description}
 														</td>
 														<td className="text-left font-weight-bold" style={{ border: '1px solid black' }}>
-															<ButtonM variant="contained" color="secondary" size="large" onClick={() => this.deleteData(e._id)}>Delete</ButtonM>
+															<ButtonM variant="contained" color="secondary" size="medium" onClick={() => this.deleteData(e._id)}>Delete</ButtonM>
 														</td>
 													</tr>
 												);

@@ -51,10 +51,10 @@ class Notifications extends React.Component {
                   <Table responsive>
                     <thead className="text-primary font-weight-bold" style={{border: '1px solid black'}}>
                       <tr>
-                        <th className="text-center font-weight-bold">Subject</th>
-                        <th className="text-center font-weight-bold">Email</th>
-                        <th className="text-center font-weight-bold">Feedback</th>
-                        <th className="text-center font-weight-bold">Added_date</th>
+                        <th className="text-center font-weight-bold" style={{border: '1px solid black'}}>Name</th>
+                        <th className="text-center font-weight-bold" style={{border: '1px solid black'}}>Email</th>
+                        <th className="text-center font-weight-bold" style={{border: '1px solid black'}}>Feedback</th>
+                        <th className="text-center font-weight-bold" style={{border: '1px solid black'}}>Added_date</th>
                 
                       </tr>
 
@@ -63,16 +63,16 @@ class Notifications extends React.Component {
                       {feedbackdata.map((e, key) => {
                         return (
                           <tr key={`${key}-key`} className="text-center">
-                            <td className="text-center font-weight-bold" >
-                              {e.subject}
+                            <td className="text-center font-weight-bold" style={{border: '1px solid black'}}>
+                              {e.name}
                             </td>
-                            <td className="text-center font-weight-bold">
+                            <td className="text-center font-weight-bold" style={{border: '1px solid black'}}>
                               {e.email}
                             </td>
-                            <td className="text-center font-weight-bold">
-                              {e.comment}
+                            <td className="text-center font-weight-bold" style={{border: '1px solid black'}}>
+                              {e.message}
                             </td>
-                            <td className="text-center font-weight-bold">
+                            <td className="text-center font-weight-bold" style={{border: '1px solid black'}}>
                               {e.added_date}
                             </td>
     

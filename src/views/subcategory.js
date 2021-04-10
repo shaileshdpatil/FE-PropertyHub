@@ -12,7 +12,7 @@ import {
     Row,
     Col,
 } from "reactstrap";
-
+import './allpackages.css'
 
 class subcategory extends React.Component {
     constructor(props) {
@@ -24,7 +24,6 @@ class subcategory extends React.Component {
         category:'',
 
     }
-    this.handleChange = this.handleChange.bind(this);
 }
 
     componentDidMount = () => {
@@ -47,6 +46,7 @@ class subcategory extends React.Component {
     submitForm = () => {
         const { names,category } = this.state;
         const data = { names ,category }
+        // console.log((data));
         if(names?.lenght <= 3 || category?.length <= 3){
             alert("please fill fields property")
         }else{
@@ -62,12 +62,15 @@ class subcategory extends React.Component {
         }
     }
 
-    handleChange(e) {
-        const re = /[A-Za-z]+/g;
-        if (e.target.value === '' || re.test(e.target.value)) {
-            this.setState({ names: e.target.value });
-        }
-    }
+
+    deleteData = (id) => {
+		axios.delete(`http://localhost:3000/api/deletesubcategory/${id}`).then((res) => {
+			alert("successfully deleted")
+			this.getsubcategoryData();
+		}).catch((resspo) => {
+			console.log("failed")
+		})
+	}
     
     render() {
         const { subcategoryData,names,category } = this.state;
@@ -95,17 +98,17 @@ class subcategory extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
-                                        <div style={{display:'flex' }}>
+                                        <div style={{display:'flex' }} className="anchor">
                                             <div>
-                                                <TextField id="outlined-basic" error={this.state.names === ""} placeholder='Type subcategory name' value={this.state.names} onChange={this.handleChange} label="sub category name" variant="outlined" style={marginfor.margin1} required/>
+                                                <TextField id="outlined-basic" error={this.state.names === ""} placeholder='Type subcategory name' onChange={(e)=>this.setState({names:e.target.values})} label="sub category name" variant="outlined" style={marginfor.margin1} required/>
                                                 <p className="alert-msg">{names?.length <= 3 && 'minimum length 3'}</p>
                                             </div>
                                             <div>
                                                 <TextField id="outlined-basic" error={this.state.category === ""} placeholder='Type category name' label="category name" onChange={(e) => this.setState({ category: e.target.value })} variant="outlined" style={marginfor.margin1} required/>
                                                 <p className="alert-msg">{category?.length <= 3 && 'minimum length 3'}</p>
                                             </div>
-                                                <Button type="submit" variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
-                                        
+                                                {/* <Button type="submit" variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button> */}
+                                                <button type="button" style={{width:'220px',marginTop:'0px',marginBottom:'15px',height:'55px',borderRadius:'10px',backgroundColor:'skyblue',border:'none',fontWeight:'bolder'}} onClick={this.submitForm}>Insert</button>
 
                                         </div>
                                     </form>
@@ -138,7 +141,7 @@ class subcategory extends React.Component {
                                                             {e.category}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <Button variant="contained" color="secondary" className="btn-danger" onClick={this.submitForm}>Delete</Button>
+                                                            <Button variant="contained" color="secondary" className="btn-danger" onClick={() => this.deleteData(e._id)}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );

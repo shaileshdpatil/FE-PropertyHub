@@ -55,6 +55,15 @@ class city extends React.Component {
 
         }
     }
+
+    deleteData = (id) => {
+		axios.delete(`http://localhost:3000/api/deletecityy/${id}`).then((resonsee) => {
+			alert("successfully deleted");
+			this.getcityData();
+		}).catch((err) => {
+			console.log("failed");
+		})
+	}
     render() {
         const { cityData, citys, states } = this.state;
         const marginfor = {
@@ -121,7 +130,7 @@ class city extends React.Component {
                                                             {e.states}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <Button variant="contained" color="secondary" className="btn-danger" onClick={this.submitForm}>Delete</Button>
+                                                        <Button variant="contained" color="secondary" className="btn-danger" onClick={() => this.deleteData(e._id)}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );
