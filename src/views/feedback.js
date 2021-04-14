@@ -8,6 +8,7 @@ import {
   CardHeader,
   Row,
   Col,
+  Button
 } from "reactstrap";
 
 // core components
@@ -37,6 +38,16 @@ class Notifications extends React.Component {
   }
   render() {
     const { feedbackdata } = this.state;
+
+    const styleMargin = {
+      bordersHead: {
+        border: '1px solid black',
+        backgroundColor:'#AFDCEC'
+      },
+      borders: {
+        border: '1px solid black'
+      }
+    }
     return (
       <>
         <PanelHeader size="sm" />
@@ -51,10 +62,11 @@ class Notifications extends React.Component {
                   <Table responsive>
                     <thead className="text-primary font-weight-bold" style={{border: '1px solid black'}}>
                       <tr>
-                        <th className="text-center font-weight-bold" style={{border: '1px solid black'}}>Name</th>
-                        <th className="text-center font-weight-bold" style={{border: '1px solid black'}}>Email</th>
-                        <th className="text-center font-weight-bold" style={{border: '1px solid black'}}>Feedback</th>
-                        <th className="text-center font-weight-bold" style={{border: '1px solid black'}}>Added_date</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Name</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Email</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Feedback</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Date of feedback</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Actions</th>
                 
                       </tr>
 
@@ -63,17 +75,21 @@ class Notifications extends React.Component {
                       {feedbackdata.map((e, key) => {
                         return (
                           <tr key={`${key}-key`} className="text-center">
-                            <td className="text-center font-weight-bold" style={{border: '1px solid black'}}>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.name}
                             </td>
-                            <td className="text-center font-weight-bold" style={{border: '1px solid black'}}>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.email}
                             </td>
-                            <td className="text-center font-weight-bold" style={{border: '1px solid black'}}>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.message}
                             </td>
-                            <td className="text-center font-weight-bold" style={{border: '1px solid black'}}>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.added_date}
+                            </td>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                            <Button type="submit" className="btn btn-success" style={{marginRight:'5px'}}>Accept</Button>
+                            <Button type="submit" className="btn btn-danger" style={{marginRight:'5px'}}>Reject</Button>
                             </td>
     
                           </tr>

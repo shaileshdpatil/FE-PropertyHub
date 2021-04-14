@@ -39,8 +39,19 @@ class Allpropertys extends React.Component {
   }
 
 
+
   render() {
     const { dealData } = this.state;
+
+    const styleMargin = {
+      bordersHead: {
+        border: '1px solid black',
+        backgroundColor:'#AFDCEC'
+      },
+      borders: {
+        border: '1px solid black'
+      }
+    }
     return (
       <>
         <PanelHeader size="sm" />
@@ -55,11 +66,11 @@ class Allpropertys extends React.Component {
                   <Table responsive>
                     <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
 
-                      <tr>
-                        <th className="text-center font-weight-bold">Property Name</th>
-                        <th className="text-center font-weight-bold">Property Type</th>
-                        <th className="text-center font-weight-bold">Amount</th>
-                        <th className="text-center font-weight-bold">action</th>
+                      <tr >
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Property Name</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Property Type</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Amount</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>action</th>
                       </tr>
 
                     </thead>
@@ -67,16 +78,16 @@ class Allpropertys extends React.Component {
                       {dealData.map((e, key) => {
                         return (
                           <tr key={`${key}-key`} className="text-left">
-                            <td className="text-center font-weight-bold">
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.name}
                             </td>
-                            <td className="text-center font-weight-bold">
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.type}
                             </td>
-                            <td className="text-center font-weight-bold">
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.amount}
                             </td>
-                            <td className="text-center">
+                            <td className="text-center" style={styleMargin.borders}>
                               <Button className="btn-success">View</Button>
                             </td>
                           </tr>

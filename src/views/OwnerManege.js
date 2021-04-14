@@ -29,6 +29,7 @@ class RegularTables extends React.Component {
     axios.put(`http://localhost:3000/api/updateOwner/${id}/status`)
       .then(
         alert("successfullt Activted"),
+        window.location.reload(false),
         this.getOwernerData()
       ).catch((res) => {
         console.log("activation failed")
@@ -40,6 +41,7 @@ class RegularTables extends React.Component {
     axios.put(`http://localhost:3000/api/deactivateOwner/${id}/status`)
       .then(
         alert("successfullt deActivted"),
+        window.location.reload(false),
         this.getOwernerData()
       ).catch((res) => {
         console.log("activation failed")
@@ -59,7 +61,15 @@ class RegularTables extends React.Component {
   render() {
 
     const { owenerData } = this.state;
-
+    const styleMargin = {
+      bordersHead: {
+        border: '1px solid black',
+        backgroundColor:'#AFDCEC'
+      },
+      borders: {
+        border: '1px solid black'
+      }
+    }
     return (
       <>
         <PanelHeader size="sm" />
@@ -74,30 +84,27 @@ class RegularTables extends React.Component {
                   <Table responsive>
                     <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
                       <tr>
-                        <th className="text-center font-weight-bold">Name</th>
-                        <th className="text-center font-weight-bold">Email</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Name</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Email</th>
                         {/* <th className="text-center font-weight-bold">Gender</th> */}
-                        <th className="text-center font-weight-bold">Phone No</th>
-                        <th className="text-center font-weight-bold">Action</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Phone No</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Action</th>
                       </tr>
                     </thead>
                     <tbody style={{ border: '1px solid black' }}>
                       {owenerData.map((e, key) => {
                         return (
                           <tr key={`${key}-key`} className="text-left">
-                            <td className="text-center font-weight-bold">
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.names}
                             </td>
-                            <td className="text-center font-weight-bold">
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.email}
                             </td>
-                            <td className="text-center font-weight-bold">
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.phone}
                             </td>
-
-
-
-                            <td className="text-center" style={{ display: "flex", justifyContent: 'center' }}>
+                            <td className="text-center" style={{ display: "flex", justifyContent: 'center',border:'1px solid black' }}>
                               {
                                 e.status
                                   ? <p style={{ fontWeight: 'bold', marginRight: '12px' }}>Already verified</p>

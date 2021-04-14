@@ -13,21 +13,27 @@ import {
     Col,
 } from "reactstrap";
 import './allpackages.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Subcategory from './Dailog/SubCategory';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class subcategory extends React.Component {
     constructor(props) {
         super(props);
 
-    this.state = {
-        subcategoryData: [],
-        names: '',
-        category:'',
+        this.state = {
+            subcategoryData: [],
+            categoryData: [],
+            names: '',
+            category: '',
 
+        }
     }
-}
 
     componentDidMount = () => {
         this.getsubcategoryData();
+        this.getcategoryData();
     }
 
     getsubcategoryData = () => {
@@ -41,20 +47,32 @@ class subcategory extends React.Component {
                 this.setState({ subcategoryData: response.data })
             });
     }
-
+    getcategoryData = () => {
+        axios.get('http://localhost:3000/api/categoryDisplay').then((response) => {
+            this.setState({ categoryData: response.data })
+        });
+    }
 
     submitForm = () => {
-        const { names,category } = this.state;
-        const data = { names ,category }
+        const { names, category } = this.state;
+        const data = { names, category }
         // console.log((data));
-        if(names?.lenght <= 3 || category?.length <= 3){
+        if (names?.lenght <= 3 || names?.lenght >= 15 || category?.lenght <= 3 || category?.lenght >= 15) {
             alert("please fill fields property")
-        }else{
+        } else {
             axios.post("http://localhost:3000/api/subcategoryadd", data)
-                .then((response) => {
-                    this.getsubcategoryData();
-                    alert("successfully inserted");
-                   
+                .then((respo) => {
+                    // console.log(data);
+                    toast.success('successfully inserted!', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    this.getsubcategoryData()
                 }).catch((error) => {
                     console.log(error);
                 })
@@ -64,19 +82,28 @@ class subcategory extends React.Component {
 
 
     deleteData = (id) => {
-		axios.delete(`http://localhost:3000/api/deletesubcategory/${id}`).then((res) => {
-			alert("successfully deleted")
-			this.getsubcategoryData();
-		}).catch((resspo) => {
-			console.log("failed")
-		})
-	}
-    
+        axios.delete(`http://localhost:3000/api/deletesubcategory/${id}`).then((res) => {
+            toast.error('successfully deleted!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            this.getsubcategoryData()
+        }).catch((resspo) => {
+            console.log("failed")
+        })
+    }
+
     render() {
-        const { subcategoryData,names,category } = this.state;
+        const { subcategoryData, names, categoryData } = this.state;
         const marginfor = {
             margin1: {
                 marginRight: '15px',
+
             },
             btnsize: {
                 marginTop: '7px',
@@ -84,6 +111,26 @@ class subcategory extends React.Component {
                 paddingBottom: '10px',
                 paddingRight: '50px',
                 paddingLeft: '50px'
+            },
+            btninsert: {
+                width: '220px',
+                marginTop: '0px',
+                marginBottom: '15px',
+                marginLeft: '30px',
+                height: '55px',
+                borderRadius: '10px',
+                backgroundColor: 'skyblue',
+                border: 'none',
+                fontWeight: 'bolder'
+            },
+            options: {
+                width: '170px',
+                height: '30px',
+                outline: 'none'
+            },
+            bordersHead: {
+                border: '1px solid black',
+                backgroundColor: '#AFDCEC'
             }
         }
         return (
@@ -98,17 +145,30 @@ class subcategory extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
-                                        <div style={{display:'flex' }} className="anchor">
+                                        <div style={{ display: 'flex' }} className="anchor">
                                             <div>
-                                                <TextField id="outlined-basic" error={this.state.names === ""} placeholder='Type subcategory name' onChange={(e)=>this.setState({names:e.target.values})} label="sub category name" variant="outlined" style={marginfor.margin1} required/>
+                                                <TextField id="outlined-basic" error={this.state.names === ""} placeholder='Type subcategory name' onChange={(e) => this.setState({ names: e.target.value })} label="sub category name" variant="outlined" style={marginfor.margin1} required />
                                                 <p className="alert-msg">{names?.length <= 3 && 'minimum length 3'}</p>
+                                                <p className="alert-msg">{names?.length >= 15 && 'maximum length 15'}</p>
                                             </div>
                                             <div>
-                                                <TextField id="outlined-basic" error={this.state.category === ""} placeholder='Type category name' label="category name" onChange={(e) => this.setState({ category: e.target.value })} variant="outlined" style={marginfor.margin1} required/>
-                                                <p className="alert-msg">{category?.length <= 3 && 'minimum length 3'}</p>
+                                                <label >Select category</label><br />
+                                                <select style={marginfor.options} value={this.category} onChange={(e) => this.setState({ category: e.target.value })}>
+                                                    {/* <option>Select category</option> */}
+                                                    {categoryData.map((event, keys) => {
+                                                        return (
+                                                            <>
+
+                                                                <option key={`${keys}-key`} value={event.name}>{event.name}</option>
+                                                            </>
+                                                        )
+                                                    })
+                                                    }
+                                                </select>
+
                                             </div>
-                                                {/* <Button type="submit" variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button> */}
-                                                <button type="button" style={{width:'220px',marginTop:'0px',marginBottom:'15px',height:'55px',borderRadius:'10px',backgroundColor:'skyblue',border:'none',fontWeight:'bolder'}} onClick={this.submitForm}>Insert</button>
+                                            {/* <Button type="submit" variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button> */}
+                                            <button type="button" style={marginfor.btninsert} onClick={this.submitForm}>Insert</button>
 
                                         </div>
                                     </form>
@@ -122,26 +182,31 @@ class subcategory extends React.Component {
                                     <Table responsive>
                                         <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
                                             <tr>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Sub-category Name</th>
+                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Sub-category Name</th>
                                                 {/* <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>category Name</th> */}
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Category</th>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Action</th>
+                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Category</th>
+                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Action</th>
                                             </tr>
 
                                         </thead>
                                         <tbody style={{ border: '1px solid black' }}>
                                             {subcategoryData.map((e, key) => {
+                                                const data = {
+                                                    _name: e.names,
+                                                    _categorys: e.category
+                                                }
                                                 return (
                                                     <tr key={`${key}-key`} className="text-center">
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.names}
                                                         </td>
-                                                
+
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.category}
                                                         </td>
-                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <Button variant="contained" color="secondary" className="btn-danger" onClick={() => this.deleteData(e._id)}>Delete</Button>
+                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black', display: 'flex', justifyContent: 'center' }}>
+                                                            <Subcategory subcatId={e._id} subCatData={data} />
+                                                            <Button variant="contained" color="secondary" className="btn-danger" startIcon={<DeleteIcon />} size="small" onClick={() => this.deleteData(e._id)} style={{ marginLeft: '5px' }}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );
@@ -153,6 +218,7 @@ class subcategory extends React.Component {
                         </Col>
                     </Row>
                 </div>
+                <ToastContainer />
             </>
         )
     }

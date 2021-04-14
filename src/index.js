@@ -12,16 +12,20 @@ import  LoginOwner from './components/OwnerPages/LoginOwner';
 import  RegisterOwner from './components/OwnerPages/RegisterOwner';
 import indexOwner from './OwnerSide/indexOwner' 
 import feedback from './OwnerSide/feedback';
+import tables from './OwnerSide/PackageTables';
+import InsertProperty from './OwnerSide/InsertProperty';
 
 ReactDOM.render(
   <Router history={history}>
     <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+      <Route  path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route path="/Login"  component={Login} />
       <Route path="/owner/Login-owner"  component={LoginOwner} />
       <Route path="/owner/register-owner"  component={RegisterOwner} />
       <Route path="/owner/Front-page-owner"  component={indexOwner} />
       <Route path="/owner/Front-page-feedback"  component={feedback} />
+      <Route path="/owner/owner-page-for-table"  component={tables} />
+      <Route path="/owner/owner-insert-property"  component={InsertProperty} />
       <Redirect to="/admin/dashboard" />
     </Switch>
   </Router>,

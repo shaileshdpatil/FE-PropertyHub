@@ -12,9 +12,11 @@ import {
     Row,
     Col,
 } from "reactstrap";
-// import CustomizedDialogs from './Dailog/Dailogpackage'
-import './allpackages.css'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './allpackages.css';
+import DailogcCat from './Dailog/DailogcCat';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class category extends React.Component {
     constructor(props) {
@@ -47,22 +49,48 @@ class category extends React.Component {
         const body = {
             name
         }
-        if(name?.length <= 3){
-            alert("invalid data")
+        if(name?.length <= 3 || name?.length >=20){
+            toast.error('Please fill the data properly!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                })
         }else{
             axios.post("http://localhost:3000/api/insertcategory", body)
                 .then((resp) => {
-                    alert("successfully inserted");
+                    toast.success('successfully inserted!', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                     this.getcategoryData();
                 }).catch((errs) => {
-                    console.log(errs);
+                    if (!errs.response.data.success) {
+                        alert(errs.response.data.error)
+                    }
                 })
 
         }
     }
     deleteCategory = (id) => {
 		axios.delete(`http://localhost:3000/api/deleteOcategory/${id}`).then((res) => {
-			alert("successfully deleted")
+            toast.error('successfully deleted!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
 			this.getcategoryData();
 		}).catch((resspo) => {
 			console.log("failed")
@@ -72,6 +100,16 @@ class category extends React.Component {
 
     render() {
         const { categoryData } = this.state;
+
+        const styleMargin = {
+            bordersHead: {
+              border: '1px solid black',
+              backgroundColor:'#AFDCEC'
+            },
+            borders: {
+              border: '1px solid black'
+            }
+          }
         return (
             <>
                 <PanelHeader size="sm" />
@@ -88,11 +126,12 @@ class category extends React.Component {
                                             <div className="anchor">
                                                 <TextField id="outlined-basic" error={this.state.name === ""} label="category name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} fullWidth={true} required/>
                                                 <p className="alert-msg">{this.state.name?.length <= 3 && 'minimum length 3'}</p>
+                                                <p className="alert-msg">{this.state.name?.length >= 15 && 'maximum length 15'}</p>
                                             </div>
                                                 <Button variant="contained" fullWidth={true} color="primary" style={{ marginTop: '20px' }} onClick={this.submitForm}>Insert</Button>
                                             
                                                 
-                                             {/* <CustomizedDialogs /> */}
+                
                                         </div>
                                     </form>
                                 </CardBody>
@@ -103,27 +142,27 @@ class category extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <Table responsive>
-                                        <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
+                                        <thead className="text-primary font-weight-bold">
                                             <tr>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>sub-category Name</th>
-
-                                                {/* <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Added date</th> */}
-                                                <th className="text-center font-weight-bold">Action</th>
+                                                <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>sub-category Name</th>
+                                                <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Action</th>
                                             </tr>
 
                                         </thead>
                                         <tbody style={{ border: '1px solid black' }}>
                                             {categoryData.map((e, key) => {
+                                                 const data = {
+                                                  _name :e.name   
+                                                } 
                                                 return (
                                                     <tr key={`${key}-key`} className="text-left">
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.name}
                                                         </td>
-                                                        {/* <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            {e.added_date}
-                                                        </td> */}
-                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <Button variant="contained" color="secondary" size="large" onClick={() => this.deleteCategory(e._id)}>Delete</Button>
+                                                       
+                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black' ,display:'flex',justifyContent:'center'}}>
+                                                            <DailogcCat categoryId={e._id} catData={data} />
+                                                            <Button variant="contained" color="secondary"  startIcon={<DeleteIcon />} size="small" onClick={() => this.deleteCategory(e._id)} style={{marginLeft:'10px'}}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );
@@ -135,6 +174,7 @@ class category extends React.Component {
                         </Col>
                     </Row>
                 </div>
+                <ToastContainer />
             </>
         )
     }

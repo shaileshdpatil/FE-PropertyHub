@@ -12,7 +12,8 @@ import {
     Row,
     Col,
 } from "reactstrap";
-
+import CityDailog from './Dailog/CityDailog';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class city extends React.Component {
     state = {
@@ -57,13 +58,13 @@ class city extends React.Component {
     }
 
     deleteData = (id) => {
-		axios.delete(`http://localhost:3000/api/deletecityy/${id}`).then((resonsee) => {
-			alert("successfully deleted");
-			this.getcityData();
-		}).catch((err) => {
-			console.log("failed");
-		})
-	}
+        axios.delete(`http://localhost:3000/api/deletecityy/${id}`).then((resonsee) => {
+            alert("successfully deleted");
+            this.getcityData();
+        }).catch((err) => {
+            console.log("failed");
+        })
+    }
     render() {
         const { cityData, citys, states } = this.state;
         const marginfor = {
@@ -71,11 +72,15 @@ class city extends React.Component {
                 marginRight: '15px',
             },
             btnsize: {
-                marginTop: '7px',
+                marginTop: '-35px',
                 paddingTop: '10px',
                 paddingBottom: '10px',
                 paddingRight: '50px',
                 paddingLeft: '50px'
+            },
+            bordersHead: {
+                border: '1px solid black',
+                backgroundColor: '#AFDCEC'
             }
         }
         return (
@@ -90,7 +95,7 @@ class city extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
-                                        <div style={{ alignItems: 'center', display:'flex' }}>
+                                        <div style={{ alignItems: 'center', display: 'flex' }}>
                                             <div>
                                                 <TextField id="outlined-basic" onChange={(e) => this.setState({ citys: e.target.value })} label="city" variant="outlined" style={marginfor.margin1} />
                                                 <p className="alert-msg">{citys?.length <= 3 && 'minimum length 3'}</p>
@@ -111,16 +116,20 @@ class city extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <Table responsive>
-                                        <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
+                                        <thead className="text-primary font-weight-bold" style={marginfor.bordersHead}>
                                             <tr>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>city</th>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>state</th>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Action</th>
+                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>city</th>
+                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>state</th>
+                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Action</th>
                                             </tr>
 
                                         </thead>
                                         <tbody style={{ border: '1px solid black' }}>
                                             {cityData.map((e, key) => {
+                                                const data = {
+                                                    _citys: e.citys,
+                                                    _states: e.states
+                                                }
                                                 return (
                                                     <tr key={`${key}-key`} className="text-center">
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
@@ -129,8 +138,9 @@ class city extends React.Component {
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.states}
                                                         </td>
-                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                        <Button variant="contained" color="secondary" className="btn-danger" onClick={() => this.deleteData(e._id)}>Delete</Button>
+                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black', display: 'flex', justifyContent: 'center' }}>
+                                                            <CityDailog cityId={e._id} cityData={data} />
+                                                            <Button variant="contained" color="secondary" startIcon={<DeleteIcon />} size="small" className="btn-danger" onClick={() => this.deleteData(e._id)} style={{ marginLeft: '5px' }}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );

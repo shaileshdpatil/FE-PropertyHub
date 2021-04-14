@@ -12,8 +12,9 @@ import {
     Row,
     Col,
 } from "reactstrap";
-import './allpackages.css'
-
+import './allpackages.css';
+import StateDailog from './Dailog/StateDailog';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 class state extends React.Component {
     state = {
@@ -25,7 +26,6 @@ class state extends React.Component {
     componentDidMount = () => {
         this.getstateData();
     }
-
     getstateData = () => {
         axios.get('http://localhost:3000/api/statedisp',
             {
@@ -37,7 +37,6 @@ class state extends React.Component {
                 this.setState({ stateData: response.data })
             });
     }
-
     submitForm = () => {
         const { country, states } = this.state;
         const data = { country, states }
@@ -56,28 +55,32 @@ class state extends React.Component {
         }
     }
     deleteData = (id) => {
-		axios.delete(`http://localhost:3000/api/deletestate/${id}`).then((res) => {
-			alert("successfully deleted")
-			this.getstateData();
-		}).catch((resspo) => {
-			console.log("failed")
-		})
-	}
+        axios.delete(`http://localhost:3000/api/deletestate/${id}`).then((res) => {
+            alert("successfully deleted")
+            this.getstateData();
+        }).catch((resspo) => {
+            console.log("failed")
+        })
+    }
     render() {
-        const { stateData, country,states } = this.state;
+        const { stateData, country, states } = this.state;
         const marginfor = {
             margin1: {
                 marginRight: '15px',
             },
             btnsize: {
-                marginTop: '7px',
+                marginTop: '-35px',
                 paddingTop: '10px',
                 paddingBottom: '10px',
                 paddingRight: '50px',
                 paddingLeft: '50px'
+            },
+            bordersHead: {
+                border: '1px solid black',
+                backgroundColor: '#AFDCEC'
             }
         }
- 
+
         return (
             <>
                 <PanelHeader size="sm" />
@@ -90,20 +93,20 @@ class state extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
-                                        <div style={{ alignItems: 'center',display:'flex' }} className="anchor">
-                                            
-                                                <div>
-                                                    <TextField id="outlined-basic" onChange={(e) => this.setState({ country: e.target.value })} label="country" variant="outlined" style={marginfor.margin1} required />
-                                                    <p className="alert-msg">{country?.length <= 3 && 'minimum length 3'}</p>
+                                        <div style={{ alignItems: 'center', display: 'flex' }} className="anchor">
 
-                                                </div>
-                                                <div>
-                                                    <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state name" variant="outlined" style={marginfor.margin1} required />
-                                                    <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p>
-                                                </div>
-                                                
-                                                <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
-                                        
+                                            <div>
+                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ country: e.target.value })} label="country" variant="outlined" style={marginfor.margin1} required />
+                                                <p className="alert-msg">{country?.length <= 3 && 'minimum length 3'}</p>
+
+                                            </div>
+                                            <div>
+                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state name" variant="outlined" style={marginfor.margin1} required />
+                                                <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p>
+                                            </div>
+
+                                            <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
+
 
                                         </div>
                                     </form>
@@ -117,14 +120,18 @@ class state extends React.Component {
                                     <Table responsive>
                                         <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
                                             <tr>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>country</th>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>state</th>
-                                                <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>Action</th>
+                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>country</th>
+                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>state</th>
+                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Action</th>
                                             </tr>
 
                                         </thead>
                                         <tbody style={{ border: '1px solid black' }}>
                                             {stateData.map((e, key) => {
+                                                const data = {
+                                                    _states: e.states,
+                                                    _country: e.country
+                                                };
                                                 return (
                                                     <tr key={`${key}-key`} className="text-center">
 
@@ -134,8 +141,10 @@ class state extends React.Component {
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.states}
                                                         </td>
-                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            <Button variant="contained" color="secondary" className="btn-danger" onClick={() => this.deleteData(e._id)}>Delete</Button>
+                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black', display: 'flex', justifyContent: 'center' }}>
+                                                            <StateDailog stateId={e._id} stateData={data} />
+                                                            {/* <Button variant="outlined" color="primary" className="btn-danger">Update</Button> */}
+                                                            <Button variant="contained" startIcon={<DeleteIcon />} size="small" color="secondary" className="btn-danger" onClick={() => this.deleteData(e._id)} style={{ marginLeft: '5px' }}>Delete</Button>
                                                         </td>
                                                     </tr>
                                                 );

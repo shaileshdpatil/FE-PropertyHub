@@ -16,6 +16,7 @@ import './allpackages.css'
 import CustomizedDialogs from './Dailog/Dailogpackage'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 // core components
@@ -100,10 +101,14 @@ class Packages extends React.Component {
 		const { propertyData, name, duration, description, no_of_ads, amount } = this.state;
 
 		const styleMargin = {
+			bordersHead: {
+			  border: '1px solid black',
+			  backgroundColor:'#AFDCEC'
+			},
 			borders: {
-				border: '1px solid black'
+			  border: '1px solid black'
 			}
-		}
+		  }
 		return (
 
 			<>
@@ -162,12 +167,12 @@ class Packages extends React.Component {
 									<Table responsive>
 										<thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
 											<tr>
-												<th className="text-center font-weight-bold" style={styleMargin.borders}>package Name</th>
-												<th className="text-center font-weight-bold" style={styleMargin.borders}>Duration</th>
-												<th className="text-center font-weight-bold" style={styleMargin.borders}>no of ads</th>
-												<th className="text-center font-weight-bold" style={styleMargin.borders}>Amount</th>
-												<th className="text-center font-weight-bold" style={styleMargin.borders}>Description</th>
-												<th className="text-center font-weight-bold" style={styleMargin.borders}>Action</th>
+												<th className="text-center font-weight-bold" style={styleMargin.bordersHead}>package Name</th>
+												<th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Duration</th>
+												<th className="text-center font-weight-bold" style={styleMargin.bordersHead}>no of ads</th>
+												<th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Amount</th>
+												<th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Description</th>
+												<th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Action</th>
 											</tr>
 
 										</thead>
@@ -189,7 +194,7 @@ class Packages extends React.Component {
 														<td className="text-center font-weight-bold" style={styleMargin.borders}>{e.description}</td>
 														<td className="text-left" style={{ border: '1px solid black', display: 'flex', justifyContent: 'center' }}>
 															<CustomizedDialogs packageId={e._id} dialogueData={data} />
-															<ButtonM variant="contained" color="secondary" size="medium" onClick={() => this.deleteData(e._id)} style={{ marginLeft: '10px' }}>Delete</ButtonM>
+															<ButtonM  startIcon={<DeleteIcon />} variant="contained" color="secondary" size="small" onClick={() => this.deleteData(e._id)} style={{ marginLeft: '10px' }}>Delete</ButtonM>
 														</td>
 													</tr>
 												)

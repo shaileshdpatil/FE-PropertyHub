@@ -1,5 +1,5 @@
 import React from 'react';
-import './abc.css';
+import styles from './abc.module.css';
 import axios from 'axios';
 
 class feedback extends React.Component {
@@ -18,7 +18,7 @@ class feedback extends React.Component {
         
         axios.post("http://localhost:3000/api/feedbackssadd", data)
             .then((res) => {
-                alert("successfully inserted");
+                alert("congratulations your feedback submitted");
             }).catch((error) => {
                 console.log(error);
             })
@@ -27,10 +27,11 @@ class feedback extends React.Component {
     render() {
         return (
             <>
-                <div className="container">
-                    <form id="contact" style={{ marginTop: '70px' }}>
+                <div className={styles.container}>
+                    <form id="contact" style={{ marginTop: '50px'}}>
                         <h3>Feedback Form</h3>
-                        <h4>Feedback to admin</h4>
+                        <div className="slogen">
+                        </div>
                         <fieldset>
                             <input placeholder="Your name" type="text" onChange={(e) => this.setState({ name: e.target.value })} tabIndex="1" required autoFocus />
                         </fieldset>
@@ -43,7 +44,7 @@ class feedback extends React.Component {
                         <fieldset>
                             <button name="submit" type="submit" id="contact-submit" onClick={this.submitForm}>Submit</button>
                         </fieldset>
-                        <p className="copyright">Designed by <a href="https://shailu43.000webhostapp.com" title="shailu">shailu</a></p>
+                        <p className="copyright">Designed by <a href="https://shailu43.000webhostapp.com" title="shailu" style={{color:'red',fontWeight:'bolder'}}>Patil</a></p>
                     </form>
                 </div>
             </>
