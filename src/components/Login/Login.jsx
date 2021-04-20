@@ -13,7 +13,7 @@ class Login extends Component {
   }
 
   login = () => {
-    const {email,password} = this.state ;
+    const {email,password} = this.state;
     const body = {email,password}
     axios.post('http://localhost:3000/api/ownerLogin',body
       ).then((res) => {

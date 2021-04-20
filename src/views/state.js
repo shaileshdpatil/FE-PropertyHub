@@ -45,11 +45,10 @@ class state extends React.Component {
         } else {
             axios.post("http://localhost:3000/api/stateadd", data)
                 .then((response) => {
-                    this.getstateData();
                     alert("successfully inserted");
-
-                }).catch((error) => {
-                    console.log(error);
+                    this.getstateData();
+                }).catch((errs) => {
+                    alert("failed");
                 })
 
         }
@@ -66,7 +65,7 @@ class state extends React.Component {
         const { stateData, country, states } = this.state;
         const marginfor = {
             margin1: {
-                marginRight: '15px',
+                marginRight: '15px',    
             },
             btnsize: {
                 marginTop: '-35px',
@@ -96,12 +95,12 @@ class state extends React.Component {
                                         <div style={{ alignItems: 'center', display: 'flex' }} className="anchor">
 
                                             <div>
-                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ country: e.target.value })} label="country" variant="outlined" style={marginfor.margin1} required />
+                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ country: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })} label="country" variant="outlined" style={marginfor.margin1} required />
                                                 <p className="alert-msg">{country?.length <= 3 && 'minimum length 3'}</p>
 
                                             </div>
                                             <div>
-                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state name" variant="outlined" style={marginfor.margin1} required />
+                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })} label="state name" variant="outlined" style={marginfor.margin1} required />
                                                 <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p>
                                             </div>
 

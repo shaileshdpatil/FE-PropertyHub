@@ -88,7 +88,7 @@ class Allpropertys extends React.Component {
                               {e.amount}
                             </td>
                             <td className="text-center" style={styleMargin.borders}>
-                              <Button className="btn-success">View</Button>
+                              <Button className="btn-secondary" href="/owner/display-property-by-single-page">View</Button>
                             </td>
                           </tr>
                         );

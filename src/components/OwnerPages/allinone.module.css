@@ -84,13 +84,13 @@ input[type="submit"]{
     outline: none;
 
 }
-.signup_link{
+.signupLinkk{
     margin:30px;
     text-align: center;
     font-size:16px;
     color: #020101;
 }
-.signup_link a{
+.signupLink a{
     color:#2691d9;
     text-decoration:underline;
 

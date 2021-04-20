@@ -124,7 +124,7 @@ class category extends React.Component {
                                     <form noValidate autoComplete="off" >
                                         <div style={{ alignItems: 'center' }}>
                                             <div className="anchor">
-                                                <TextField id="outlined-basic" error={this.state.name === ""} label="category name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} fullWidth={true} required/>
+                                                <TextField id="outlined-basic" error={this.state.name === ""} label="category name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })} fullWidth={true} required/>
                                                 <p className="alert-msg">{this.state.name?.length <= 3 && 'minimum length 3'}</p>
                                                 <p className="alert-msg">{this.state.name?.length >= 15 && 'maximum length 15'}</p>
                                             </div>

@@ -8,7 +8,7 @@ import logo from "logo-white.svg";
 
 var ps;
 
-class Sidebar extends React.Component {
+class SidebarOwner extends React.Component {
   constructor(props) {
     super(props);
     this.activeRoute.bind(this);
@@ -35,7 +35,7 @@ class Sidebar extends React.Component {
       <div className="sidebar" data-color={this.props.backgroundColor}>
         <div className="logo">
           <a
-          href="http://localhost:3001/admin/all-packages"
+          href="http://localhost:3001/owner/all-packages"
             className="simple-text logo-mini"
             target="_blank"
             rel="noopener noreferrer"
@@ -45,7 +45,7 @@ class Sidebar extends React.Component {
             </div>
           </a>
           <a
-            href="http://localhost:3001/visitor/display-HomePage"
+            href="http://localhost:3001/owner/all-packages"
             className="simple-text logo-normal"
             target="_blank"
             rel="noopener noreferrer"
@@ -55,7 +55,7 @@ class Sidebar extends React.Component {
         </div>
         <div className="sidebar-wrapper" ref="sidebar">
           <Nav>
-            {this.props.routes.map((prop, key) => {
+            {this.props.routesOwner.map((prop, key) => {
               if (prop.redirect) return null;
               return (
                 <li
@@ -83,4 +83,4 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar;
+export default SidebarOwner;

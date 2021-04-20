@@ -18,6 +18,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 class city extends React.Component {
     state = {
         cityData: [],
+        StateData:[],
         citys: '',
         states: ''
 
@@ -25,6 +26,7 @@ class city extends React.Component {
 
     componentDidMount = () => {
         this.getcityData();
+        this.getStateData();
     }
 
     getcityData = () => {
@@ -42,7 +44,7 @@ class city extends React.Component {
     submitForm = () => {
         const { citys, states } = this.state;
         const data = { citys, states }
-        if (citys <= 3 || states <= 3) {
+        if (citys < 3 || states < 3) {
             alert("please fill the fields properly")
         } else {
             axios.post("http://localhost:3000/api/cityadd", data)
@@ -56,6 +58,11 @@ class city extends React.Component {
 
         }
     }
+    getStateData = () => {
+        axios.get('http://localhost:3000/api/statedisp').then((response) => {
+            this.setState({ StateData: response.data })
+        });
+    }
 
     deleteData = (id) => {
         axios.delete(`http://localhost:3000/api/deletecityy/${id}`).then((resonsee) => {
@@ -66,7 +73,7 @@ class city extends React.Component {
         })
     }
     render() {
-        const { cityData, citys, states } = this.state;
+        const { cityData, citys,StateData } = this.state;
         const marginfor = {
             margin1: {
                 marginRight: '15px',
@@ -81,6 +88,11 @@ class city extends React.Component {
             bordersHead: {
                 border: '1px solid black',
                 backgroundColor: '#AFDCEC'
+            },
+            options:{
+                marginBottom:'70px',
+                marginRight:'10px',
+                fontSize:'20px',
             }
         }
         return (
@@ -97,12 +109,25 @@ class city extends React.Component {
                                     <form noValidate autoComplete="off" >
                                         <div style={{ alignItems: 'center', display: 'flex' }}>
                                             <div>
-                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ citys: e.target.value })} label="city" variant="outlined" style={marginfor.margin1} />
+                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ citys: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })} label="city" variant="outlined" style={marginfor.margin1} />
                                                 <p className="alert-msg">{citys?.length <= 3 && 'minimum length 3'}</p>
                                             </div>
                                             <div>
-                                                <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state" variant="outlined" style={marginfor.margin1} />
-                                                <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p>
+                                                {/* <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state" variant="outlined" style={marginfor.margin1} />
+                                                <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p> */}
+                                                                                            <label >Select State</label><br />
+                                                <select style={marginfor.options} value={this.states} onChange={(e) => this.setState({ states: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })}>
+                                                    {/* <option>Select category</option> */}
+                                                    {StateData.map((event, keys) => {
+                                                        return (
+                                                            <>
+
+                                                                <option key={`${keys}-key`} value={event.states}>{event.states}</option>
+                                                            </>
+                                                        )
+                                                    })
+                                                    }
+                                                    </select>
                                             </div>
                                             <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
 

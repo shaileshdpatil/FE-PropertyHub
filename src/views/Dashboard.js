@@ -1,5 +1,4 @@
 import React from "react";
-// react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 
 // reactstrap components
@@ -14,13 +13,7 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
-  // Table,
-  // Button,
-  // Label,
-  // FormGroup,
-  // Input,
-  // UncontrolledTooltip,
+  DropdownItem
 } from "reactstrap";
 
 // core components

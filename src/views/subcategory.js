@@ -73,8 +73,10 @@ class subcategory extends React.Component {
                         progress: undefined,
                     });
                     this.getsubcategoryData()
-                }).catch((error) => {
-                    console.log(error);
+                }).catch((errs) => {
+                    if (!errs.response.data.success) {
+                        alert(errs.response.data.error)
+                    }
                 })
 
         }

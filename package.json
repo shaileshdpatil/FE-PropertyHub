@@ -5,6 +5,8 @@
   "private": true,
   "homepage": "https://demos.creative-tim.com/now-ui-dashboard-react/#/",
   "dependencies": {
+    "@brainhubeu/react-carousel": "^2.0.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",

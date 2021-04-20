@@ -2,7 +2,7 @@
 import Dashboard from "views/Dashboard.js";
 import Notifications from "views/feedback";
 // import Typography from "views/Typography.js";
-// import TableList from "views/TableList.js";
+import TableList from "views/TableList.js";
 import OwnerManage from "views/OwnerManege";
 // import Maps from "views/Maps.js";
 // import Upgrade from "views/Upgrade.js";
@@ -36,13 +36,13 @@ var dashRoutes = [
     component: Allpropertys,
     layout: "/admin",
   },
-  // {
-  //   path: "/extended-tables",
-  //   name: "Total Deals",
-  //   icon: "business_briefcase-24",
-  //   component: TableList,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/extended-tables",
+    name: "Total Deals",
+    icon: "business_briefcase-24",
+    component: TableList,
+    layout: "/admin",
+  },
   {
     path: "/owner-manage",
     name: "Manage owners",

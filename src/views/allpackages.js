@@ -39,13 +39,13 @@ class Packages extends React.Component {
 
 	submitForm = () => {
 		const { name, duration, no_of_ads, amount, description } = this.state;
-
 		const body = {
 			name, duration, no_of_ads, amount, description
 		}
 		if (name?.length <= 3 || name?.length >= 8 || duration < 1 || no_of_ads < 3 || description?.length < 10 || amount < 1) {
 			alert("fill properly");
 		} else {
+			// console.log(body);
 			axios.post("http://localhost:3000/api/packageadd", body)
 				.then((response) => {
 					toast.success('successfully inserted!', {
@@ -59,9 +59,11 @@ class Packages extends React.Component {
 					});
 					this.getDealData()
 				}).catch((errs) => {
-                    if (!errs.response.data.success) {
+                    if (errs.response.data.success) {
                         alert(errs.response.data.error)
-                    }
+                    }else{
+						alert(errs.response.data.error)
+					}
                 })}
 
 	}
@@ -122,13 +124,11 @@ class Packages extends React.Component {
 									<CardTitle tag="h4" className="font-weight-bold">Add packages</CardTitle>
 								</CardHeader>
 								<CardBody>
-
 									<div style={{ display: 'flex' }} className="anchor">
 										<div>
-											<TextField id="outlined-basic" type="string" label="Package Name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} style={{ marginRight: 25 }} required />
+											<TextField id="outlined-basic" type="string" label="Package Name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })} style={{ marginRight: 25 }} required />
 											<p className="alert-msg">{name?.length <= 3 && 'minimum length 3'}</p>
 											<p className="alert-msg">{name?.length >= 8 && 'maxium length 10'}</p>
-
 										</div>
 										<div>
 											<TextField id="outlined-basic" type="number" label="Duration" variant="outlined" onChange={(e) => this.setState({ duration: e.target.value })} style={{ marginRight: 25 }} required />

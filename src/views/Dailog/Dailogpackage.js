@@ -85,10 +85,10 @@ export default function CustomizedDialogs(props) {
         progress: undefined,
       });
     } else {
-      const data = {name,amount,no_of_ads,description,duration}
+      const data = { name, amount, no_of_ads, description, duration }
       // console.log('=========>', props.packageId);
-      axios.put(`http://localhost:3000/api/updatePackage/${props.packageId}/details`,data).then((res) => {
-      toast.success('Successfully updated!', {
+      axios.put(`http://localhost:3000/api/updatePackage/${props.packageId}/details`, data).then((res) => {
+        toast.success('Successfully updated!', {
           position: "top-center",
           autoClose: 5000,
           hideProgressBar: false,
@@ -98,12 +98,12 @@ export default function CustomizedDialogs(props) {
           progress: undefined,
         });
         setOpen(false);
-      }).catch((resspo) => {
-        console.log("failed")
+      }).catch((errs) => {
+        alert(errs.response.data.error)
       })
     }
   }
-  
+
 
   const marginfor = {
     margins: {
