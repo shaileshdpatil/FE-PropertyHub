@@ -6,7 +6,7 @@ import styles from './PropertySingle.module.css'
 import p1 from '../images/p1.jpg';
 import HeaderNav from './HeaderNav';
 
-export const PorpertySingle = () => {
+const PorpertySingle = () => {
     return (
         <>  
         <HeaderNav />
@@ -173,3 +173,5 @@ export const PorpertySingle = () => {
         </>
     )
 }
+
+export default PorpertySingle;

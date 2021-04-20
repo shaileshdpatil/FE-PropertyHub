@@ -16,6 +16,7 @@ import PanelHeader from "components/PanelHeader/PanelHeader.js";
 import axios from "axios";
 import Table from "reactstrap/lib/Table";
 
+
 class Notifications extends React.Component {
   state = {
     feedbackdata: []
@@ -36,6 +37,23 @@ class Notifications extends React.Component {
         this.setState({ feedbackdata: response.data })
       });
   }
+
+  deleteData = (id) => {
+		axios.delete(`http://localhost:3000/api/deletefeedback/${id}`).then((res) => {
+			toast.error('Successfully deleted!', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+			this.getFeedbackdata();
+		}).catch((resspo) => {
+			console.log("failed")
+		})
+	}
   render() {
     const { feedbackdata } = this.state;
 
@@ -66,8 +84,7 @@ class Notifications extends React.Component {
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Email</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Feedback</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Date of feedback</th>
-                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Actions</th>
-                
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Actions</th> 
                       </tr>
 
                     </thead>
@@ -88,8 +105,7 @@ class Notifications extends React.Component {
                               {e.added_date}
                             </td>
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                            <Button type="submit" className="btn btn-success" style={{marginRight:'5px'}}>Accept</Button>
-                            <Button type="submit" className="btn btn-danger" style={{marginRight:'5px'}}>Reject</Button>
+                            <Button type="button" className="btn btn-danger" style={{marginRight:'5px'}} onClick={() => this.deleteData(e._id)}>Delete</Button>
                             </td>
     
                           </tr>
@@ -103,6 +119,7 @@ class Notifications extends React.Component {
           </Row>
 
         </div>
+        <ToastContainer />
       </>
     );
   }

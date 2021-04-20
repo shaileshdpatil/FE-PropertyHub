@@ -31,11 +31,11 @@ const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 class Packages extends React.Component {
 	state = {
 		propertyData: [],
-		name: 'package',
-		duration: 4,
-		no_of_ads: 5,
-		amount: 2500,
-		description: 'testing package description',
+		name: '',
+		duration: 0,
+		no_of_ads: 0,
+		amount: 0,
+		description: '',
 	}
 
 	
@@ -120,7 +120,6 @@ class Packages extends React.Component {
 		return (
 
 			<>
-
 				<PanelHeader size="sm" />
 				<div className="content ">
 					<Row>

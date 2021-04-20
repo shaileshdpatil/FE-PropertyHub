@@ -13,7 +13,7 @@ import  RegisterOwner from './components/OwnerPages/RegisterOwner';
 import indexOwner from './OwnerSide/indexOwner' 
 import feedback from './OwnerSide/feedback';
 import tables from './OwnerSide/PackageTables';
-import {PorpertySingle} from './OwnerSide/VisitorSide/PropertySingle'
+import PorpertySingle from './OwnerSide/VisitorSide/PropertySingle'
 import InsertProperty from './OwnerSide/InsertProperty';
 import HomePage from './OwnerSide/VisitorSide/HomePage'; 
 import ContactUs from './OwnerSide/VisitorSide/ContactUs'; 
@@ -32,7 +32,7 @@ ReactDOM.render(
       <Route path="/owner/Front-page-feedback"  component={feedback} />
       <Route path="/owner/owner-page-for-table"  component={tables} />
       <Route path="/owner/owner-insert-property"  component={InsertProperty} />
-      <Route path="/owner/display-property-by-single-page"  component={PorpertySingle} />
+      <Route path="/visitor/display-property-by-single-page"  component={PorpertySingle} />
       {/* <Route path="/owner/display-Navbar"  component={HeaderNav} /> */}
       <Route path="/visitor/display-HomePage"  component={HomePage} />
       <Route path="/visitor/display-contactus"  component={ContactUs} />
