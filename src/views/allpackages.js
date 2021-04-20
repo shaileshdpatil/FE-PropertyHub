@@ -31,23 +31,24 @@ const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 class Packages extends React.Component {
 	state = {
 		propertyData: [],
-		name: '',
-		duration: 0,
-		no_of_ads: 0,
-		amount: 0,
-		description: '',
+		name: 'package',
+		duration: 4,
+		no_of_ads: 5,
+		amount: 2500,
+		description: 'testing package description',
 	}
 
-
+	
 	submitForm = () => {
 		const { name, duration, no_of_ads, amount, description } = this.state;
 
 		const body = {
 			name, duration, no_of_ads, amount, description
 		}
-		if (name?.length <= 3 || name?.length >= 8 || duration < 1 || no_of_ads < 3 || description?.length < 10 || amount < 1) {
-			// alert("fill properly");
-		} else if(!format.test(name)){
+		if (name?.length <= 3 || duration < 1 || no_of_ads < 3 || description?.length < 10 || amount < 1) {
+			alert("fill properly");
+		} else if(format.test(name)){
+			console.log(format.test(name))
 			alert('No special Character Allowed in Package name')
 		} 
 		else {
@@ -64,6 +65,7 @@ class Packages extends React.Component {
 					});
 					this.getDealData()
 				}).catch((errs) => {
+					console.log(errs);
                     if (!errs.response.data.success) {
                         alert(errs.response.data.error)
                     }
@@ -130,18 +132,18 @@ class Packages extends React.Component {
 
 									<div style={{ display: 'flex' }} className="anchor">
 										<div>
-											<TextField id="outlined-basic" type="string" label="Package Name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} style={{ marginRight: 25 }} required />
+											<TextField id="outlined-basic" value={name} type="string" label="Package Name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} style={{ marginRight: 25 }} required />
 											<p className="alert-msg">{name?.length <= 3 && 'minimum length 3'}</p>
-											<p className="alert-msg">{name?.length >= 8 && 'maxium length 10'}</p>
+											<p className="alert-msg">{name?.length >= 10 && 'maxium length 10'}</p>
 											<p className="alert-msg">{name.length > 1 && format.test(name) && 'Special Character not allowed'}</p>
 										</div>
 										<div>
-											<TextField id="outlined-basic" type="number" label="Duration (month)" variant="outlined" onChange={(e) => this.setState({ duration: e.target.value })} style={{ marginRight: 25 }} required />
+											<TextField id="outlined-basic" value={duration} type="number" label="Duration (month)" variant="outlined" onChange={(e) => this.setState({ duration: e.target.value })} style={{ marginRight: 25 }} required />
 											<p className="alert-msg">{duration < 1 && 'should br greater than 1'}</p>
 											<p className="alert-msg">{duration >= 90 && 'should be less than 90'}</p>
 										</div>
 										<div>
-											<TextField id="outlined-basic" label="Description" onChange={(e) => this.setState({ description: e.target.value })} variant="outlined" required />
+											<TextField id="outlined-basic" value={description} label="Description" onChange={(e) => this.setState({ description: e.target.value })} variant="outlined" required />
 											<p className="alert-msg">{description?.length < 10 && 'minimum 10 character'}</p>
 											<p className="alert-msg">{description?.length >= 30 && 'maximum 30 character'}</p>
 										</div>
@@ -149,12 +151,12 @@ class Packages extends React.Component {
 
 									<div style={{ display: 'flex' }} className="anchor">
 										<div>
-											<TextField id="outlined-basic" type="number" label="No of ads" onChange={(e) => this.setState({ no_of_ads: e.target.value })} variant="outlined" style={{ marginRight: 25 }} required />
-											<p className="alert-msg">{no_of_ads < 3 && 'minimum 3 Ads'}</p>
+											<TextField id="outlined-basic" value={no_of_ads} type="number" label="No of ads" onChange={(e) => this.setState({ no_of_ads: e.target.value })} variant="outlined" style={{ marginRight: 25 }} required />
+											<p className="alert-msg">{no_of_ads <= 3 && 'minimum 3 Ads'}</p>
 											<p className="alert-msg">{no_of_ads >= 50 && 'maximum 50 Ads'}</p>
 										</div>
 										<div>
-											<TextField id="outlined-basic" type="number" label="Amount" onChange={(e) => this.setState({ amount: e.target.value })} variant="outlined" style={{ marginRight: 25 }} required />
+											<TextField id="outlined-basic" value={amount} type="number" label="Amount" onChange={(e) => this.setState({ amount: e.target.value })} variant="outlined" style={{ marginRight: 25 }} required />
 											<p className="alert-msg">{amount < 1 && 'must be more than 0'}</p>
 											<p className="alert-msg">{amount >= 500000 && 'must be less than 500000'}</p>
 										</div>
@@ -203,7 +205,7 @@ class Packages extends React.Component {
 														</td>
 													</tr>
 												)
-											})};
+											})}
 										</tbody>
 									</Table>
 								</CardBody>

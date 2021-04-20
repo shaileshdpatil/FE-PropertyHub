@@ -15,6 +15,8 @@ import {
 import CityDailog from './Dailog/CityDailog';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
 class city extends React.Component {
     state = {
         cityData: [],
@@ -44,6 +46,8 @@ class city extends React.Component {
         const data = { citys, states }
         if (citys <= 3 || states <= 3) {
             alert("please fill the fields properly")
+        } else if (format.test(citys) || format.test(states)){
+            alert("City name or state name must not contain special character");
         } else {
             axios.post("http://localhost:3000/api/cityadd", data)
                 .then((response) => {
