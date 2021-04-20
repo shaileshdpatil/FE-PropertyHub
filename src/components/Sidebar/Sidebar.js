@@ -45,11 +45,8 @@ class Sidebar extends React.Component {
             </div>
           </a>
           <a
-<<<<<<< HEAD
             href="http://localhost:3001/visitor/display-HomePage"
-=======
             href="/admin/all-packages"
->>>>>>> f0292e2df7dfd97970f150c282bf7b0bfbafc3cf
             className="simple-text logo-normal"
             target="_blank"
             rel="noopener noreferrer"

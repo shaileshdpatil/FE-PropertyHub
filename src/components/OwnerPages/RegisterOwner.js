@@ -24,12 +24,12 @@ class ownerRegister extends React.Component {
     submitForm = () => {
         const { names, email, phone, password } = this.state;
         const data = { names, email, phone, password }
-<<<<<<< HEAD
+
         if(names?.length<3 || email?.length<=4 || password?.length<=4 || phone<=9 || phone>=12){
             alert("please fill data properly");
         }
         else{
-=======
+
         if (names?.length < 3 || password?.length <= 4) {
             alert("please fill data properly")
         } else if (phone?.length < 10) {
@@ -37,7 +37,6 @@ class ownerRegister extends React.Component {
         } else if (!EMAIL_REGEX.test(email)) {
             alert('Please enter valid Email Address !')
         } else {
->>>>>>> f0292e2df7dfd97970f150c282bf7b0bfbafc3cf
             axios.post("http://localhost:3000/api/ownerRegister", data)
                 .then((res) => {
                     toast.success('registration Successfull!', {
@@ -58,7 +57,7 @@ class ownerRegister extends React.Component {
 
 
     }
-
+    }
     render() {
         return (
             <>

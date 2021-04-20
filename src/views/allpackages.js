@@ -46,16 +46,11 @@ class Packages extends React.Component {
 		}
 		if (name?.length <= 3 || duration < 1 || no_of_ads < 3 || description?.length < 10 || amount < 1) {
 			alert("fill properly");
-<<<<<<< HEAD
-		} else {
-			// console.log(body);
-=======
 		} else if(format.test(name)){
 			console.log(format.test(name))
 			alert('No special Character Allowed in Package name')
 		} 
 		else {
->>>>>>> f0292e2df7dfd97970f150c282bf7b0bfbafc3cf
 			axios.post("http://localhost:3000/api/packageadd", body)
 				.then((response) => {
 					toast.success('successfully inserted!', {
@@ -69,12 +64,8 @@ class Packages extends React.Component {
 					});
 					this.getDealData()
 				}).catch((errs) => {
-<<<<<<< HEAD
-                    if (errs.response.data.success) {
-=======
 					console.log(errs);
                     if (!errs.response.data.success) {
->>>>>>> f0292e2df7dfd97970f150c282bf7b0bfbafc3cf
                         alert(errs.response.data.error)
                     }else{
 						alert(errs.response.data.error)
@@ -141,16 +132,10 @@ class Packages extends React.Component {
 								<CardBody>
 									<div style={{ display: 'flex' }} className="anchor">
 										<div>
-<<<<<<< HEAD
-											<TextField id="outlined-basic" type="string" label="Package Name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })} style={{ marginRight: 25 }} required />
-											<p className="alert-msg">{name?.length <= 3 && 'minimum length 3'}</p>
-											<p className="alert-msg">{name?.length >= 8 && 'maxium length 10'}</p>
-=======
 											<TextField id="outlined-basic" value={name} type="string" label="Package Name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} style={{ marginRight: 25 }} required />
 											<p className="alert-msg">{name?.length <= 3 && 'minimum length 3'}</p>
 											<p className="alert-msg">{name?.length >= 10 && 'maxium length 10'}</p>
 											<p className="alert-msg">{name.length > 1 && format.test(name) && 'Special Character not allowed'}</p>
->>>>>>> f0292e2df7dfd97970f150c282bf7b0bfbafc3cf
 										</div>
 										<div>
 											<TextField id="outlined-basic" value={duration} type="number" label="Duration (month)" variant="outlined" onChange={(e) => this.setState({ duration: e.target.value })} style={{ marginRight: 25 }} required />

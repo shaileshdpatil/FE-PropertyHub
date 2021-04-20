@@ -74,13 +74,8 @@ class LoginOwner extends Component {
                         <span></span>
                         <label>Password</label>
                     </div>
-<<<<<<< HEAD
-                    <div className={styles.signupLink} style={{ marginLeft: '120px' }}>
-                        Not a member ? <a href="http://localhost:3001/owner/register-owner" style={{ marginTop: '-40px !important' }}> signup</a>
-=======
                     <div className="signup_link" style={{ marginLeft: '-120px' }}>
                         Not a member ? <a href="/owner/register-owner" style={{ marginTop: '-40px !important' }}> signup</a>
->>>>>>> f0292e2df7dfd97970f150c282bf7b0bfbafc3cf
                     </div>
                         <a href="abc" style={{ fontWeight:'bolder',color:'black'}}>forget password</a>
                     {/* <button type="button" value="login" name="login" style={{ marginBottom: '40px' }}  /> */}
