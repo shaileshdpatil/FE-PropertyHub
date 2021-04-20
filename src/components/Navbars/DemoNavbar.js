@@ -166,7 +166,7 @@ class Header extends React.Component {
                   </p>
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem tag="a" href="http://localhost:3001/Login">Logout</DropdownItem>
+                  <DropdownItem tag="a" href="/Login">Logout</DropdownItem>
                   
                 </DropdownMenu>
               </Dropdown>

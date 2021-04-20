@@ -26,6 +26,8 @@ import axios from "axios";
 //styles
 import './allpackages.css'
 
+const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
 class Packages extends React.Component {
 	state = {
 		propertyData: [],
@@ -44,8 +46,11 @@ class Packages extends React.Component {
 			name, duration, no_of_ads, amount, description
 		}
 		if (name?.length <= 3 || name?.length >= 8 || duration < 1 || no_of_ads < 3 || description?.length < 10 || amount < 1) {
-			alert("fill properly");
-		} else {
+			// alert("fill properly");
+		} else if(!format.test(name)){
+			alert('No special Character Allowed in Package name')
+		} 
+		else {
 			axios.post("http://localhost:3000/api/packageadd", body)
 				.then((response) => {
 					toast.success('successfully inserted!', {
@@ -128,10 +133,10 @@ class Packages extends React.Component {
 											<TextField id="outlined-basic" type="string" label="Package Name" variant="outlined" onChange={(e) => this.setState({ name: e.target.value })} style={{ marginRight: 25 }} required />
 											<p className="alert-msg">{name?.length <= 3 && 'minimum length 3'}</p>
 											<p className="alert-msg">{name?.length >= 8 && 'maxium length 10'}</p>
-
+											<p className="alert-msg">{name.length > 1 && format.test(name) && 'Special Character not allowed'}</p>
 										</div>
 										<div>
-											<TextField id="outlined-basic" type="number" label="Duration" variant="outlined" onChange={(e) => this.setState({ duration: e.target.value })} style={{ marginRight: 25 }} required />
+											<TextField id="outlined-basic" type="number" label="Duration (month)" variant="outlined" onChange={(e) => this.setState({ duration: e.target.value })} style={{ marginRight: 25 }} required />
 											<p className="alert-msg">{duration < 1 && 'should br greater than 1'}</p>
 											<p className="alert-msg">{duration >= 90 && 'should be less than 90'}</p>
 										</div>

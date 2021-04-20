@@ -5,6 +5,8 @@ import history from '../../history';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 class ownerRegister extends React.Component {
     constructor(props) {
         super(props);
@@ -22,11 +24,13 @@ class ownerRegister extends React.Component {
     submitForm = () => {
         const { names, email, phone, password } = this.state;
         const data = { names, email, phone, password }
-        if(names?.length<3 || email?.length<=4 || password?.length<=4){
+        if (names?.length < 3 || password?.length <= 4) {
             alert("please fill data properly")
-        }
-        else{
-            
+        } else if (phone?.length < 10) {
+            alert("Phone number must contain 10 digits")
+        } else if (!EMAIL_REGEX.test(email)) {
+            alert('Please enter valid Email Address !')
+        } else {
             axios.post("http://localhost:3000/api/ownerRegister", data)
                 .then((res) => {
                     toast.success('registration Successfull!', {
@@ -37,9 +41,9 @@ class ownerRegister extends React.Component {
                         pauseOnHover: true,
                         draggable: true,
                         progress: undefined,
-                        });
+                    });
                     history.push("/owner/Login-owner");
-    
+
                 }).catch((error) => {
                     console.log(error);
                 })
@@ -74,9 +78,9 @@ class ownerRegister extends React.Component {
                             <span></span>
                             <label>Password</label>
                         </div>
-                        <a href="http://localhost:3001/owner/Login-owner" style={{ color: 'black', fontWeight: 'bolder' }}>Alredy have an account</a>
+                        <a href="/owner/Login-owner" style={{ color: 'black', fontWeight: 'bolder' }}>Alredy have an account</a>
                         {/* <button type="submit" value="Register" name="register" style={{ marginBottom: '40px' }} /> */}
-                        <button type="button" onClick={this.submitForm} style={{width:'300px',marginTop:'15px',marginBottom:'15px',height:'35px',borderRadius:'10px',backgroundColor:'skyblue'}}>Register</button>
+                        <button type="button" onClick={this.submitForm} style={{ width: '300px', marginTop: '15px', marginBottom: '15px', height: '35px', borderRadius: '10px', backgroundColor: 'skyblue' }}>Register</button>
                     </form>
 
                 </div>

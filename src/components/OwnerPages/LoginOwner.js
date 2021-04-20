@@ -5,6 +5,9 @@ import history from '../../history';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+
 class LoginOwner extends Component {
     state = {
       owLogin :[],
@@ -15,12 +18,31 @@ class LoginOwner extends Component {
     owlogin = () => {
       const {email,password} = this.state ;
       const body = {email,password}
-      axios.post('http://localhost:3000/api/ownerLogin',body
-        ).then((res) => {
-          console.log(res);
-          const status = res.data.user.status;
-          if (status) {
-            toast.success('Login Successfully!', {
+
+      if(!EMAIL_REGEX.test(email)){
+        alert('Please enter valid Email Address !')
+      }else{
+        axios.post('http://localhost:3000/api/ownerLogin',body
+          ).then((res) => {
+            console.log(res);
+            const status = res.data.user.status;
+            if (status) {
+              toast.success('Login Successfully!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
+              history.push("/owner/Front-page-owner");
+            } else {
+              alert('User is not verified');
+            }
+          }).catch((e)=>{
+            // console.log(e);
+            toast.error('Enter valid details!', {
               position: "top-center",
               autoClose: 5000,
               hideProgressBar: false,
@@ -29,23 +51,10 @@ class LoginOwner extends Component {
               draggable: true,
               progress: undefined,
               });
-            history.push("/owner/Front-page-owner");
-          } else {
-            alert('User is not verified');
-          }
-        }).catch((e)=>{
-          // console.log(e);
-          toast.error('Enter valid details!', {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            });
-      
-        })
+        
+          })
+      }
+
     }
 
     render(){
@@ -66,7 +75,7 @@ class LoginOwner extends Component {
                         <label>Password</label>
                     </div>
                     <div className="signup_link" style={{ marginLeft: '-120px' }}>
-                        Not a member ? <a href="http://localhost:3001/owner/register-owner" style={{ marginTop: '-40px !important' }}> signup</a>
+                        Not a member ? <a href="/owner/register-owner" style={{ marginTop: '-40px !important' }}> signup</a>
                     </div>
                         <a href="abc" style={{ fontWeight:'bolder',color:'black'}}>forget password</a>
                     {/* <button type="button" value="login" name="login" style={{ marginBottom: '40px' }}  /> */}
