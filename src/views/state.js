@@ -16,6 +16,8 @@ import './allpackages.css';
 import StateDailog from './Dailog/StateDailog';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
 class state extends React.Component {
     state = {
         stateData: [],
@@ -42,6 +44,8 @@ class state extends React.Component {
         const data = { country, states }
         if (country <= 3 || states <= 3) {
             alert("please fill fields property");
+        } else if (format.test(country) || format.test(states)){
+            alert("Country name or state name must not contain special character");
         } else {
             axios.post("http://localhost:3000/api/stateadd", data)
                 .then((response) => {

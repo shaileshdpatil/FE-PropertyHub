@@ -35,7 +35,7 @@ class Sidebar extends React.Component {
       <div className="sidebar" data-color={this.props.backgroundColor}>
         <div className="logo">
           <a
-          href="http://localhost:3001/admin/all-packages"
+          href="/admin/all-packages"
             className="simple-text logo-mini"
             target="_blank"
             rel="noopener noreferrer"
@@ -45,7 +45,11 @@ class Sidebar extends React.Component {
             </div>
           </a>
           <a
+<<<<<<< HEAD
             href="http://localhost:3001/visitor/display-HomePage"
+=======
+            href="/admin/all-packages"
+>>>>>>> f0292e2df7dfd97970f150c282bf7b0bfbafc3cf
             className="simple-text logo-normal"
             target="_blank"
             rel="noopener noreferrer"
