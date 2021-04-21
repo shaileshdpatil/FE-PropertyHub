@@ -4,6 +4,7 @@ import axios from "axios";
 import history from '../../history';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {NavLink} from 'react-router-dom'
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -51,7 +52,6 @@ class LoginOwner extends Component {
               draggable: true,
               progress: undefined,
               });
-        
           })
       }
 
@@ -74,10 +74,10 @@ class LoginOwner extends Component {
                         <span></span>
                         <label>Password</label>
                     </div>
-                    <div className="signup_link" style={{ marginLeft: '-120px' }}>
-                        Not a member ? <a href="/owner/register-owner" style={{ marginTop: '-40px !important' }}> signup</a>
+                    <div className="signup_link" style={{ marginLeft: '20px' }}>
+                        Not a member ? <NavLink to="/visitor/register-owner" style={{ marginTop: '-40px',color:'red' }}> signup</NavLink>
                     </div>
-                        <a href="abc" style={{ fontWeight:'bolder',color:'black'}}>forget password</a>
+                        <a href="abc" style={{ fontWeight:'bolder',color:'black'}}>Back to home page!</a>
                     {/* <button type="button" value="login" name="login" style={{ marginBottom: '40px' }}  /> */}
                     <br></br><button type="button" onClick={this.owlogin} style={{width:'300px',marginTop:'15px',marginBottom:'25px',height:'35px',borderRadius:'10px',backgroundColor:'skyblue'}}>Login</button>
                     

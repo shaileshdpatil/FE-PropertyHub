@@ -11,13 +11,13 @@ import Footer from "components/Footer/Footer.js";
 import SidebarOwner from "components/Sidebar/SidebarOwner"
 import FixedPluginOwner from "components/FixedPlugin/FixedPluginOwner";
 
-import routesOwner from "routesOwner.js";
+import dashRoutes from "routesOwner.js";
 
 var ps;
 
 class OwnerDashboard extends React.Component {
   state = {
-    backgroundColor: "blue",
+    backgroundColor: "green",
   };
   mainPanel = React.createRef();
   componentDidMount() {
@@ -47,13 +47,13 @@ class OwnerDashboard extends React.Component {
       <div className="wrapper">
         <SidebarOwner
           {...this.props}
-          routesOwner={routesOwner}
+          routesOwner={dashRoutes}
           backgroundColor={this.state.backgroundColor}
         />
         <div className="main-panel" ref={this.mainPanel}>
           <DemoOwnerNav {...this.props} />
           <Switch>
-            {routesOwner.map((prop, key) => {
+            {dashRoutes.map((prop, key) => {
               return (
                 <routesOwner
                   path={prop.layout + prop.path}

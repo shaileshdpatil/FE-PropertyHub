@@ -19,7 +19,8 @@ export default class HeaderNav extends Component {
       <div className={styles.logo}><span className={styles.detailLogo}>PROPERTYHUB</span><br/></div>
       <nav>
         <NavLink to="/visitor/display-HomePage">Home</NavLink>
-        <a href="#1">About us</a>
+        {/* <a href="#1">About us</a> */}
+        <NavLink to="">All Property</NavLink>
         <NavLink to="/visitor/display-contactus">Contact us</NavLink>
         <NavLink className={styles.registerBtn} to="/visitor/register-owner">Login & Signup</NavLink>
       </nav>

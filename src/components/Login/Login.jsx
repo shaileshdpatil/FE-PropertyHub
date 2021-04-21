@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './Login.css';
 import axios from "axios";
 import history from '../../history';
-
- 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+ import {NavLink} from 'react-router-dom';
 
 class Login extends Component {
   state = {
@@ -15,18 +16,19 @@ class Login extends Component {
   login = () => {
     const {email,password} = this.state;
     const body = {email,password}
-    axios.post('http://localhost:3000/api/ownerLogin',body
+    axios.post('http://localhost:3000/api/AdminLogin',body
       ).then((res) => {
-        console.log(res);
-        const status = res.data.user.status;
-        if (status) {
-          history.push("/admin/dashboard");
-        } else {
-          alert('User is not verified');
-        }
+        history.push("/admin/dashboard");
       }).catch((e)=>{
-        // console.log(e);
-        alert("failed to login")
+        toast.error('Email or password is wrong', {
+          position: "top-center",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
   }
 
@@ -38,8 +40,9 @@ class Login extends Component {
           <input className="un " type="text" align="center" placeholder="Username" onChange={(e) => this.setState({ email: e.target.value })} />
           <input className="un " type="password" align="center" placeholder="password" onChange={(e) => this.setState({ password: e.target.value })} />
           <button className="submit" type="button" align="center" onClick={this.login}>Sign in</button>
-          <br></br><a className="forgot" align="center" href="abc" style={{marginLeft:'40px'}}>Forgot Password?</a>
+          <br></br><NavLink className="forgot" align="center" href="abc" to="/visitor" style={{marginLeft:'40px'}}>Back to Home page!</NavLink>
         </form>
+        <ToastContainer />
       </div>
     )
   }

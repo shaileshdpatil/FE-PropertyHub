@@ -15,7 +15,8 @@ import {
 import PanelHeader from "components/PanelHeader/PanelHeader.js";
 import axios from "axios";
 import Table from "reactstrap/lib/Table";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class Notifications extends React.Component {
   state = {

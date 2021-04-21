@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import HeaderNav from './HeaderNav';
 import styles from './HomePage.module.css';
-import Carousel, { Dots } from '@brainhubeu/react-carousel';
 import home1 from '../images/home-1.jpg';
 import home2 from '../images/home-2.jpg';
 import home3 from '../images/home-3.jpg';
-import home4 from '../images/home-4.jpg';
+// import home4 from '../images/home-4.jpg';
 // import home5 from '../images/home-5.jpg';
 // import home6 from '../images/home-6.jpg';
 // import home7 from '../images/home-7.jpg';
@@ -13,9 +12,9 @@ import home4 from '../images/home-4.jpg';
 // import home9 from '../images/home-9.jpg';
 // import home10 from '../images/home-10.jpg';
 // import home11 from '../images/home-11.jpg';
-import style from './HomePage.module.css';
-import styless from './HomePage.scss';
 import '@brainhubeu/react-carousel/lib/style.css';
+import Tables from '../PackageTables';
+import FooterNav from './FooterNav';
 
 export class HomePage extends Component {
 
@@ -35,22 +34,46 @@ export class HomePage extends Component {
                     <div className={styles.overlay}></div>
                 </headersps>
 
-                <div className={style.imageData}>
-                    <h1>Property category</h1>
-                    <Dots
-                        // value={value}
-                        // onChange={onChange}
-                        thumbnails={[
-                            (<img key={1} className={styless.preview} src={home1} />),
-                            (<img key={2} className={styless.preview} src={home2} />),
-                            (<img key={3} className={styless.preview} src={home3} />),
-                            (<img key={4} className={styless.preview} src={home4} />),
-                            (<img key={4} className={styless.preview} src={home4} />),
-                        ]}
-                    />
-                </div>
+                <main>
+                    <sectionhome>
+                        <div className={styles.containerHome}>
+                            <div className="padding-20"></div>
+                            <div className="row">
+                                <div className="col-xs-4 text-center" style={{border:'1px solid grey',margin:'15px',borderRadius:'10px'}}>
+                                    <div className={styles.thumbnail}>
+                                        <a href="products.html"><img src={home1} alt="Watches" /></a>
+                                        <div className={styles.caption}>
+                                            <h2>Kitchens</h2>
+                                            <p>Original watches from the best brands.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-xs-4 text-center" style={{border:'1px solid grey',margin:'15px',borderRadius:'10px'}}>
+                                    <div className={styles.thumbnail}>
+                                        <a href="products.html"><img src={home2} alt="Camera" /></a>
+                                        <div className={styles.caption}>
+                                            <h2>Hall</h2>
+                                            <p>Choose among the best available in the world.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="col-xs-4 text-center" style={{border:'1px solid grey',margin:'15px',borderRadius:'10px'}}>
+                                    <div className={styles.thumbnail}>
+                                        <a href="products.html"><img src={home3} alt="Shirt" /></a>
+                                        <div className={styles.caption}>
+                                            <h2>Living Room</h2>
+                                            <p>Our exquisite collection of shirts.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="padding-20"></div>
+                        </div>
+                    </sectionhome>
+                </main>
+                <Tables />
 
-
+                <FooterNav />
             </>
         )
     }

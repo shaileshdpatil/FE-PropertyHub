@@ -34,8 +34,8 @@ class SidebarOwner extends React.Component {
     return (
       <div className="sidebar" data-color={this.props.backgroundColor}>
         <div className="logo">
-          <a
-          href="http://localhost:3001/owner/all-packages"
+          <NavLink
+          to="/visitor/display-HomePage"
             className="simple-text logo-mini"
             target="_blank"
             rel="noopener noreferrer"
@@ -43,15 +43,15 @@ class SidebarOwner extends React.Component {
             <div className="logo-img">
               <img src={logo} alt="react-logo" />
             </div>
-          </a>
-          <a
-            href="http://localhost:3001/owner/all-packages"
+          </NavLink>
+          <NavLink
+            to="/visitor/display-HomePage"
             className="simple-text logo-normal"
             target="_blank"
             rel="noopener noreferrer"
           >
             Propertyhub
-          </a>
+          </NavLink>
         </div>
         <div className="sidebar-wrapper" ref="sidebar">
           <Nav>
