@@ -6,7 +6,8 @@
   padding: 15px;
   position: relative;
   left:35%;
-  margin-top:2%
+  margin-top:2%;
+  margin-bottom: 80px;
 }
 form h3 {
   display: flex;

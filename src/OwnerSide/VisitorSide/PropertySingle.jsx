@@ -5,7 +5,7 @@ import styles from './PropertySingle.module.css'
 // } from 'reactstrap';
 import p1 from '../images/p1.jpg';
 import HeaderNav from './HeaderNav';
-
+import FooterNav from './FooterNav';
 const PorpertySingle = () => {
     return (
         <>  
@@ -141,13 +141,12 @@ const PorpertySingle = () => {
                                     <article className="post">
                                         <figure className="post-thumb"><img src="assets/images/l5.jpg" className="radius-image" alt="" />
                                         </figure>
-                                        <div className="text mb-0"><a href="#blog-single">Company realty
-                                </a>
+                                        <div className="text mb-0">
                                             <div className="post-info">+(12) 324 567 89</div>
                                             <div className="post-info">companyrealty@mail.com</div>
                                         </div>
                                     </article>
-                                    <button type="submit" className="btn btn-primary btn-style w-100">Request to propertys owner</button>
+                                    <button type="submit" className="btn btn-primary btn-style w-100">Chat with Seller</button>
                                 </div>
 
                                 <div className="sidebar-widget popular-posts" style={{marginTop:'15px'}}>
@@ -169,7 +168,7 @@ const PorpertySingle = () => {
                     </div>
                 </div>
             </section>
-            <p>Created by shailesh Patil @2020</p>
+                                        <FooterNav />
         </>
     )
 }

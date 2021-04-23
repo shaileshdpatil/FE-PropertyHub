@@ -211,7 +211,7 @@ const ListingProperty = () => {
 			<footer>
 				<div className={styles.FooterNav}>
 					<p>
-						Copyrights to © shah. All Rights Reserved and Contact Us: +91 90000 00000
+						Copyrights to © patil & shah . All Rights Reserved and Contact Us: +91 90000 00000
                     </p>
 				</div>
 			</footer>
