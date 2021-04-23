@@ -5,7 +5,7 @@ import history from '../../history';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from 'react-router-dom'
-
+import HeaderNav from '../../OwnerSide/VisitorSide/HeaderNav';
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,   3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -54,6 +54,7 @@ class ownerRegister extends React.Component {
     render() {
         return (
             <>
+                <HeaderNav />
                 <div className={styles.boxs} style={{ border: '1px solid black', backgroundColor: '#D4DFE6' }}>
                     <h2 style={{ marginLeft: '60px', marginTop: '10px', fontWeight: 'bolder' }}>Register a owner</h2>
                     <form style={{ borderTop: '2px solid black' }}>
