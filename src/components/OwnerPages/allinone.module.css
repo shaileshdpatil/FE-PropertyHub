@@ -1,19 +1,18 @@
-.box{
-    position: absolute;
-    top:50%;
-    left:50%;
+.boxs{
+    margin-top: 20%;
+    margin-left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
     background:#fff;
     border-radius: 10px;
 }
 
-.box h1{
+.boxs h1{
     text-align: center;
     padding: 0 0 20px 0;
     border-bottom:1px solid silver
 }
-.box form{
+.boxs form{
     padding: 0 40px;
     box-sizing: border-box;
 }

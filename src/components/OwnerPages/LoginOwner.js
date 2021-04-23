@@ -60,7 +60,7 @@ class LoginOwner extends Component {
     render(){
     return (
         <>
-            <div className={styles.box} style={{border:'1px solid black',backgroundColor:'#D4DFE6'}}>
+            <div className={styles.boxs} style={{border:'1px solid black',backgroundColor:'#D4DFE6'}}>
                 <h2 style={{ marginLeft: '90px', marginTop: '20px', fontWeight: 'bolder' }}>Login owner</h2>
                 <form style={{ borderTop: '2px solid black' }}>
                     <div className={styles.inputbox}>
@@ -77,7 +77,7 @@ class LoginOwner extends Component {
                     <div className="signup_link" style={{ marginLeft: '20px' }}>
                         Not a member ? <NavLink to="/visitor/register-owner" style={{ marginTop: '-40px',color:'red' }}> signup</NavLink>
                     </div>
-                        <a href="abc" style={{ fontWeight:'bolder',color:'black'}}>Back to home page!</a>
+                        <NavLink to="/visitor" style={{ fontWeight:'bolder',color:'black'}}>Back to home page!</NavLink>
                     {/* <button type="button" value="login" name="login" style={{ marginBottom: '40px' }}  /> */}
                     <br></br><button type="button" onClick={this.owlogin} style={{width:'300px',marginTop:'15px',marginBottom:'25px',height:'35px',borderRadius:'10px',backgroundColor:'skyblue'}}>Login</button>
                     

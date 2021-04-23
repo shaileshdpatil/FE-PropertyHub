@@ -4,6 +4,7 @@ import styles from './HomePage.module.css';
 import home1 from '../images/home-1.jpg';
 import home2 from '../images/home-2.jpg';
 import home3 from '../images/home-3.jpg';
+import {NavLink} from 'react-router-dom';
 // import home4 from '../images/home-4.jpg';
 // import home5 from '../images/home-5.jpg';
 // import home6 from '../images/home-6.jpg';
@@ -27,7 +28,7 @@ export class HomePage extends Component {
                         <div className={styles.row}>
                             <div className={styles.hPrimaryContent}>
                                 <h1 style={{ color: 'white', fontWeight: 'bold' }}>Find Your Dream Home</h1>
-                                <a href="/visitor/display-HomePage"><span className={styles.cta}>View Listings</span></a>
+                                <NavLink to="/visitor/display-ListingProperty"><span className={styles.cta}>View Listings</span></NavLink>
                             </div>
                         </div>
                     </div>
@@ -39,7 +40,7 @@ export class HomePage extends Component {
                         <div className={styles.containerHome}>
                             <div className="padding-20"></div>
                             <div className="row">
-                                <div className="col-xs-4 text-center" style={{border:'1px solid grey',margin:'15px',borderRadius:'10px'}}>
+                                <div className="text-center" style={{border:'1px solid grey',margin:'1px',borderRadius:'10px'}}>
                                     <div className={styles.thumbnails}>
                                         <a href="products.html"><img src={home1} alt="Watches" /></a>
                                         <div className={styles.caption}>
@@ -48,21 +49,21 @@ export class HomePage extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-xs-4 text-center" style={{border:'1px solid grey',margin:'15px',borderRadius:'10px'}}>
+                                <div className="text-center" style={{border:'1px solid grey',margin:'1px',borderRadius:'10px'}}>
                                     <div className={styles.thumbnails}>
-                                        <a href="products.html"><img src={home2} alt="Camera" /></a>
+                                        <a href="products.html"><img src={home2} alt="Watches" /></a>
                                         <div className={styles.caption}>
-                                            <h2>Hall</h2>
-                                            <p>Choose among the best available in the world.</p>
+                                            <h2>BedRooms</h2>
+                                            <p>Original watches from the best brands.</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-xs-4 text-center" style={{border:'1px solid grey',margin:'15px',borderRadius:'10px'}}>
+                                <div className="text-center" style={{border:'1px solid grey',margin:'1px',borderRadius:'10px'}}>
                                     <div className={styles.thumbnails}>
-                                        <a href="products.html"><img src={home3} alt="Shirt" /></a>
+                                        <a href="products.html"><img src={home3} alt="Watches" /></a>
                                         <div className={styles.caption}>
-                                            <h2>Living Room</h2>
-                                            <p>Our exquisite collection of shirts.</p>
+                                            <h2>Halls</h2>
+                                            <p>Original watches from the best brands.</p>
                                         </div>
                                     </div>
                                 </div>

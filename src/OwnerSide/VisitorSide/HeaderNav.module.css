@@ -21,12 +21,12 @@ header {
     display: flex;
     align-items: center;
   }
-  header nav a {
+  .navbar a {
     color: #fff;
     padding: 7px 20px;
     text-transform: capitalize;
     font-weight: 300;
-    font-size: 0.9rem;
+    font-size: 15px;
     font-weight: bold;
 }
 header nav a:hover {

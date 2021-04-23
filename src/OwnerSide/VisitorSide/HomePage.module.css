@@ -26,7 +26,6 @@ headersps {
     position: relative;
     height: 100%;
     z-index: 3;
-
   }
   
   headersps .container .row {
@@ -75,7 +74,7 @@ headersps {
   max-height: 150px; 
 }
 main {
-  padding: 24px;
+  padding: 10px;
   min-height: 100px;
   /* background-color:#d3e0f7; */
   border: 2px solid black;

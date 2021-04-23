@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './allinone.module.css'
 import axios from 'axios';
 import history from '../../history';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from 'react-router-dom'
 
@@ -54,7 +54,7 @@ class ownerRegister extends React.Component {
     render() {
         return (
             <>
-                <div className={styles.box} style={{ border: '1px solid black', backgroundColor: '#D4DFE6' }}>
+                <div className={styles.boxs} style={{ border: '1px solid black', backgroundColor: '#D4DFE6' }}>
                     <h2 style={{ marginLeft: '60px', marginTop: '10px', fontWeight: 'bolder' }}>Register a owner</h2>
                     <form style={{ borderTop: '2px solid black' }}>
                         <div className={styles.inputbox}>
