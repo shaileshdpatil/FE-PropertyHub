@@ -40,7 +40,7 @@ export class HomePage extends Component {
                             <div className="padding-20"></div>
                             <div className="row">
                                 <div className="col-xs-4 text-center" style={{border:'1px solid grey',margin:'15px',borderRadius:'10px'}}>
-                                    <div className={styles.thumbnail}>
+                                    <div className={styles.thumbnails}>
                                         <a href="products.html"><img src={home1} alt="Watches" /></a>
                                         <div className={styles.caption}>
                                             <h2>Kitchens</h2>
@@ -49,7 +49,7 @@ export class HomePage extends Component {
                                     </div>
                                 </div>
                                 <div className="col-xs-4 text-center" style={{border:'1px solid grey',margin:'15px',borderRadius:'10px'}}>
-                                    <div className={styles.thumbnail}>
+                                    <div className={styles.thumbnails}>
                                         <a href="products.html"><img src={home2} alt="Camera" /></a>
                                         <div className={styles.caption}>
                                             <h2>Hall</h2>
@@ -58,7 +58,7 @@ export class HomePage extends Component {
                                     </div>
                                 </div>
                                 <div className="col-xs-4 text-center" style={{border:'1px solid grey',margin:'15px',borderRadius:'10px'}}>
-                                    <div className={styles.thumbnail}>
+                                    <div className={styles.thumbnails}>
                                         <a href="products.html"><img src={home3} alt="Shirt" /></a>
                                         <div className={styles.caption}>
                                             <h2>Living Room</h2>

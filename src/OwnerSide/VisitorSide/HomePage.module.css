@@ -71,7 +71,7 @@ headersps {
 
 
 /* cards image */
-.thumbnail img{
+.thumbnails img{
   max-height: 150px; 
 }
 main {
@@ -85,13 +85,12 @@ main:hover{
 }
 img{
   border-radius: 10px;
-  height: 150px;
 }
-.thumbnail{
+.thumbnails{
   cursor: pointer;
   padding: 12px;
 }
-.thumbnail:hover{
+.thumbnails:hover{
   background-color: #cff0da;
 }
 .containerHome{

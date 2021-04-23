@@ -4,10 +4,10 @@ import axios from 'axios';
 import history from '../../history';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {NavLink} from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
-const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,   3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class ownerRegister extends React.Component {
     constructor(props) {
@@ -27,43 +27,34 @@ class ownerRegister extends React.Component {
         const { names, email, phone, password } = this.state;
         const data = { names, email, phone, password }
 
-        if(names?.length<3 || email?.length<=4 || password?.length<=4 || phone<=9 || phone>=12){
+        if (names?.length < 3 || password?.length <= 4) {
             alert("please fill data properly");
         }
-        else{
+        else {
+            if (names?.length < 3 || password?.length <= 4) {
+                alert("please fill data properly")
+            } else if (phone?.length < 10) {
+                alert("Phone number must contain 10 digits")
+            } else if (!EMAIL_REGEX.test(email)) {
+                alert('Please enter valid Email Address !')
+            } else {
+                axios.post("http://localhost:3000/api/ownerRegister", data)
+                    .then((res) => {
+                        alert("successfully registered");
+                        history.push("/visitor/Login-owner");
 
-        if (names?.length < 3 || password?.length <= 4) {
-            alert("please fill data properly")
-        } else if (phone?.length < 10) {
-            alert("Phone number must contain 10 digits")
-        } else if (!EMAIL_REGEX.test(email)) {
-            alert('Please enter valid Email Address !')
-        } else {
-            axios.post("http://localhost:3000/api/ownerRegister", data)
-                .then((res) => {
-                    toast.success('registration Successfull!', {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                    });
-                    history.push("/visitor/Login-owner");
+                    }).catch((error) => {
+                        console.log(error);
+                    })
+            }
 
-                }).catch((error) => {
-                    console.log(error);
-                })
+
         }
-
-
-    }
     }
     render() {
         return (
             <>
-                <div className={styles.box} style={{border:'1px solid black',backgroundColor:'#D4DFE6'}}>
+                <div className={styles.box} style={{ border: '1px solid black', backgroundColor: '#D4DFE6' }}>
                     <h2 style={{ marginLeft: '60px', marginTop: '10px', fontWeight: 'bolder' }}>Register a owner</h2>
                     <form style={{ borderTop: '2px solid black' }}>
                         <div className={styles.inputbox}>
