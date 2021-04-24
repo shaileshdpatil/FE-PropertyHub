@@ -152,8 +152,8 @@ class Header extends React.Component {
                     <span className="d-lg-none d-md-block">Some Actions</span>
                   </p>
                 </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem tag="a" href="http://localhost:3001/Login">Logout</DropdownItem>
+                <DropdownMenu >
+                  <DropdownItem tag="a" href="http://localhost:3001/visitor/Login-owner">Logout</DropdownItem>
                   
                 </DropdownMenu>
               </Dropdown>

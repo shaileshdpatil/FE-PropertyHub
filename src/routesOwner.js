@@ -1,20 +1,12 @@
-import propertysOwner from './components/OwnerPages/views/allProperty.js'
-import Dashboard from "views/Dashboard.js";
+import Allpropertys from './views/Allproperty'
 
 var dashRoutes = [
   {
-    path: "/dashboard",
-    name: "All-propertys",
+    path: "/ownerdata",
+    name: "Owner Data",
     icon: "files_paper",
-    component: Dashboard,
+    component: Allpropertys,
     layout: "/owner",
   },
-  {
-    path: "/ownerdata",
-    name: "All-propertys",
-    icon: "files_paper",
-    component: propertysOwner,
-    layout: "/owner",
-  }
 ];
 export default dashRoutes;

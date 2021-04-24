@@ -16,8 +16,7 @@ import tables from './OwnerSide/PackageTables';
 import PorpertySingle from './OwnerSide/VisitorSide/PropertySingle'
 import InsertProperty from './OwnerSide/InsertProperty';
 import HomePage from './OwnerSide/VisitorSide/HomePage'; 
-import ContactUs from './OwnerSide/VisitorSide/ContactUs'; 
-import SidebarOwner from './OwnerSide/DashboardOwner/SidebarOwner'; 
+import ContactUs from './OwnerSide/VisitorSide/ContactUs';  
 import propertysOwner from '../src/components/OwnerPages/views/allProperty';
 import ListingProperty from './OwnerSide/VisitorSide/ListingProperty';
 
@@ -25,7 +24,7 @@ ReactDOM.render(
   <Router history={history}>
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/owner" render={(props) => <OwnerDashboard {...props} />} />
+      <Route path="/owner" component={OwnerDashboard}/>
       <Route path="/Login"  component={Login} />
 
       
@@ -34,7 +33,6 @@ ReactDOM.render(
       <Route path="/owner/Front-page-feedback"  component={feedback} />
       <Route path="/owner/owner-page-for-table"  component={tables} />
       <Route path="/owner/owner-insert-property"  component={InsertProperty} />
-      <Route path="/owner/display-sidebar"  component={SidebarOwner} />
       <Route path="/owner/owner-dashboard-All-propertys"  component={propertysOwner} />
 
 

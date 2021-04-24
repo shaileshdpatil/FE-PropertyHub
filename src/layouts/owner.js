@@ -3,7 +3,7 @@ import React from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 
 // reactstrap components
-import { Switch, Redirect } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 
 // core components
 import DemoOwnerNav from "components/Navbars/DemoOwnerNav";
@@ -55,7 +55,7 @@ class OwnerDashboard extends React.Component {
           <Switch>
             {dashRoutes.map((prop, key) => {
               return (
-                <routesOwner
+                <Route
                   path={prop.layout + prop.path}
                   component={prop.component}
                   key={key}

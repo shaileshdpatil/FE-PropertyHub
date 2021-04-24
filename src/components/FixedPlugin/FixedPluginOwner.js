@@ -35,12 +35,7 @@ class FixedPluginOwner extends Component {
               >
                 Home
               </Link>
-              <Link
-                to="/owner/notifications"
-                className="btn btn-warning btn-block btn-round col-sm-12"
-              >
-                Feedback
-              </Link>
+            
             </li>
           </ul>
         </div>
