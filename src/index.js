@@ -19,6 +19,7 @@ import HomePage from './OwnerSide/VisitorSide/HomePage';
 import ContactUs from './OwnerSide/VisitorSide/ContactUs';  
 import propertysOwner from '../src/components/OwnerPages/views/allProperty';
 import ListingProperty from './OwnerSide/VisitorSide/ListingProperty';
+import AboutUs from './OwnerSide/VisitorSide/AboutUs';
 
 ReactDOM.render(
   <Router history={history}>
@@ -44,6 +45,7 @@ ReactDOM.render(
       <Route path="/visitor/display-HomePage"  component={HomePage} />
       <Route path="/visitor/display-contactus"  component={ContactUs} />
       <Route path="/visitor/display-ListingProperty"  component={ListingProperty} />
+      <Route path="/visitor/display-about"  component={AboutUs} />
       <Redirect to="/visitor/display-HomePage" />
     </Switch>
   </Router>,

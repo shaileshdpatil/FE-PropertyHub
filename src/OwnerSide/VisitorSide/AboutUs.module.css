@@ -1,0 +1,48 @@
+.root{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main{
+  flex: 1;
+  padding-top: 5vh;
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+}
+
+.container h2{
+  margin-bottom: 30px;
+}
+
+.note{
+  font-weight: normal;
+  font-size: medium;
+  color: grey;
+}
+
+.name{
+  font-size: medium;
+  font-weight: 500;
+}
+
+.card{
+  padding: 20px 8px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card img{
+  height: 16rem;
+  width: 16rem;
+  align-self: center;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
