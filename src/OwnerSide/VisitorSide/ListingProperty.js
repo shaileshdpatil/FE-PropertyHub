@@ -5,7 +5,6 @@ import './img/main.css';
 import HeaderNav from './HeaderNav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './img/bootstrap.min.css';
-import styles from './HomePage.module.css';
 import { NavLink } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import FooterNav from './FooterNav';
@@ -187,8 +186,6 @@ const ListingProperty = () => {
 					</div>
 				</div>
 			</div>
-
-
 			<FooterNav />
 		</>
 	);
