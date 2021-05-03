@@ -76,8 +76,17 @@ export default function InsertProperty() {
           Insert a Property
         </DialogTitle>
         <DialogContent dividers>
-          <TextField id="outlined-basic"  label="Outlined" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" label="Outlined" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic"  label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" label="Description" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" type="Number" label="Price" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" type="Number" label="No of Floors" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" type="Number" label="No of Rooms" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" type="Number" label="No of BeedRoom" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" type="Number" label="No of Garage" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" type="Number" label="No of Bathroom" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" type="Number" label="No of Living-Room" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" label="City" variant="outlined" fullWidth style={marginfor.marginBtn}/>
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={handleClose} color="primary">
