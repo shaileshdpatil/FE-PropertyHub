@@ -22,7 +22,7 @@ export default class HeaderNav extends Component {
 
           <NavLink to="/visitor/display-HomePage">Home</NavLink>
           <NavLink to="/visitor/display-ListingProperty">All Property</NavLink>
-          <a href="#1">About us</a>
+          <NavLink to="/visitor/display-about">About us</NavLink>
           <NavLink to="/visitor/display-contactus">Contact us</NavLink>
           <NavLink className={styles.registerBtn} to="/visitor/register-owner">Login & Signup</NavLink>
           </div>

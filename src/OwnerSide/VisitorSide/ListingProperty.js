@@ -8,6 +8,7 @@ import './img/bootstrap.min.css';
 import styles from './HomePage.module.css';
 import { NavLink } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import FooterNav from './FooterNav';
 
 const ListingProperty = () => {
 	return (
@@ -33,7 +34,7 @@ const ListingProperty = () => {
 								</ul>
 							</div>
 						</div>
-						<div classNameName="col-sm-3" style={{marginTop:'10px'}}>
+						<div classNameName="col-sm-3" style={{ marginTop: '10px' }}>
 							<div className="search_box pull-right">
 								<input type="text" placeholder="Search" />
 							</div>
@@ -109,12 +110,10 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p1} alt="data"/>
+												<img src={p1} alt="data" />
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<Link className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 									</div>
 								</div>
@@ -126,12 +125,10 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p2} alt="data"/>
+												<img src={p2} alt="data" />
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<Link  className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 									</div>
 
@@ -144,12 +141,10 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p1} alt="data"/>
+												<img src={p1} alt="data" />
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<Link  className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 
 									</div>
@@ -163,12 +158,10 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p1} alt="data"/>
+												<img src={p1} alt="data" />
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<Link className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 
 									</div>
@@ -181,12 +174,10 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p2} alt="data"/>
+												<img src={p2} alt="data" />
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<Link className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 									</div>
 
@@ -198,13 +189,7 @@ const ListingProperty = () => {
 			</div>
 
 
-			<footer>
-				<div className={styles.FooterNav}>
-					<p>
-						Copyrights to © patil & shah . All Rights Reserved and Contact Us: +91 90000 00000
-                    </p>
-				</div>
-			</footer>
+			<FooterNav />
 		</>
 	);
 }
