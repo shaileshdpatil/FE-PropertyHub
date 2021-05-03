@@ -52,20 +52,20 @@ const ListingProperty = () => {
 								<div className="panel panel-default">
 									<div className="panel-heading">
 										<h4 className="panel-title">
-											<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
+											<Link data-toggle="collapse" data-parent="#accordian">
 												<span className="badge pull-right"></span>
 											Villa
-										</a>
+										</Link>
 										</h4>
 									</div>
 								</div>
 								<div className="panel panel-default">
 									<div className="panel-heading">
 										<h4 className="panel-title">
-											<a data-toggle="collapse" data-parent="#accordian" href="#mens">
+											<Link data-toggle="collapse" data-parent="#accordian" >
 												<span className="badge pull-right"></span>
 											Row Houses
-										</a>
+										</Link>
 										</h4>
 									</div>
 								</div>
@@ -73,21 +73,11 @@ const ListingProperty = () => {
 								<div className="panel panel-default">
 									<div className="panel-heading">
 										<h4 className="panel-title">
-											<a data-toggle="collapse" data-parent="#accordian" href="#womens">
+											<Link data-toggle="collapse" data-parent="#accordian">
 												<span className="badge pull-right"></span>
 											Residential
-										</a>
+										</Link>
 										</h4>
-									</div>
-								</div>
-								<div className="panel panel-default">
-									<div className="panel-heading">
-										<h4 className="panel-title"><a href="#">Shops</a></h4>
-									</div>
-								</div>
-								<div className="panel panel-default">
-									<div className="panel-heading">
-										<h4 className="panel-title"><a href="#">Garage</a></h4>
 									</div>
 								</div>
 							</div>
@@ -98,8 +88,8 @@ const ListingProperty = () => {
 								<h2>Types</h2>
 								<div className="brands-name">
 									<ul className="nav nav-pills nav-stacked">
-										<li><a href="!#"> <span className="pull-right">(50)</span>Villa</a></li>
-										<li><a href="!#"> <span className="pull-right">(56)</span>Row Houses</a></li>
+										<li><Link > <span className="pull-right">(50)</span>Villa</Link></li>
+										<li><Link > <span className="pull-right">(56)</span>Row Houses</Link></li>
 									</ul>
 								</div>
 							</div>
@@ -119,12 +109,12 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p1} />
+												<img src={p1} alt="data"/>
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<a href="#" className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</a>
+											<Link className="btn btn-default add-to-cart"><i
+												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 									</div>
 								</div>
@@ -136,12 +126,12 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p2} />
+												<img src={p2} alt="data"/>
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<a href="#" className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</a>
+											<Link  className="btn btn-default add-to-cart"><i
+												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 									</div>
 
@@ -154,12 +144,12 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p1} />
+												<img src={p1} alt="data"/>
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<a href="#" className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</a>
+											<Link  className="btn btn-default add-to-cart"><i
+												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 
 									</div>
@@ -173,12 +163,12 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p1} />
+												<img src={p1} alt="data"/>
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<a href="#" className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</a>
+											<Link className="btn btn-default add-to-cart"><i
+												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 
 									</div>
@@ -191,12 +181,12 @@ const ListingProperty = () => {
 									<div className="single-products">
 										<div className="productinfo text-center">
 											<Link to="/visitor/display-property-by-single-page">
-												<img src={p2} />
+												<img src={p2} alt="data"/>
 											</Link>
 											<h2>$56</h2>
 											<p>Easy Polo Black Edition</p>
-											<a href="#" className="btn btn-default add-to-cart"><i
-												className="fa fa-shopping-cart"></i>Add to cart</a>
+											<Link className="btn btn-default add-to-cart"><i
+												className="fa fa-shopping-cart"></i>Add to cart</Link>
 										</div>
 									</div>
 

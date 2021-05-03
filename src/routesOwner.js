@@ -1,11 +1,11 @@
-import Allpropertys from './views/Allproperty'
+import DisplayProperty from './OwnerPages/DisplayProperty'
 
 var dashRoutes = [
   {
     path: "/ownerdata",
     name: "Owner Data",
     icon: "files_paper",
-    component: Allpropertys,
+    component: DisplayProperty,
     layout: "/owner",
   },
 ];

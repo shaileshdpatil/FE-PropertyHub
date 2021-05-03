@@ -14,10 +14,8 @@ import indexOwner from './OwnerSide/indexOwner'
 import feedback from './OwnerSide/feedback';
 import tables from './OwnerSide/PackageTables';
 import PorpertySingle from './OwnerSide/VisitorSide/PropertySingle'
-import InsertProperty from './OwnerSide/InsertProperty';
 import HomePage from './OwnerSide/VisitorSide/HomePage'; 
 import ContactUs from './OwnerSide/VisitorSide/ContactUs';  
-import propertysOwner from '../src/components/OwnerPages/views/allProperty';
 import ListingProperty from './OwnerSide/VisitorSide/ListingProperty';
 
 ReactDOM.render(
@@ -27,15 +25,9 @@ ReactDOM.render(
       <Route path="/owner" component={OwnerDashboard}/>
       <Route path="/Login"  component={Login} />
 
-      
-      
       <Route path="/owner/Front-page-owner"  component={indexOwner} />
       <Route path="/owner/Front-page-feedback"  component={feedback} />
       <Route path="/owner/owner-page-for-table"  component={tables} />
-      <Route path="/owner/owner-insert-property"  component={InsertProperty} />
-      <Route path="/owner/owner-dashboard-All-propertys"  component={propertysOwner} />
-
-
 
       <Route path="/visitor/Login-owner"  component={LoginOwner} />
       <Route path="/visitor/register-owner"  component={RegisterOwner} />

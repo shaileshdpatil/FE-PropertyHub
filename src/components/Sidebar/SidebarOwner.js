@@ -53,7 +53,7 @@ class SidebarOwner extends React.Component {
             Propertyhub
           </NavLink>
         </div>
-        <div className="sidebar-wrapper" ref="sidebar">
+        <div className="sidebar-wrapper"  ref="sidebar">
           <Nav>
             {this.props.routesOwner.map((prop, key) => {
               if (prop.redirect) return null;

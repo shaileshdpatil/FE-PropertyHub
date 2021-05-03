@@ -17,7 +17,7 @@ var ps;
 
 class OwnerDashboard extends React.Component {
   state = {
-    backgroundColor: "green",
+    backgroundColor: 'green',
   };
   mainPanel = React.createRef();
   componentDidMount() {
@@ -62,7 +62,7 @@ class OwnerDashboard extends React.Component {
                 />
               );
             })}
-            <Redirect from="/owner" to="/owner/dashboard" />
+            <Redirect from="/owner" to="/owner/ownerdata" />
           </Switch>
           <Footer fluid />
         </div>

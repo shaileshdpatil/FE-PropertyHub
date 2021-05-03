@@ -125,7 +125,6 @@ class city extends React.Component {
                                                     {StateData.map((event, keys) => {
                                                         return (
                                                             <>
-
                                                                 <option key={`${keys}-key`} value={event.states}>{event.states}</option>
                                                             </>
                                                         )
