@@ -35,29 +35,29 @@ const DisplayProperty = () => {
                                     <thead className="text-primary font-weight-bold" >
                                         <tr>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>PropertyName</th>
-                                            <th className="text-center font-weight-bold" style={marginfor.bordersHead}>City</th>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Address</th>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Phone</th>
+                                            <th className="text-center font-weight-bold" style={marginfor.bordersHead}>City</th>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody className="text-primary font-weight-bold">
                                         <tr className="text-center">
                                             <td className="text-center">
-                                            shailesh patil
+                                                shailesh patil
                                             </td>
                                             <td className="text-center">
-                                            shailesh patil
+                                                katargam
                                             </td>
                                             <td className="text-center">
-                                            shailesh patil
+                                                8866965956
                                             </td>
                                             <td className="text-center">
-                                            8866965956
+                                                surat
                                             </td>
                                             <td className="text-center">
-                                            <Button className="btn-primary" style={{marginRight:'10px'}}>Edit</Button>
-                                            <Button className="btn-danger">Delete</Button>
+                                                <Button className="btn-primary" style={{ marginRight: '10px' }}>Edit</Button>
+                                                <Button className="btn-danger">Delete</Button>
                                             </td>
                                         </tr>
 

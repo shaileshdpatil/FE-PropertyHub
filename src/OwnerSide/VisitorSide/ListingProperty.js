@@ -29,7 +29,7 @@ const ListingProperty = () => {
 							<div classNameName="mainmenu pull-left">
 								<ul className="nav navbar-nav collapse navbar-collapse">
 									<li><NavLink to="/visitor/display-HomePage">Home</NavLink></li>
-									<li><NavLink to="/visitor/display-contactus">Contact</NavLink></li>
+									<li><NavLink to="/visitor/Login-owner">Insert property</NavLink></li>
 								</ul>
 							</div>
 						</div>

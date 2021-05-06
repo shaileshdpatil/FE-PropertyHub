@@ -26,8 +26,9 @@ class LoginOwner extends Component {
       }else{
         axios.post('http://localhost:3000/api/ownerLogin',body
           ).then((res) => {
-            const status = res?.status;
-            if (status === 200) {
+            console.log(res);
+            const status = res.data.user.status;
+            if (status) {
               toast.success('Login Successfully!', {
                 position: "top-center",
                 autoClose: 5000,
@@ -37,9 +38,9 @@ class LoginOwner extends Component {
                 draggable: true,
                 progress: undefined,
                 });
-              history.push("/owner/Front-page-owner");
+              history.push("/owner/Dashboard");
             } else {
-              alert('User is not verified, If verified then please try again later after some time, Thank you');
+              alert('User is not verified');
             }
           }).catch((e)=>{
             console.log(e);
