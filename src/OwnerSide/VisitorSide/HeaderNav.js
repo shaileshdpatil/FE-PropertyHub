@@ -24,7 +24,7 @@ export default class HeaderNav extends Component {
           <NavLink to="/visitor/display-ListingProperty">All Property</NavLink>
           <NavLink to="/visitor/display-about">About us</NavLink>
           <NavLink to="/visitor/display-contactus">Contact us</NavLink>
-          <NavLink className={styles.registerBtn} to="/visitor/register-owner">Login & Signup</NavLink>
+          <NavLink className={styles.registerBtn} to="/visitor/Login-user">Login & Signup</NavLink>
           </div>
         </nav>
       </header>

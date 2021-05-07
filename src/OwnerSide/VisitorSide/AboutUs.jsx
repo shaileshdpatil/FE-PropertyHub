@@ -15,7 +15,7 @@ export default () => {
       <div className={styles.card}>
         <img src={HomeImage} />
         <p className={styles.note}>{text}</p>
-        <p className={styles.name}>{name}<br/>india</p>
+        <p className={styles.name}>{name}<br />india</p>
       </div>
     )
   }
@@ -29,7 +29,7 @@ export default () => {
           <Row className={styles.row}>
             <Col lg={1} />
             <Col lg={5}>
-              <img src={HomeImage} className={styles.image}/>
+              <img src={HomeImage} className={styles.image} />
             </Col>
             <Col lg={5}>
               <p className={styles.note}>Launched in 2021, propertyHub.com, India’s No. 1 property portal, deals with every aspect of the consumers’ needs in the real estate industry. It is an online forum where buyers, sellers and brokers/agents can exchange information about real estate properties quickly, effectively and inexpensively. At propertyHub.com, you can advertise a property, search for a property, browse through properties, build your own property microsite, and keep yourself updated with the latest news and trends making headlines in the realty sector.</p>
@@ -39,32 +39,37 @@ export default () => {
             <Col lg={1} />
           </Row>
           <Divider style={{ marginBlock: 30 }} />
-          <h2 style={{ marginBottom: 0 }}>Our Testimonials! Read what our Users say</h2>
-          <p className={styles.note} style={{ marginBottom: 30 }}>Read our testimonials, check our reviews and Deals your trip with us.</p>
+          <h2 style={{ marginBottom: 0, textAlign: 'center' }}>Our Team</h2>
+          <p className={styles.note} style={{ marginBottom: 30, textAlign: 'center' }}>Read our testimonials, check our Founder and Co-Founder.</p>
           <Row>
             <Col lg={3}>
               <Card
-                text="I loved the entire process of booking. I was given multiple options for hotels and activities I could choose from. Ground support was excellent. I loved the experience. Strongly Recommended!"
+                text="Would like to have another trip arranged from them. Thank you HungryTripper for ur support!"
+                name="Shailesh Patil"
+                style={{ marginBottom: '35px' }}
+              />
+              <p style={{ marginTop: '-65px', padding: '8px' }}>Founder</p>
+            </Col>
+            <Col lg={3}>
+              <Card
+                text="I loved the entire process of booking. I was given multiple options for hotels and activities"
+                name="Huzefa"
+              />
+              <p style={{ marginTop: '-65px', padding: '8px' }}>Co-Founder</p>
+            </Col>
+            <Col lg={3}>
+              <Card
+                text="I loved the entire process of booking. I was given multiple options for hotels and activities"
                 name="Vaidehi K"
               />
+              <p style={{ marginTop: '-65px', padding: '8px' }}>CEO</p>
             </Col>
             <Col lg={3}>
               <Card
-                text="I really would like to recommend HungryTripper to my friends. Everything went smoothly as planned. Would like to have another trip arranged from them. Thank you HungryTripper for ur support!"
-                name="Shailesh Patil"
+                text="The Bali adventure was great. It has so much to offer culturally and spiritually."
+                name="Pankaj shah"
               />
-            </Col>
-            <Col lg={3}>
-              <Card
-                text="The Bali adventure was great. It has so much to offer culturally and spiritually. We visited Nasa Dua and few more. Bali has something for everyone. :) Thank you very much team for awesome journey!"
-                name="Pankaj "
-              />
-            </Col>
-            <Col lg={3}>
-              <Card
-                text="I loved the entire process of booking. I was given multiple options for hotels and activities I could choose from. Ground support was excellent. I loved the experience. Strongly Recommended!"
-                name="Huzefa "
-              />
+              <p style={{ marginTop: '-65px', padding: '8px' }}>Maneger</p>
             </Col>
           </Row>
         </Container>

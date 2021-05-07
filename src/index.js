@@ -18,6 +18,8 @@ import HomePage from './OwnerSide/VisitorSide/HomePage';
 import ContactUs from './OwnerSide/VisitorSide/ContactUs';  
 import ListingProperty from './OwnerSide/VisitorSide/ListingProperty';
 import AboutUs from './OwnerSide/VisitorSide/AboutUs';
+import LoginUser from './OwnerSide/VisitorSide/userlogin';
+import userregist from './OwnerSide/VisitorSide/userregist';
 
 ReactDOM.render(
   <Router history={history}>
@@ -38,6 +40,8 @@ ReactDOM.render(
       <Route path="/visitor/display-contactus"  component={ContactUs} />
       <Route path="/visitor/display-ListingProperty"  component={ListingProperty} />
       <Route path="/visitor/display-about"  component={AboutUs} />
+      <Route path="/visitor/Login-user"  component={LoginUser} />
+      <Route path="/visitor/Regiset-user"  component={userregist} />
       <Redirect to="/visitor/display-HomePage" />
     </Switch>
   </Router>,

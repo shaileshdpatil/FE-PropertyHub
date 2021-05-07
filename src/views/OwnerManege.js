@@ -111,10 +111,6 @@ class RegularTables extends React.Component {
                                   : <Button type="submit" className="btn btn-success" onClick={() => this.activateOwner(e._id)} style={{marginRight:'23px'}}>Accept</Button>
                               }
                               <Button type="submit" className="btn btn-danger" onClick={() => this.deActivateOwner(e._id)} style={{ marginRight: '10px' }}>Reject</Button>
-                              
-
-
-
                             </td>
                           </tr>
                         );
