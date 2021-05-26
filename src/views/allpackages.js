@@ -80,10 +80,7 @@ class Packages extends React.Component {
 	}
 
 	getDealData = () => {
-		axios.get('http://localhost:3000/api/packageDisplay',
-
-
-		).then((response) => {
+		axios.get('http://localhost:3000/api/packageDisplay').then((response) => {
 			this.setState({ propertyData: response.data });
 		})
 	}
