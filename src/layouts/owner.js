@@ -62,7 +62,7 @@ class OwnerDashboard extends React.Component {
                 />
               );
             })}
-            <Redirect from="/owner" to="/owner/ownerdata" />
+            <Redirect from="/owner" to="/owner/Dashboard" />
           </Switch>
           <Footer fluid />
         </div>

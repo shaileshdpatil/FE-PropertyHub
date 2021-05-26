@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import {TextField} from '@material-ui/core' 
+import axios from 'axios';
 
 const styles = (theme) => ({
   root: {
@@ -53,12 +54,39 @@ const DialogActions = withStyles((theme) => ({
 export default function InsertProperty() {
   const [open, setOpen] = React.useState(false);
 
+
+  //elemnets of 
+  const [PropertyName, setPropertyName ] = React.useState();
+  const [FullAddress,setFullAddress] = React.useState();
+  const [description,setdescription] = React.useState();
+  const [Price,setPrice] = React.useState();
+  const [No_of_Floors,setNo_of_Floors] = React.useState();
+  const [No_of_Rooms,setNo_of_Rooms] = React.useState();
+  const [No_of_BeedRoom,setNo_of_BeedRoom] = React.useState();
+  const [No_of_Garage,setNo_of_Garage] = React.useState();
+  const [No_of_Bathroom,setNo_of_Bathroom] = React.useState();
+  const [No_of_Living_Room,setNo_of_Living_Room] = React.useState();
+  const [City,setCity] = React.useState();
+
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+
+  const submitForm = () => {
+ 
+    const data = { PropertyName,FullAddress, description, Price,No_of_Floors,No_of_Rooms,No_of_BeedRoom,No_of_Garage,No_of_Bathroom,No_of_Living_Room,City };
+    // console.log(data);
+    axios.post("http://localhost:3000/api/insertpropertyData/Patil",data).then(
+      alert("successully inserted property"),
+      handleClose(),
+    ).catch(
+      console.log("error")
+    )
+  
+  }
 
   const marginfor={
     marginBtn:{
@@ -76,20 +104,20 @@ export default function InsertProperty() {
           Insert a Property
         </DialogTitle>
         <DialogContent dividers>
-          <TextField id="outlined-basic"  label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" label="Description" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" type="Number" label="Price" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" type="Number" label="No of Floors" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" type="Number" label="No of Rooms" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" type="Number" label="No of BeedRoom" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" type="Number" label="No of Garage" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" type="Number" label="No of Bathroom" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" type="Number" label="No of Living-Room" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" label="City" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+        <TextField id="outlined-basic" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={description} onChange={(e) => setdescription(e.target.value)} label="Description" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={Price} onChange={(e) => setPrice(e.target.value)} type="Number" label="Price" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={No_of_Floors} onChange={(e) => setNo_of_Floors(e.target.value)} type="Number" label="No of Floors" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={No_of_Rooms} onChange={(e) => setNo_of_Rooms(e.target.value)} type="Number" label="No of Rooms" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={No_of_BeedRoom} onChange={(e) => setNo_of_BeedRoom(e.target.value)} type="Number" label="No of BeedRoom" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={No_of_Garage} onChange={(e) => setNo_of_Garage(e.target.value)} type="Number" label="No of Garage" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={No_of_Bathroom} onChange={(e) => setNo_of_Bathroom(e.target.value)} type="Number" label="No of Bathroom" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={No_of_Living_Room} onChange={(e) => setNo_of_Living_Room(e.target.value)} type="Number" label="No of Living-Room" variant="outlined" fullWidth style={marginfor.marginBtn}/>
+          <TextField id="outlined-basic" value={City} onChange={(e) => setCity(e.target.value)} label="City" variant="outlined" fullWidth style={marginfor.marginBtn}/>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} color="primary">
+          <Button autoFocus onClick={handleClose} onClick={submitForm} color="primary">
             Save changes
           </Button>
         </DialogActions>

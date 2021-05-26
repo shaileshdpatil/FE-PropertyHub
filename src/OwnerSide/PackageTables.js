@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import styles from './package.module.css'
 
@@ -29,7 +30,10 @@ const tables = () => {
 								<div className={styles.price}>
 									<h4>₹159</h4>
 								</div>
-								<button className="btn btn-block btn-outline-primary" type="submit">BUY NOW</button>
+								<Link to="/visitor/register-owner">
+									<button className="btn btn-block btn-outline-primary" >BUY NOW</button>
+								</Link>
+
 							</div>
 						</div>
 						<div className="col-md-5 col-lg-3">
@@ -47,7 +51,9 @@ const tables = () => {
 								<div className={styles.price}>
 									<h4>₹299</h4>
 								</div>
-								<button className="btn btn-block btn-primary" type="submit">BUY NOW</button>
+								<Link to="/visitor/register-owner">
+									<button className="btn btn-block btn-outline-primary" >BUY NOW</button>
+								</Link>
 							</div>
 						</div>
 						<div className="col-md-5 col-lg-3">
@@ -64,7 +70,9 @@ const tables = () => {
 								<div className={styles.price}>
 									<h4>₹499</h4>
 								</div>
-								<button className="btn btn-block btn-outline-primary" type="submit">BUY NOW</button>
+								<Link to="/visitor/register-owner">
+									<button className="btn btn-block btn-outline-primary" >BUY NOW</button>
+								</Link>
 							</div>
 						</div>
 					</div>

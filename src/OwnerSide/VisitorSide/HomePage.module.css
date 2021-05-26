@@ -82,7 +82,7 @@ main {
 main:hover{
   background-color: #fffcf0;
 }
-img{
+.thumbnails img{
   border-radius: 10px;
 }
 .thumbnails{

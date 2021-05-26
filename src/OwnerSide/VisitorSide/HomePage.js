@@ -8,6 +8,8 @@ import {NavLink} from 'react-router-dom';
 import '@brainhubeu/react-carousel/lib/style.css';
 import Tables from '../PackageTables';
 import FooterNav from './FooterNav';
+// import {} from 'react-router-dom'
+import ReviewsByUser from './ReviewsByUser';
 
 export class HomePage extends Component {
 
@@ -65,6 +67,8 @@ export class HomePage extends Component {
                     </sectionhome>
                 </main>
                 <Tables />
+
+            <ReviewsByUser />
 
                 <FooterNav />
             </>
