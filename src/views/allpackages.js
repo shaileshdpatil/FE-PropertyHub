@@ -26,6 +26,8 @@ import axios from "axios";
 //styles
 import './allpackages.css'
 
+
+//eslint-disable-next-line
 const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
 class Packages extends React.Component {

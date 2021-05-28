@@ -17,7 +17,7 @@ export class HomePage extends Component {
         return (
             <>
                 <HeaderNav />
-                <headersps>
+                <div className={styles.headersps}>
                     <div className={styles.container}>
                         <div className={styles.row}>
                             <div className={styles.hPrimaryContent}>
@@ -27,10 +27,10 @@ export class HomePage extends Component {
                         </div>
                     </div>
                     <div className={styles.overlay}></div>
-                </headersps>
+                </div>
 
                 <main>
-                    <sectionhome>
+                    <div className={styles.sectionhome}>
                         <div className={styles.containerHome}>
                             <div className="padding-20"></div>
                             <div className="row">
@@ -64,7 +64,7 @@ export class HomePage extends Component {
                             </div>
                             <div className="padding-20"></div>
                         </div>
-                    </sectionhome>
+                    </div>
                 </main>
                 <Tables />
 

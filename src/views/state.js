@@ -16,6 +16,8 @@ import './allpackages.css';
 import StateDailog from './Dailog/StateDailog';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+
+//eslint-disable-next-line
 const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
 class state extends React.Component {

@@ -21,6 +21,8 @@ class LoginUser extends Component {
     // console.log(body);
     axios.post('http://localhost:3000/api/userLogin',body
       ).then((res) => {
+        // console.log(res.user.token);
+        // localStorage.setItem("token",res.token)
         history.push("/visitor/display-HomePage");
       }).catch((e)=>{
         toast.error('Email or password is wrong', {

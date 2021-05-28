@@ -6,6 +6,8 @@ import styles from './PropertySingle.module.css'
 import p1 from '../images/p1.jpg';
 import HeaderNav from './HeaderNav';
 import FooterNav from './FooterNav';
+import InquieryToOwner from './Dailog/inquieryToOwner';
+
 const PorpertySingle = () => {
     return (
         <>  
@@ -146,7 +148,8 @@ const PorpertySingle = () => {
                                             <div className="post-info">companyrealty@mail.com</div>
                                         </div>
                                     </article>
-                                    <button type="submit" className="btn btn-primary btn-style w-100">Chat with Seller</button>
+                                    {/* <button type="submit" className="btn btn-primary btn-style w-100">Chat with Seller</button> */}
+                                    <InquieryToOwner />
                                 </div>
 
                                 <div className="sidebar-widget popular-posts" style={{marginTop:'15px'}}>

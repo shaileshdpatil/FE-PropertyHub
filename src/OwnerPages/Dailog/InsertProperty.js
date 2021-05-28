@@ -117,7 +117,7 @@ export default function InsertProperty() {
           <TextField id="outlined-basic" value={City} onChange={(e) => setCity(e.target.value)} label="City" variant="outlined" fullWidth style={marginfor.marginBtn}/>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} onClick={submitForm} color="primary">
+          <Button autoFocus onClick={submitForm} color="primary">
             Save changes
           </Button>
         </DialogActions>

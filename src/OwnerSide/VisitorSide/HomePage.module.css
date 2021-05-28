@@ -1,4 +1,4 @@
-headersps {
+.headersps {
     position: relative;
     display: inline-block;
     text-align: center;
@@ -12,7 +12,7 @@ headersps {
   /* body{
     overflow: hidden;
   } */
-  headersps .overlay {
+  .headersps .overlay {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.5);
     height: 580px;
@@ -21,34 +21,34 @@ headersps {
     z-index: 2;
   }
   
-  headersps .container {
+  .headersps .container {
     margin-top: 170px;
     position: relative;
     height: 100%;
     z-index: 3;
   }
   
-  headersps .container .row {
+  .headersps .container .row {
     height: 100%;
     align-items: center;
   }
   
-  headersps .hPrimaryContent h1 {
+  .headersps .hPrimaryContent h1 {
     font-size: 3em;
     font-weight: bold;
     color: #fff;
     margin-top: 50px;
   }
   
-  headersps .hPrimaryContent a {
+  .headersps .hPrimaryContent a {
     color: #000;
   }
   
-  headersps .hPrimaryContent a:hover {
+  .headersps .hPrimaryContent a:hover {
     color: #000;
   }
   
-  headersps .hPrimaryContent .cta {
+  .headersps .hPrimaryContent .cta {
     display: inline-block;
     position: relative;
     color: #444;
@@ -61,7 +61,7 @@ headersps {
     font-weight: bold;
   }
   
-  headersps .hPrimaryContent .cta:hover {
+  .headersps .hPrimaryContent .cta:hover {
     cursor: pointer;
     background-color: #444;
     color: #fff;

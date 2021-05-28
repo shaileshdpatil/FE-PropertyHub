@@ -15,6 +15,7 @@ import {
 import CityDailog from './Dailog/CityDailog';
 import DeleteIcon from '@material-ui/icons/Delete';
 
+//eslint-disable-next-line
 const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
 class city extends React.Component {
