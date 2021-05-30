@@ -6,12 +6,17 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
+var userLogin = cookies.get('shailuKiCookie')
 export default function InquieryToOwner() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+      userLogin
+      ?setOpen(true)
+      :alert("you should login first")
   };
 
   const handleClose = () => {
@@ -20,41 +25,41 @@ export default function InquieryToOwner() {
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen} style={{width:'100%',color:'white'}}>
-      Chat with Seller
+      <Button variant="outlined" color="primary" onClick={handleClickOpen} style={{ width: '100%', color: 'white' }}>
+        Chat with Seller
       </Button>
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText style={{width:'500px',fontSize:'15px'}}>
-            Here you can chat with owner and sent your message.
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+          <DialogContent>
+            <DialogContentText style={{ width: '500px', fontSize: '15px' }}>
+              Here you can chat with owner and sent your message.
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Enter your bid"
-            type="Numner"
-            fullWidth
-          />
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Enter your Message"
-            type="text"
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} color="primary">
-            Cancel
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Enter your bid"
+              type="Numner"
+              fullWidth
+            />
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Enter your Message"
+              type="text"
+              fullWidth
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
-            Sent
+            <Button onClick={handleClose} color="primary">
+              Sent
           </Button>
-        </DialogActions>
-      </Dialog>
+          </DialogActions>
+        </Dialog>
     </div>
   );
 }

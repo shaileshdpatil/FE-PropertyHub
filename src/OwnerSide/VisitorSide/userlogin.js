@@ -6,24 +6,29 @@ import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {NavLink} from 'react-router-dom'
 import HeaderNav from './HeaderNav';
+import Cookies from 'universal-cookie';
 
 class LoginUser extends Component {
- 
-    state = {
-        userLogin :[],
-        email:'',
-        password:''
-      }
+  
+  state = {
+    userLogin :[],
+    email:'',
+    password:'',
+    Auth:false
+  }
   
   login = () => {
+    const cookies = new Cookies();
     const {email,password} = this.state;
     const body = {email,password}
     // console.log(body);
     axios.post('http://localhost:3000/api/userLogin',body
       ).then((res) => {
-        // console.log(res.user.token);
-        // localStorage.setItem("token",res.token)
+        // console.log(res.data.token);
+        cookies.set('shailuKiCookie',res.data.token, { path: '/' });
+        // console.log(cookies.get('shailuKiCookie'));
         history.push("/visitor/display-HomePage");
+        window.location.reload(false);
       }).catch((e)=>{
         toast.error('Email or password is wrong', {
           position: "top-center",
@@ -64,7 +69,7 @@ class LoginUser extends Component {
               />
             </div>
             <div className="createAccount">
-              <button type="button" onClick={this.login}>Login</button>
+              <button type="button" onClick={this.login} style={{fontWeightL:'bolder'}}>Login</button>
               <NavLink to="/visitor/Regiset-user">Not Have an Account ?</NavLink>
             </div>
           </form>
