@@ -20,11 +20,11 @@ export default class HeaderNav extends Component {
   
   Logout = () =>{
     var user = cookies.get('shailuKiCookie');
-    // console.log(user);
     if(user){
       cookies.remove(user); 
-      // alert("logout successfully");
-      window.location.reload(false);
+      console.log(user);
+      alert("logout successfully");
+      // window.location.reload(false);
     }else{
       alert("alredy logged out");
     }

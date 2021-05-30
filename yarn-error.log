@@ -1,29 +1,20 @@
 Arguments: 
-  C:\Program Files (x86)\nodejs\node.exe C:\Users\DELL\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @material-ui/icons
+  C:\Program Files\nodejs\node.exe C:\Users\DELL\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js upgrade react-dom --latest
 
 PATH: 
-  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\nodejs\;C:\Users\DELL\AppData\Local\Microsoft\WindowsApps;C:\Users\DELL\AppData\Roaming\npm;C:\Users\DELL\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Git\bin;C:\Program Files (x86)\nodejs\node_modules\npm\bin;C:\Program Files\MongoDB\Server\4.4\bin;
+  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Users\DELL\AppData\Local\Microsoft\WindowsApps;;C:\Users\DELL\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\DELL\AppData\Roaming\npm
 
 Yarn version: 
   1.22.10
 
 Node version: 
-  14.16.0
+  14.16.1
 
 Platform: 
-  win32 ia32
+  win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.2.tgz: ESOCKETTIMEDOUT
-      at ClientRequest.<anonymous> (C:\Users\DELL\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141289:19)
-      at Object.onceWrapper (events.js:421:28)
-      at ClientRequest.emit (events.js:315:20)
-      at TLSSocket.emitRequestTimeout (_http_client.js:784:9)
-      at Object.onceWrapper (events.js:421:28)
-      at TLSSocket.emit (events.js:327:22)
-      at TLSSocket.Socket._onTimeout (net.js:483:8)
-      at listOnTimeout (internal/timers.js:554:17)
-      at processTimers (internal/timers.js:497:7)
+  Error: EPERM: operation not permitted, unlink 'S:\react\now-ui-dashboard-react-master\node_modules\node-sass\vendor\win32-x64-83\binding.node'
 
 npm manifest: 
   {
@@ -33,7 +24,10 @@ npm manifest:
     "private": true,
     "homepage": "https://demos.creative-tim.com/now-ui-dashboard-react/#/",
     "dependencies": {
-      "@material-ui/core": "^4.11.3",
+      "@brainhubeu/react-carousel": "^2.0.4",
+      "@fortawesome/free-solid-svg-icons": "^5.15.3",
+      "@material-ui/core": "^4.11.4",
+      "@material-ui/icons": "^4.11.2",
       "axios": "^0.21.1",
       "bcryptjs": "^2.4.3",
       "bootstrap": "4.5.0",
@@ -41,7 +35,7 @@ npm manifest:
       "gulp": "4.0.2",
       "gulp-append-prepend": "1.0.8",
       "history": "4.10.1",
-      "mapbox-gl": "^2.2.0",
+      "mapbox-gl": "^2.3.0",
       "node-sass": "4.14.1",
       "perfect-scrollbar": "1.5.0",
       "react": "16.13.1",
@@ -52,7 +46,9 @@ npm manifest:
       "react-router": "5.2.0",
       "react-router-dom": "5.2.0",
       "react-scripts": "3.4.1",
-      "reactstrap": "8.4.1"
+      "react-toastify": "^7.0.4",
+      "reactstrap": "8.4.1",
+      "universal-cookie": "^4.0.4"
     },
     "scripts": {
       "start": "react-scripts start",
@@ -1499,6 +1495,13 @@ Lockfile:
       prop-types "^15.7.2"
       react-is "^16.8.0 || ^17.0.0"
       react-transition-group "^4.4.0"
+  
+  "@material-ui/icons@^4.11.2":
+    version "4.11.2"
+    resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.2.tgz#b3a7353266519cd743b6461ae9fdfcb1b25eb4c5"
+    integrity sha512-fQNsKX2TxBmqIGJCSi3tGTO/gZ+eJgWmMJkgDiOfyNaunNaxcklJQFaFogYcFl0qFuaEz1qaXYXboa/bUXVSOQ==
+    dependencies:
+      "@babel/runtime" "^7.4.4"
   
   "@material-ui/styles@^4.11.3":
     version "4.11.3"
@@ -3436,7 +3439,7 @@ Lockfile:
       process-nextick-args "^2.0.0"
       readable-stream "^2.3.5"
   
-  clsx@^1.0.4:
+  clsx@^1.0.4, clsx@^1.1.1:
     version "1.1.1"
     resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.1.1.tgz#98b3134f9abbdf23b2663491ace13c5c03a73188"
     integrity sha512-6/bPho624p3S2pMyvP5kKBPXnI3ufHLObBFCfgx+LkeR5lg2XYy2hqZqUf45ypD8COn2bhgGJSUE+l5dhNBieA==
@@ -10355,6 +10358,13 @@ Lockfile:
       workbox-webpack-plugin "4.3.1"
     optionalDependencies:
       fsevents "2.1.2"
+  
+  react-toastify@^7.0.3:
+    version "7.0.3"
+    resolved "https://registry.yarnpkg.com/react-toastify/-/react-toastify-7.0.3.tgz#93804c777ecf918872ba3b5be9c654db14547f85"
+    integrity sha512-cxZ5rfurC8LzcZQMTYc8RHIkQTs+BFur18Pzk6Loz6uS8OXUWm6nXVlH/wqglz4Z7UAE8xxcF5mRjfE13487uQ==
+    dependencies:
+      clsx "^1.1.1"
   
   react-transition-group@^2.3.1:
     version "2.9.0"

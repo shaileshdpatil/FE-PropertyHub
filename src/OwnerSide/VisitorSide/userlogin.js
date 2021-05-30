@@ -18,7 +18,7 @@ class LoginUser extends Component {
   }
   
   login = () => {
-    const cookies = new Cookies();
+    const cookies = new Cookies();  
     const {email,password} = this.state;
     const body = {email,password}
     // console.log(body);
