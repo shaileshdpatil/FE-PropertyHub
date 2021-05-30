@@ -1,15 +1,17 @@
 import React from 'react';
 import styles from './PropertySingle.module.css'
-// import {
-//     Card
-// } from 'reactstrap';
 import p1 from '../images/p1.jpg';
 import HeaderNav from './HeaderNav';
 import FooterNav from './FooterNav';
+import InquieryToOwner from './Dailog/inquieryToOwner';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 const PorpertySingle = () => {
+    var userLogin = cookies.get('shailuKiCookie');
     return (
-        <>  
-        <HeaderNav />
+        <>
+            <HeaderNav />
             <section className="w3l-blog post-content py-5" style={{ margin: '70px' }}>
                 <div className={styles.container}>
                     <div className={styles.titleSingle}>
@@ -40,11 +42,6 @@ const PorpertySingle = () => {
                                                 <img src={p1} style={{ width: '100%' }} className="img-fluid radius-image" alt="imagess" />
                                             </div>
                                         </div>
-                                        {/* <div className="item">
-                                            <div className="card">
-                                                <img src="assets/images/p3.jpg" className="img-fluid radius-image" alt="image" />
-                                            </div>
-                                        </div> */}
                                     </div>
                                 </div>
 
@@ -119,15 +116,15 @@ const PorpertySingle = () => {
 
                                     <div className="single-bg-white card" style={{ padding: '20px' }}>
                                         <h3 className="post-content-title mb-4">user Reviews</h3>
-                                        <h6 style={{fontWeight:'bold',fontSize:'15px',marginLeft:'5px',color:'green',backgroundColor:'skyblue',padding:'10px'}}>Shailesh Patil</h6>
+                                        <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }}>Shailesh Patil</h6>
                                         <div className={styles.detailsList}>
                                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, nemo? Cumque a assumenda molestiae reiciendis. Repellendus, deleniti culpa, veniam praesentium exercitationem animi corrupti laboriosam fugiat aspernatur dolor beatae maxime veritatis?</p>
                                         </div>
-                                        <h6 style={{fontWeight:'bold',fontSize:'15px',marginLeft:'5px',color:'green',backgroundColor:'skyblue',padding:'10px'}}>sunilbhai Patil</h6>
+                                        <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }}>sunilbhai Patil</h6>
                                         <div className={styles.detailsList}>
                                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, nemo? Cumque a assumenda molestiae reiciendis. Repellendus, deleniti culpa, veniam praesentium exercitationem animi corrupti laboriosam fugiat aspernatur dolor beatae maxime veritatis?</p>
                                         </div>
-                                        <h6 style={{fontWeight:'bold',fontSize:'15px',marginLeft:'5px',color:'green',backgroundColor:'skyblue',padding:'10px'}}>maheshbhai Patil</h6>
+                                        <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }}>maheshbhai Patil</h6>
                                         <div className={styles.detailsList}>
                                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, nemo? Cumque a assumenda molestiae reiciendis. Repellendus, deleniti culpa, veniam praesentium exercitationem animi corrupti laboriosam fugiat aspernatur dolor beatae maxime veritatis?</p>
                                         </div>
@@ -139,7 +136,7 @@ const PorpertySingle = () => {
                         </div>
 
                         <div className="sidebar-side col-lg-4 col-md-12 col-sm-12 mt-lg-0 mt-5" style={{ display: 'flex', width: '500px' }}>
-                            <aside className="sidebars card">
+                            <aside className="sidebars card"  style={{borderTop:'2px solid black'}}>
                                 <div className={styles.sidebarWidget}>
                                     <div className={styles.sidebarTitle}>
                                         <h4>Contact an Owner</h4>
@@ -153,21 +150,28 @@ const PorpertySingle = () => {
                                             <div className="post-info">companyrealty@mail.com</div>
                                         </div>
                                     </article>
-                                    <button type="submit" className="btn btn-primary btn-style w-100">Chat with Seller</button>
+                                    {/* <button type="submit" className="btn btn-primary btn-style w-100">Chat with Seller</button> */}
+                                    <InquieryToOwner />
                                 </div>
 
-                                <div className="sidebar-widget popular-posts" style={{marginTop:'15px'}}>
-                                    <div className={styles.sidebarOwnerTitle}>
-                                        <h4 style={{ margin: '20px' }}>Owner Details</h4>
+                                <div className="sidebar-widget popular-posts" style={{ marginTop: '15px',borderBottom:'2px solid black' }}>
+                                    <div className={styles.sidebarOwnerTitle} style={{borderTop:'2px solid black'}}>
+                                        <h4 style={{ margin: '20px',marginTop:'25px' }}>Owner Details</h4>
                                     </div>
-
-                                    <article className={styles.detailsowner}>
+                                    {
+                                     userLogin   
+                                    ?<article className={styles.detailsowner}>
                                         <p><strong>Owner Name :</strong> shailesh patil </p>
                                         <p><strong>Owner address :</strong> katargam </p>
                                         <p><strong>Owner age :</strong> 20 </p>
                                         <p><strong>Owner phone :</strong> 454121445</p>
                                         <p><strong>Owner email :</strong> shailesh@gail.com</p>
                                     </article>
+                                    :<>
+                                     <p style={{marginLeft:'20px'}}>You should login first then you can see the owner details.</p>
+                                     <p style={{color:'red',marginLeft:'20px'}}>This data are restricted if you are user then you can see this data.</p>
+                                     </>
+                                    }
                                 </div>
 
                             </aside>
@@ -175,7 +179,7 @@ const PorpertySingle = () => {
                     </div>
                 </div>
             </section>
-                                        <FooterNav />
+            <FooterNav />
         </>
     )
 }

@@ -26,6 +26,8 @@ import axios from "axios";
 //styles
 import './allpackages.css'
 
+
+//eslint-disable-next-line
 const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 
 class Packages extends React.Component {
@@ -80,10 +82,7 @@ class Packages extends React.Component {
 	}
 
 	getDealData = () => {
-		axios.get('http://localhost:3000/api/packageDisplay',
-
-
-		).then((response) => {
+		axios.get('http://localhost:3000/api/packageDisplay').then((response) => {
 			this.setState({ propertyData: response.data });
 		})
 	}

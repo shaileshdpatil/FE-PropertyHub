@@ -133,7 +133,7 @@ export default function InsertProperty() {
           <Cat />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose} onClick={submitForm} color="primary">
+          <Button autoFocus onClick={submitForm} color="primary">
             Save changes
           </Button>
         </DialogActions>

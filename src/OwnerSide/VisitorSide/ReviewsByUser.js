@@ -12,7 +12,7 @@ const ReviewsByUser = () => {
                 <div className={styles.reviews}>
                     <div className={styles.review}> 
                         <div className={styles.headReview}>
-                            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" />
+                            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" alt="description" />
                         </div>
                         <div className={styles.bodyReview}>
                             <div className={styles.nameReview}>Nathan D.</div>
@@ -31,7 +31,7 @@ const ReviewsByUser = () => {
                 <div className={styles.reviews}>
                     <div className={styles.review}>
                         <div className={styles.headReview}>
-                            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" width="250px" />
+                            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" width="250px" alt="description" />
                         </div>
                         <div className={styles.bodyReview}>
                             <div className={styles.nameReview}>Nathan D.</div>
@@ -50,7 +50,7 @@ const ReviewsByUser = () => {
                 <div className={styles.reviews}>
                     <div className={styles.review}>
                         <div className={styles.headReview}>
-                            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" width="250px" />
+                            <img src="https://images.unsplash.com/photo-1488161628813-04466f872be2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80" width="250px" alt="description" />
                         </div>
                         <div className={styles.bodyReview}>
                             <div className={styles.nameReview}>Nathan D.</div>

@@ -80,7 +80,6 @@ class userregist extends Component {
                   required onChange={(e) => this.setState({ phone: e.target.value })}
                 />
 
-
               </div>
 
               <div className="password">
