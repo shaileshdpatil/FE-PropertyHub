@@ -110,6 +110,13 @@ const PorpertySingle = () => {
                                             <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, nemo? Cumque a assumenda molestiae reiciendis. Repellendus, deleniti culpa, veniam praesentium exercitationem animi corrupti laboriosam fugiat aspernatur dolor beatae maxime veritatis?</p>
                                         </div>
                                     </div>
+
+                                    <div className="single-bg-white card">
+                                        <textarea rows="3" id="comments-input" type="text" placeholder="Add a comment..."  />
+                                        <button className="btn btn-primary"type="button" id="contact-submit">post</button>
+                                    </div>
+
+
                                     <div className="single-bg-white card" style={{ padding: '20px' }}>
                                         <h3 className="post-content-title mb-4">user Reviews</h3>
                                         <h6 style={{fontWeight:'bold',fontSize:'15px',marginLeft:'5px',color:'green',backgroundColor:'skyblue',padding:'10px'}}>Shailesh Patil</h6>
