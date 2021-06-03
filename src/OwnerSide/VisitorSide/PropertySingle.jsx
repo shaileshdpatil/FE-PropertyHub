@@ -1,14 +1,11 @@
 import React from 'react';
 import styles from './PropertySingle.module.css'
 import p1 from '../images/p1.jpg';
-import HeaderNav from './HeaderNav';
+import {HeaderNav} from './HeaderNav';
 import FooterNav from './FooterNav';
 import InquieryToOwner from './Dailog/inquieryToOwner';
-import Cookies from 'universal-cookie';
-const cookies = new Cookies();
 
 const PorpertySingle = () => {
-    var userLogin = cookies.get('shailuKiCookie');
     return (
         <>
             <HeaderNav />
@@ -151,20 +148,13 @@ const PorpertySingle = () => {
                                     <div className={styles.sidebarOwnerTitle} style={{borderTop:'2px solid black'}}>
                                         <h4 style={{ margin: '20px',marginTop:'25px' }}>Owner Details</h4>
                                     </div>
-                                    {
-                                     userLogin   
-                                    ?<article className={styles.detailsowner}>
+                            <article className={styles.detailsowner}>
                                         <p><strong>Owner Name :</strong> shailesh patil </p>
                                         <p><strong>Owner address :</strong> katargam </p>
                                         <p><strong>Owner age :</strong> 20 </p>
                                         <p><strong>Owner phone :</strong> 454121445</p>
                                         <p><strong>Owner email :</strong> shailesh@gail.com</p>
                                     </article>
-                                    :<>
-                                     <p style={{marginLeft:'20px'}}>You should login first then you can see the owner details.</p>
-                                     <p style={{color:'red',marginLeft:'20px'}}>This data are restricted if you are user then you can see this data.</p>
-                                     </>
-                                    }
                                 </div>
 
                             </aside>
