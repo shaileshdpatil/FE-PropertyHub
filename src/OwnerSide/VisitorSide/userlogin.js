@@ -5,7 +5,7 @@ import history from '../../history';
 import {  toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {NavLink} from 'react-router-dom'
-import HeaderNav from './HeaderNav';
+import {HeaderNav} from './HeaderNav';
 import Cookies from 'universal-cookie';
 
 class LoginUser extends Component {
@@ -14,7 +14,6 @@ class LoginUser extends Component {
     userLogin :[],
     email:'',
     password:'',
-    Auth:false
   }
   
   login = () => {
@@ -25,10 +24,10 @@ class LoginUser extends Component {
     axios.post('http://localhost:3000/api/userLogin',body
       ).then((res) => {
         // console.log(res.data.token);
-        cookies.set('shailuKiCookie',res.data.token, { path: '/' });
-        // console.log(cookies.get('shailuKiCookie'));
+        cookies.set('shailuKiCookie',res.data.token, { path: '/'});
+        console.log(cookies.get('shailuKiCookie'));
         history.push("/visitor/display-HomePage");
-        window.location.reload(false);
+        window.location.reload();
       }).catch((e)=>{
         toast.error('Email or password is wrong', {
           position: "top-center",

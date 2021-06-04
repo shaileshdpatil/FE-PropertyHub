@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './ContactUs.module.css';
 import axios from 'axios';
-import HeaderNav from './HeaderNav';
+import {HeaderNav} from './HeaderNav';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import FooterNav from './FooterNav';
@@ -61,7 +61,7 @@ class ContactUs extends React.Component {
                     </div>
                 </div>
                 <ToastContainer />
-                <FooterNav style={{ marginTop: '50px' }} />
+                <FooterNav />
             </>
         )
     }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HeaderNav from './HeaderNav';
+import {HeaderNav} from './HeaderNav';
 import styles from './HomePage.module.css';
 import { NavLink } from 'react-router-dom';
 import '@brainhubeu/react-carousel/lib/style.css';

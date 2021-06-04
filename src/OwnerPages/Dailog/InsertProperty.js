@@ -11,8 +11,6 @@ import Typography from '@material-ui/core/Typography';
 import {TextField} from '@material-ui/core' 
 import axios from 'axios';
 import Cat from './categoryD';
-import States from './stateD';
-import CityDD from './cityD';
 
 const styles = (theme) => ({
   root: {
@@ -72,7 +70,6 @@ export default function InsertProperty() {
   const [location,setlocation] = React.useState();
   const [sqrft,setsqrft] = React.useState();
   const [kitchen,setkitchen] = React.useState();
-  {props.citys}
 
 
 
@@ -88,14 +85,14 @@ export default function InsertProperty() {
 
   const submitForm = () => {
  
-    const data = { PropertyName,FullAddress, description, Price,No_of_Floors,No_of_Rooms,No_of_BeedRoom,No_of_Garage,No_of_Bathroom,No_of_Living_Room,sqrft,location,kitchen,citys,states,category };
+    const data = { PropertyName,FullAddress, description, Price,No_of_Floors,No_of_Rooms,No_of_BeedRoom,No_of_Garage,No_of_Bathroom,No_of_Living_Room,sqrft,location,kitchen};
      console.log(data);
-    // axios.post("http://localhost:3000/api/insertpropertyData/Patil",data).then(
-    //   alert("successully inserted property"),
-    //   handleClose(),
-    // ).catch(
-    //   console.log("error")
-    // )
+    axios.post("http://localhost:3000/api/insertpropertyData/Patil",data).then(
+      alert("successully inserted property"),
+      handleClose(),
+    ).catch(
+      console.log("error")
+    )
   
   }
 
@@ -125,8 +122,6 @@ export default function InsertProperty() {
           <TextField id="outlined-basic" value={No_of_Garage} onChange={(e) => setNo_of_Garage(e.target.value)} type="Number" label="No of Garage" variant="outlined" fullWidth style={marginfor.marginBtn}/>
           <TextField id="outlined-basic" value={No_of_Bathroom} onChange={(e) => setNo_of_Bathroom(e.target.value)} type="Number" label="No of Bathroom" variant="outlined" fullWidth style={marginfor.marginBtn}/>
           <TextField id="outlined-basic" value={No_of_Living_Room} onChange={(e) => setNo_of_Living_Room(e.target.value)} type="Number" label="No of Living-Room" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <States />
-          <CityDD />
           <TextField id="outlined-basic" value={location} onChange={(e) => setlocation(e.target.value)} label="location" variant="outlined" fullWidth style={marginfor.marginBtn}/>
           <TextField id="outlined-basic" value={sqrft} onChange={(e) => setsqrft(e.target.value)} label="sqrft" variant="outlined" fullWidth style={marginfor.marginBtn}/>
           <TextField id="outlined-basic" value={kitchen} onChange={(e) => setkitchen(e.target.value)} label="kitchen" variant="outlined" fullWidth style={marginfor.marginBtn}/>

@@ -20,7 +20,6 @@ import ListingProperty from './OwnerSide/VisitorSide/ListingProperty';
 import AboutUs from './OwnerSide/VisitorSide/AboutUs';
 import LoginUser from './OwnerSide/VisitorSide/userlogin';
 import userregist from './OwnerSide/VisitorSide/userregist';
-import PaymentDetail from './components/OwnerPages/PaymentDetail';
 
 
 ReactDOM.render(
@@ -33,7 +32,6 @@ ReactDOM.render(
       <Route path="/owner/Front-page-owner"  component={indexOwner} />
       <Route path="/owner/Front-page-feedback"  component={feedback} />
       <Route path="/owner/owner-page-for-table"  component={tables} />
-      <Route path="/owner/owner-page-for-confirm"  component={PaymentDetail} />
 
       <Route path="/visitor/Login-owner"  component={LoginOwner} />
       <Route path="/visitor/register-owner"  component={RegisterOwner} />

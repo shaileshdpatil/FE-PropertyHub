@@ -4,7 +4,7 @@ import Container from 'reactstrap/lib/Container';
 import Row from 'reactstrap/lib/Row';
 import styles from './AboutUs.module.css'
 import FooterNav from './FooterNav';
-import HeaderNav from './HeaderNav';
+import {HeaderNav} from './HeaderNav';
 import HomeImage from '../images/hero-image.jpg'
 import { Divider } from '@material-ui/core';
 

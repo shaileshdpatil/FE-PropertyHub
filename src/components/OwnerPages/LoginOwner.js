@@ -5,7 +5,7 @@ import history from '../../history';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {NavLink} from 'react-router-dom'
-import HeaderNav from '../../OwnerSide/VisitorSide/HeaderNav';
+import {HeaderNav} from '../../OwnerSide/VisitorSide/HeaderNav';
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 

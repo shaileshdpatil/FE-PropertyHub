@@ -2,7 +2,7 @@ import React from 'react';
 import p1 from './img/p1.jpg';
 import p2 from './img/p2.jpg';
 import './img/main.css';
-import HeaderNav from './HeaderNav';
+import {HeaderNav} from './HeaderNav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './img/bootstrap.min.css';
 import { NavLink } from 'react-router-dom';
@@ -111,8 +111,8 @@ const ListingProperty = () => {
 											<Link to="/visitor/display-property-by-single-page">
 												<img src={p1} alt="data" />
 											</Link>
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
+											<h2>$20000</h2>
+											<p>Row houses near you</p>
 										</div>
 									</div>
 								</div>
@@ -126,8 +126,8 @@ const ListingProperty = () => {
 											<Link to="/visitor/display-property-by-single-page">
 												<img src={p2} alt="data" />
 											</Link>
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
+											<h2>$61000</h2>
+											<p>Row houses near you</p>
 										</div>
 									</div>
 
@@ -142,8 +142,8 @@ const ListingProperty = () => {
 											<Link to="/visitor/display-property-by-single-page">
 												<img src={p1} alt="data" />
 											</Link>
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
+											<h2>$60000</h2>
+											<p>Row houses near you</p>
 										</div>
 
 									</div>
@@ -159,8 +159,8 @@ const ListingProperty = () => {
 											<Link to="/visitor/display-property-by-single-page">
 												<img src={p1} alt="data" />
 											</Link>
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
+											<h2>$56000</h2>
+											<p>Row houses near you</p>
 										</div>
 
 									</div>
@@ -175,8 +175,8 @@ const ListingProperty = () => {
 											<Link to="/visitor/display-property-by-single-page">
 												<img src={p2} alt="data" />
 											</Link>
-											<h2>$56</h2>
-											<p>Easy Polo Black Edition</p>
+											<h2>$96000</h2>
+											<p>Row houses near you</p>
 										</div>
 									</div>
 

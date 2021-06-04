@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./userregist.css";
 import axios from 'axios';
 import history from '../../history';
-import HeaderNav from './HeaderNav';
+import {HeaderNav} from './HeaderNav';
 import { NavLink } from 'react-router-dom';
 
 

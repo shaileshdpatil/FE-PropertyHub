@@ -5,7 +5,7 @@ import history from '../../history';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from 'react-router-dom'
-import HeaderNav from '../../OwnerSide/VisitorSide/HeaderNav';
+import {HeaderNav} from '../../OwnerSide/VisitorSide/HeaderNav';
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -41,7 +41,7 @@ class ownerRegister extends React.Component {
                 axios.post("http://localhost:3000/api/ownerRegister", data)
                     .then((res) => {
                         alert("successfully registered");
-                        history.push("/visitor/Login-owner");
+                        history.push("owner/owner-page-for-confirm");
 
                     }).catch((error) => {
                         console.log(error);

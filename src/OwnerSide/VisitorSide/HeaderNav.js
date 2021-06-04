@@ -1,7 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styles from './HeaderNav.module.css';
 import { NavLink } from 'react-router-dom'
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
+var user = cookies.get('shailuKiCookie',{ path: '/'});
 
 
 export const HeaderNav = () => {
@@ -18,6 +21,11 @@ export const HeaderNav = () => {
     }
   }
   
+  const Logout = () =>{
+      cookies.remove("shailuKiCookie",{ path: '/'});
+      alert("logout successfully");
+      window.location.reload();
+  }
     return (
       
       <header>
@@ -29,8 +37,11 @@ export const HeaderNav = () => {
           <NavLink to="/visitor/display-ListingProperty">All Property</NavLink>
           <NavLink to="/visitor/display-about">About us</NavLink>
           <NavLink to="/visitor/display-contactus">Contact us</NavLink>
-          <NavLink className={styles.registerBtn} to="/visitor/Login-user">Login & Signup</NavLink>
-        
+          {
+          user
+          ?<button style={btnClass.btnData} onClick={Logout}>Logout</button>
+          :<NavLink className={styles.registerBtn} to="/visitor/Login-user">Login & Signup</NavLink>
+          }
           </div>
         </nav>
       </header>

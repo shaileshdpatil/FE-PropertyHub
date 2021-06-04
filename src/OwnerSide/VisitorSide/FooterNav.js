@@ -15,5 +15,3 @@ export default class FooterNav extends Component {
         )
     }
 }
-
-
