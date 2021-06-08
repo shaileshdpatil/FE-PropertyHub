@@ -8,7 +8,6 @@ import {
   CardHeader,
   Row,
   Col,
-  Button
 } from "reactstrap";
 
 // core components
@@ -67,9 +66,9 @@ class inquiry extends React.Component {
                       <tr>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Name</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Email</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Phone number</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>inquiry</th>
-                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Date of inquiry</th>
-                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Actions</th> 
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>inquiery date</th> 
                       </tr>
 
                     </thead>
@@ -78,20 +77,23 @@ class inquiry extends React.Component {
                         return (
                           <tr key={`${key}-key`} className="text-center">
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                              {e.name}
+                              {e.userName}
                             </td>
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                              {e.email}
+                              {e.userEmail}
+                            </td>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                              {e.phone}
                             </td>
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.message}
                             </td>
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                              {e.added_date}
+                              {e.Added_date}
                             </td>
-                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                            {/* <td className="text-center font-weight-bold" style={styleMargin.borders}>
                             <Button type="button" className="btn btn-danger" style={{marginRight:'5px'}}>response</Button>
-                            </td>
+                            </td> */}
     
                           </tr>
                         );

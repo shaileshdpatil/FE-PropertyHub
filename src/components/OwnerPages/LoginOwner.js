@@ -6,6 +6,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {NavLink} from 'react-router-dom'
 import {HeaderNav} from '../../OwnerSide/VisitorSide/HeaderNav';
+import Cookies from 'universal-cookie';
+
+const cookies = new Cookies();
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -26,8 +29,9 @@ class LoginOwner extends Component {
       }else{
         axios.post('http://localhost:3000/api/ownerLogin',body
           ).then((res) => {
-            console.log(res);
-            const status = res.data.user.status;
+            const status = res.data.data.status;
+            const token = res.data.token;
+            console.log(status);
             if (status) {
               toast.success('Login Successfully!', {
                 position: "top-center",
@@ -38,6 +42,7 @@ class LoginOwner extends Component {
                 draggable: true,
                 progress: undefined,
                 });
+                cookies.set('OwnerLogin',token,{path:'/owner'});
               history.push("/owner/Dashboard");
             } else {
               alert('User is not verified');

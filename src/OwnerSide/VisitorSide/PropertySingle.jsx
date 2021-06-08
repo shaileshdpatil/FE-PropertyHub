@@ -12,16 +12,14 @@ const PorpertySingle = () => {
     return (
         <>
             <HeaderNav />
-            <section className="w3l-blog post-content py-5" style={{ margin: '70px' }}>
+            <section className="w3l-blog post-content py-5" style={{ marginLeft: '70px',marginRight:'70px' }}>
                 <div className={styles.container}>
                     <div className={styles.titleSingle}>
                         <h2>Get your dream home in your Location</h2>
                     </div>
                     <div className="details-propertys">
                         <div className={styles.categorys} style={{ display: 'flex' }}>
-                            <p>
                                 <p>katargam road, ved road, AB 94102</p>
-                            </p>
                             <div className={styles.details}>
                                 <p><span className="fa fa-bed"></span> 3 Beds</p>
                                 <p><span className="fa fa-bath"></span> 4 Baths</p>
@@ -39,7 +37,7 @@ const PorpertySingle = () => {
                                     <div className="owl-blog owl-carousel owl-theme">
                                         <div className="item">
                                             <div className="card">
-                                                <img src={p1} style={{ width: '100%' }} className="img-fluid radius-image" alt="imagess" />
+                                                <img src={p1} style={{ width: '100%',marginLeft:'-100px' }} className="img-fluid radius-image" alt="imagess" />
                                             </div>
                                         </div>
                                     </div>

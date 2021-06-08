@@ -2,14 +2,13 @@ import React, { Component } from "react";
 import "./userregist.css";
 import axios from "axios";
 import history from '../../history';
-import {  toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {NavLink} from 'react-router-dom'
 import {HeaderNav} from './HeaderNav';
 import Cookies from 'universal-cookie';
 
 class LoginUser extends Component {
-  
   state = {
     userLogin :[],
     email:'',
@@ -21,11 +20,15 @@ class LoginUser extends Component {
     const {email,password} = this.state;
     const body = {email,password}
     // console.log(body);
+
     axios.post('http://localhost:3000/api/userLogin',body
       ).then((res) => {
-        // console.log(res.data.token);
         cookies.set('shailuKiCookie',res.data.token, { path: '/'});
-        console.log(cookies.get('shailuKiCookie'));
+        // cookies.set('userId',res.data.payload.userLogin.id,{path:'/'});
+        const mail = res.data.payload.userLogin.email;
+        const name = res.data.payload.userLogin.Fname;
+       cookies.set('userEmail',mail,{path:'/'});
+       cookies.set('userName',name,{path:'/'});
         history.push("/visitor/display-HomePage");
         window.location.reload();
       }).catch((e)=>{
@@ -74,6 +77,7 @@ class LoginUser extends Component {
           </form>
         </div>
       </div>
+      <ToastContainer />
   </>
   );
 } 

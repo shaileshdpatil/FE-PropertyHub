@@ -29,7 +29,7 @@ const ListingProperty = () => {
 							<div classNameName="mainmenu pull-left">
 								<ul className="nav navbar-nav collapse navbar-collapse">
 									<li><NavLink to="/visitor/display-HomePage">Home</NavLink></li>
-									<li><NavLink to="/visitor/Login-owner">Insert property</NavLink></li>
+									<li><NavLink to="/owner/Login-owner">Insert property</NavLink></li>
 								</ul>
 							</div>
 						</div>
@@ -52,7 +52,7 @@ const ListingProperty = () => {
 								<div className="panel panel-default">
 									<div className="panel-heading">
 										<h4 className="panel-title">
-											<Link data-toggle="collapse" data-parent="#accordian">
+											<Link to="/visitor/display-property-by-single-page" data-toggle="collapse" data-parent="#accordian">
 												<span className="badge pull-right"></span>
 											Villa
 										</Link>
@@ -62,7 +62,7 @@ const ListingProperty = () => {
 								<div className="panel panel-default">
 									<div className="panel-heading">
 										<h4 className="panel-title">
-											<Link data-toggle="collapse" data-parent="#accordian" >
+											<Link to="/visitor/display-property-by-single-page" data-toggle="collapse" data-parent="#accordian" >
 												<span className="badge pull-right"></span>
 											Row Houses
 										</Link>
@@ -73,7 +73,7 @@ const ListingProperty = () => {
 								<div className="panel panel-default">
 									<div className="panel-heading">
 										<h4 className="panel-title">
-											<Link data-toggle="collapse" data-parent="#accordian">
+											<Link to="/visitor/display-property-by-single-page" data-toggle="collapse" data-parent="#accordian">
 												<span className="badge pull-right"></span>
 											Residential
 										</Link>

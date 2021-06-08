@@ -23,6 +23,7 @@ export const HeaderNav = () => {
   
   const Logout = () =>{
       cookies.remove("shailuKiCookie",{ path: '/'});
+      cookies.remove("userId",{ path: '/'});
       alert("logout successfully");
       window.location.reload();
   }

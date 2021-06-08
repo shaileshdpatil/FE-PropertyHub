@@ -10,7 +10,6 @@ import OwnerDashboard from 'layouts/owner.js';
 import Login from "./components/Login/Login"
 import  LoginOwner from './components/OwnerPages/LoginOwner';
 import  RegisterOwner from './components/OwnerPages/RegisterOwner';
-import indexOwner from './OwnerSide/indexOwner' 
 import feedback from './OwnerSide/feedback';
 import tables from './OwnerSide/PackageTables';
 import PorpertySingle from './OwnerSide/VisitorSide/PropertySingle'
@@ -20,21 +19,30 @@ import ListingProperty from './OwnerSide/VisitorSide/ListingProperty';
 import AboutUs from './OwnerSide/VisitorSide/AboutUs';
 import LoginUser from './OwnerSide/VisitorSide/userlogin';
 import userregist from './OwnerSide/VisitorSide/userregist';
+// import Cookies from "universal-cookie";
+// const cookies = new Cookies();
 
+// const OwnerLogin = cookies.get("OwnerLogin",{path:'/owner'});
 
 ReactDOM.render(
   <Router history={history}>
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Route path="/owner" component={OwnerDashboard}/>
-      <Route path="/Login"  component={Login} />
 
-      <Route path="/owner/Front-page-owner"  component={indexOwner} />
       <Route path="/owner/Front-page-feedback"  component={feedback} />
       <Route path="/owner/owner-page-for-table"  component={tables} />
+      
+      <Route path="/admin/safe-Login"  component={Login} />
 
-      <Route path="/visitor/Login-owner"  component={LoginOwner} />
+      <Route path="/owner/Login-owner"  component={LoginOwner} />
       <Route path="/visitor/register-owner"  component={RegisterOwner} />
+
+      <Route path="/visitor/Login-user"  component={LoginUser} />
+      <Route path="/visitor/Regiset-user"  component={userregist} />
+
+
+
       <Route path="/visitor/display-property-by-single-page"  component={PorpertySingle} />
 
       {/* <Route path="/owner/display-Navbar"  component={HeaderNav} /> */}
@@ -42,8 +50,6 @@ ReactDOM.render(
       <Route path="/visitor/display-contactus"  component={ContactUs} />
       <Route path="/visitor/display-ListingProperty"  component={ListingProperty} />
       <Route path="/visitor/display-about"  component={AboutUs} />
-      <Route path="/visitor/Login-user"  component={LoginUser} />
-      <Route path="/visitor/Regiset-user"  component={userregist} />
       <Redirect to="/visitor/display-HomePage" />
     </Switch>
   </Router>,

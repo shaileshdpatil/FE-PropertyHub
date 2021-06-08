@@ -41,7 +41,7 @@ class ownerRegister extends React.Component {
                 axios.post("http://localhost:3000/api/ownerRegister", data)
                     .then((res) => {
                         alert("successfully registered");
-                        history.push("owner/owner-page-for-confirm");
+                        history.push("/owner/Login-owner");
 
                     }).catch((error) => {
                         console.log(error);
@@ -78,7 +78,7 @@ class ownerRegister extends React.Component {
                             <span></span>
                             <label>Password</label>
                         </div>
-                        <NavLink to="/visitor/Login-owner" style={{ color: 'black', fontWeight: 'bolder' }}>Alredy have an account</NavLink>
+                        <NavLink to="/owner/Login-owner" style={{ color: 'black', fontWeight: 'bolder' }}>Alredy have an account</NavLink>
                         {/* <button type="submit" value="Register" name="register" style={{ marginBottom: '40px' }} /> */}
                         <button type="button" onClick={this.submitForm} style={{ width: '300px', marginTop: '15px', marginBottom: '15px', height: '35px', borderRadius: '10px', backgroundColor: 'skyblue' }}>Register</button>
                     </form>
