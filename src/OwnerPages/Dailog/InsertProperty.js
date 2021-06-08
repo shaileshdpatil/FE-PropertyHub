@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -8,9 +8,10 @@ import MuiDialogActions from '@material-ui/core/DialogActions';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
-import {TextField} from '@material-ui/core' 
+import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
-import Cat from './categoryD';
+
+import './data.css'
 
 const styles = (theme) => ({
   root: {
@@ -54,25 +55,34 @@ const DialogActions = withStyles((theme) => ({
 
 export default function InsertProperty() {
   const [open, setOpen] = React.useState(false);
+  const [City, setCity] = React.useState([]);
+
+  // elemnets of 
+  const [PropertyName, setPropertyName] = React.useState("");
+  const [FullAddress, setFullAddress] = React.useState("");
+  const [description, setdescription] = React.useState("");
+  const [Price, setPrice] = React.useState(0);
+  const [No_of_Floors, setNo_of_Floors] = React.useState(0);
+  const [No_of_Rooms, setNo_of_Rooms] = React.useState(0);
+  const [No_of_BeedRoom, setNo_of_BeedRoom] = React.useState(0);
+  const [No_of_Garage, setNo_of_Garage] = React.useState(0);
+  const [No_of_Bathroom, setNo_of_Bathroom] = React.useState(0);
+  const [No_of_Living_Room, setNo_of_Living_Room] = React.useState(0);
+  const [location, setlocation] = React.useState("");
+  const [sqrft, setsqrft] = React.useState(0);
+  const [kitchen, setkitchen] = React.useState(0);
+  const [citys, setCitys] = React.useState("");
 
 
-  //elemnets of 
-  const [PropertyName, setPropertyName ] = React.useState();
-  const [FullAddress,setFullAddress] = React.useState();
-  const [description,setdescription] = React.useState();
-  const [Price,setPrice] = React.useState();
-  const [No_of_Floors,setNo_of_Floors] = React.useState();
-  const [No_of_Rooms,setNo_of_Rooms] = React.useState();
-  const [No_of_BeedRoom,setNo_of_BeedRoom] = React.useState();
-  const [No_of_Garage,setNo_of_Garage] = React.useState();
-  const [No_of_Bathroom,setNo_of_Bathroom] = React.useState();
-  const [No_of_Living_Room,setNo_of_Living_Room] = React.useState();
-  const [location,setlocation] = React.useState();
-  const [sqrft,setsqrft] = React.useState();
-  const [kitchen,setkitchen] = React.useState();
 
-
-
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/citydisp')
+      .then((res) => {
+        setCity(res.data);
+      }).catch((error) => {
+        console.log(error);
+      })
+  }, [])
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -84,22 +94,21 @@ export default function InsertProperty() {
 
 
   const submitForm = () => {
- 
-    const data = { PropertyName,FullAddress, description, Price,No_of_Floors,No_of_Rooms,No_of_BeedRoom,No_of_Garage,No_of_Bathroom,No_of_Living_Room,sqrft,location,kitchen};
-     console.log(data);
-    axios.post("http://localhost:3000/api/insertpropertyData/Patil",data).then(
-      alert("successully inserted property"),
-      handleClose(),
-    ).catch(
-      console.log("error")
-    )
-  
+
+    const data = {PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen,citys };
+    console.log(data);  
+    axios.post("http://localhost:3000/api/insertpropertyData/Patil", data).then((res)=>{
+      alert("successully inserted property");
+      handleClose();
+    }).catch((error)=>{
+      console.log("error");
+    })
   }
 
-  const marginfor={
-    marginBtn:{
-      marginBottom:'5px',
-      marginTop:'5px'
+  const marginfor = {
+    marginBtn: {
+      marginBottom: '5px',
+      marginTop: '5px'
     }
   }
   return (
@@ -108,24 +117,30 @@ export default function InsertProperty() {
         Insert a Property
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} >
-        <DialogTitle id="customized-dialog-title" onClose={handleClose} style={{width:'600px'}}>
+        <DialogTitle id="customized-dialog-title" onClose={handleClose} style={{ width: '600px' }}>
           Insert a Property
         </DialogTitle>
         <DialogContent dividers>
-        <TextField id="outlined-basic" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={description} onChange={(e) => setdescription(e.target.value)} label="Description" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={Price} onChange={(e) => setPrice(e.target.value)} type="Number" label="Price" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={No_of_Floors} onChange={(e) => setNo_of_Floors(e.target.value)} type="Number" label="No of Floors" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={No_of_Rooms} onChange={(e) => setNo_of_Rooms(e.target.value)} type="Number" label="No of Rooms" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={No_of_BeedRoom} onChange={(e) => setNo_of_BeedRoom(e.target.value)} type="Number" label="No of BeedRoom" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={No_of_Garage} onChange={(e) => setNo_of_Garage(e.target.value)} type="Number" label="No of Garage" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={No_of_Bathroom} onChange={(e) => setNo_of_Bathroom(e.target.value)} type="Number" label="No of Bathroom" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={No_of_Living_Room} onChange={(e) => setNo_of_Living_Room(e.target.value)} type="Number" label="No of Living-Room" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={location} onChange={(e) => setlocation(e.target.value)} label="location" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={sqrft} onChange={(e) => setsqrft(e.target.value)} label="sqrft" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <TextField id="outlined-basic" value={kitchen} onChange={(e) => setkitchen(e.target.value)} label="kitchen" variant="outlined" fullWidth style={marginfor.marginBtn}/>
-          <Cat />
+          <TextField id="name" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="address" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <select key={City.id} id="option" value={citys} onChange={(e)=>{setCitys(e.target.value)}}>
+          {
+            City.map((cityData,key)=>
+              <option value={cityData.citys} key={`${key}-key`}>{cityData.citys}</option>
+            )
+          }
+          </select>
+          <TextField id="Description" value={description} onChange={(e) => setdescription(e.target.value)} label="Description" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="Price" value={Price} onChange={(e) => setPrice(e.target.value)} type="Number" label="Price" variant="outlined"  fullWidth style={marginfor.marginBtn} />
+          <TextField id="floor" value={No_of_Floors} onChange={(e) => setNo_of_Floors(e.target.value)} type="Number" label="No of Floors" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="room" value={No_of_Rooms} onChange={(e) => setNo_of_Rooms(e.target.value)} type="Number" label="No of Rooms" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="bed" value={No_of_BeedRoom} onChange={(e) => setNo_of_BeedRoom(e.target.value)} type="Number" label="No of BeedRoom" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="garage" value={No_of_Garage} onChange={(e) => setNo_of_Garage(e.target.value)} type="Number" label="No of Garage" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="bath" value={No_of_Bathroom} onChange={(e) => setNo_of_Bathroom(e.target.value)} type="Number" label="No of Bathroom" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="living" value={No_of_Living_Room} onChange={(e) => setNo_of_Living_Room(e.target.value)} type="Number" label="No of Living-Room" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="olocation" value={location} onChange={(e) => setlocation(e.target.value)} label="location" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="sqrft" value={sqrft} onChange={(e) => setsqrft(e.target.value)} label="sqrft" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="kitchen" value={kitchen} onChange={(e) => setkitchen(e.target.value)} label="kitchen" variant="outlined" fullWidth style={marginfor.marginBtn} />
         </DialogContent>
         <DialogActions>
           <Button autoFocus onClick={submitForm} color="primary">

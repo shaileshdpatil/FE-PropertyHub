@@ -12,7 +12,7 @@ import CardHeader from 'reactstrap/lib/CardHeader';
 import CardTitle from 'reactstrap/lib/CardTitle';
 import Table from 'reactstrap/lib/Table';
 import InsertProperty from './Dailog/InsertProperty';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const DisplayProperty = () => {
     const [proper, setProper] = useState([]);
@@ -24,7 +24,7 @@ const DisplayProperty = () => {
             }).catch((error) => {
                 console.log(error);
             })
-    },[])
+    }, [])
 
     const marginfor = {
         bordersHead: {
@@ -45,7 +45,7 @@ const DisplayProperty = () => {
                                 <InsertProperty />
                             </CardHeader>
                             <CardBody>
-                                <Table responsive key={proper.id}>
+                                <Table responsive >
                                     <thead className="text-primary font-weight-bold" >
                                         <tr>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>PropertyName</th>
@@ -55,29 +55,30 @@ const DisplayProperty = () => {
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Action</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="text-primary font-weight-bold">
-                                      
-                                        <tr className="text-center">
-                                            <td className="text-center">
-                                                 row house
-                                            </td>
-                                             <td className="text-center">
-                                             katargam
-                                            </td>
-                                            <td className="text-center">
-                                            1500
-                                            </td>
-                                            <td className="text-center">
-                                          surat
-                                            </td>
-                                                <td className="text-center">
-                                                {/* <Button className="btn-primary" style={{ marginRight: '10px' }}>Edit</Button> */}
-                                                <Link to="/visitor/display-property-by-single-page">
-                                                    <Button className="btn-danger" >view</Button>
-                                                </Link>    
-                                                </td>
-                                        </tr>
-
+                                    <tbody className="text-primary font-weight-bold" >
+                                        {
+                                            proper.map((pro,key) =>
+                                                <tr className="text-center" key={`${key}-key`}>
+                                                    <td className="text-center" >
+                                                        {pro.PropertyName}
+                                                    </td>
+                                                    <td className="text-center" >
+                                                        {pro.FullAddress}
+                                                    </td>
+                                                    <td className="text-center"  >
+                                                        {pro.Price}
+                                                    </td>
+                                                    <td className="text-center" >
+                                                        {pro.City}
+                                                    </td>
+                                                    <td className="text-center" >
+                                                        <Link to="/visitor/display-property-by-single-page">
+                                                            <Button className="btn-danger" >view</Button>
+                                                        </Link>
+                                                    </td>
+                                                </tr>
+                                            )
+                                        }
                                     </tbody>
                                 </Table>
                             </CardBody>
