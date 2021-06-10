@@ -9,6 +9,10 @@ import Button from 'reactstrap/lib/Button';
 import CardBody from 'reactstrap/lib/CardBody';
 import CardHeader from 'reactstrap/lib/CardHeader';
 import CardTitle from 'reactstrap/lib/CardTitle';
+// import Cookies from 'universal-cookie';
+// const cookies = new Cookies();
+
+// cookies.get()
 
 const OwnerProfile = () => {
     return (

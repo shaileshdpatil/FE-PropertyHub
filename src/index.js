@@ -28,14 +28,14 @@ ReactDOM.render(
   <Router history={history}>
     <Switch>
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/owner" component={OwnerDashboard}/>
+      <Route path="/owner" component={OwnerDashboard} />    
 
       <Route path="/owner/Front-page-feedback"  component={feedback} />
       <Route path="/owner/owner-page-for-table"  component={tables} />
       
-      <Route path="/admin/safe-Login"  component={Login} />
+      <Route path="/data/admin/safe-Login"  component={Login} />
 
-      <Route path="/owner/Login-owner"  component={LoginOwner} />
+      <Route path="/visitor/Login-owner"  component={LoginOwner} />
       <Route path="/visitor/register-owner"  component={RegisterOwner} />
 
       <Route path="/visitor/Login-user"  component={LoginUser} />
@@ -43,7 +43,7 @@ ReactDOM.render(
 
 
 
-      <Route path="/visitor/display-property-by-single-page"  component={PorpertySingle} />
+      <Route path={`/visitor/display-property-by-single-page/:id`}  component={PorpertySingle} />
 
       {/* <Route path="/owner/display-Navbar"  component={HeaderNav} /> */}
       <Route path="/visitor/display-HomePage"  component={HomePage} />

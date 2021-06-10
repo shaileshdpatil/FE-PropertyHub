@@ -1,4 +1,4 @@
-import React, {useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,8 +10,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
-
 import './data.css'
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 
 const styles = (theme) => ({
   root: {
@@ -55,7 +57,7 @@ const DialogActions = withStyles((theme) => ({
 
 export default function InsertProperty() {
   const [open, setOpen] = React.useState(false);
-  const [City, setCity] = React.useState([]);
+  const [citys, setCitys] = React.useState([]);
 
   // elemnets of 
   const [PropertyName, setPropertyName] = React.useState("");
@@ -71,14 +73,13 @@ export default function InsertProperty() {
   const [location, setlocation] = React.useState("");
   const [sqrft, setsqrft] = React.useState(0);
   const [kitchen, setkitchen] = React.useState(0);
-  const [citys, setCitys] = React.useState("");
-
+  const [City, setCity] = React.useState();
 
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/citydisp')
       .then((res) => {
-        setCity(res.data);
+        setCitys(res.data);
       }).catch((error) => {
         console.log(error);
       })
@@ -91,18 +92,26 @@ export default function InsertProperty() {
     setOpen(false);
   };
 
-
-
   const submitForm = () => {
-
-    const data = {PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen,citys };
-    console.log(data);  
-    axios.post("http://localhost:3000/api/insertpropertyData/Patil", data).then((res)=>{
-      alert("successully inserted property");
-      handleClose();
-    }).catch((error)=>{
-      console.log("error");
-    })
+    //
+    const ownerID = cookies.get("ownerID", { path: '/owner' });
+    console.log(ownerID);
+    const data = { PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen, City, ownerID };
+    if (PropertyName.length < 8) {
+      alert("property name should be 10 charector long")
+    } else if (FullAddress.length < 15) {
+      alert("peoprty description should be 15 charector long")
+    } else if (Price < 50000) {
+      alert("price value should greater then 50000 rupees")
+    }
+    else {
+      axios.post("http://localhost:3000/api/insertpropertyData/Patil", data).then((res) => {
+        handleClose();
+        alert("successully inserted property");
+      }).catch((error) => {
+        console.log("error");
+      })
+    }
   }
 
   const marginfor = {
@@ -123,15 +132,16 @@ export default function InsertProperty() {
         <DialogContent dividers>
           <TextField id="name" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="address" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn} />
-          <select key={City.id} id="option" value={citys} onChange={(e)=>{setCitys(e.target.value)}}>
-          {
-            City.map((cityData,key)=>
-              <option value={cityData.citys} key={`${key}-key`}>{cityData.citys}</option>
-            )
-          }
+          <select id="option" value={City} onChange={(e) => { setCity(e.target.value) }}>
+            <option>Select city</option>
+            {
+              citys.map((cityData, key) =>
+                <option value={cityData.citys} key={`${key}-key`}>{cityData.citys}</option>
+              )
+            }
           </select>
           <TextField id="Description" value={description} onChange={(e) => setdescription(e.target.value)} label="Description" variant="outlined" fullWidth style={marginfor.marginBtn} />
-          <TextField id="Price" value={Price} onChange={(e) => setPrice(e.target.value)} type="Number" label="Price" variant="outlined"  fullWidth style={marginfor.marginBtn} />
+          <TextField id="Price" value={Price} onChange={(e) => setPrice(e.target.value)} type="Number" label="Price" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="floor" value={No_of_Floors} onChange={(e) => setNo_of_Floors(e.target.value)} type="Number" label="No of Floors" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="room" value={No_of_Rooms} onChange={(e) => setNo_of_Rooms(e.target.value)} type="Number" label="No of Rooms" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="bed" value={No_of_BeedRoom} onChange={(e) => setNo_of_BeedRoom(e.target.value)} type="Number" label="No of BeedRoom" variant="outlined" fullWidth style={marginfor.marginBtn} />

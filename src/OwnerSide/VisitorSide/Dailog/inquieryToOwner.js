@@ -18,24 +18,26 @@ var userLogin = cookies.get('shailuKiCookie')
 var userName = cookies.get('userName',{ path: '/' });
 var userEmail = cookies.get('userEmail',{ path: '/' });
 
-export default function InquieryToOwner() {
+export default function InquieryToOwner(props) {
   const [open, setOpen] = React.useState(false);
-  const [amount, setAmount] = React.useState(0);
+  const [amount, setAmount] = React.useState();
   const [message, setMessage] = React.useState("");
-  const [phone, setPhone] = React.useState(0);
+  const [phone, setPhone] = React.useState();
 
-  const data = { userName,userEmail, amount, message, phone }
-
+  const ownerID = props.ownerID;
+  const data = { userName,userEmail, amount, message, phone ,ownerID }
+  
   const handleClickOpen = () => {
+    console.log(ownerID);
     userLogin
-      ? setOpen(true)
-      : alert("you should login first")
+    ? setOpen(true)
+    : alert("you should login first")
   };
-
+  
   const handleClose = () => {
     setOpen(false);
   };
-
+  
   const SentData = () => {
     // console.log(data);
     if(message.length<10){
@@ -44,8 +46,8 @@ export default function InquieryToOwner() {
       alert("Phone number must be 10 Digit");
     }else{
       axios.post("http://localhost:3000/api/inqueryProperty", data)
-        .then((res) => {
-          alert("message sent successfully.");
+      .then((res) => {
+        alert("message sent successfully.");
         }).catch((error) => {
           alert("failed to sent message");
         })

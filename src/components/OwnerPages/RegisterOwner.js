@@ -27,21 +27,23 @@ class ownerRegister extends React.Component {
         const { names, email, phone, password } = this.state;
         const data = { names, email, phone, password }
 
+        console.log(data);
         if (names?.length < 3 || password?.length <= 4) {
             alert("please fill data properly");
         }
         else {
             if (names?.length < 3 || password?.length <= 4) {
                 alert("please fill data properly")
-            } else if (phone?.length < 10) {
+            } else if (phone?.length < 10 || phone < 500000) {
                 alert("Phone number must contain 10 digits")
-            } else if (!EMAIL_REGEX.test(email)) {
-                alert('Please enter valid Email Address !')
-            } else {
+            }else if(!EMAIL_REGEX.test(email)){
+                alert("enter valid email");
+            }
+            else {
                 axios.post("http://localhost:3000/api/ownerRegister", data)
                     .then((res) => {
                         alert("successfully registered");
-                        history.push("/owner/Login-owner");
+                        history.push("/visitor/Login-owner");
 
                     }).catch((error) => {
                         console.log(error);

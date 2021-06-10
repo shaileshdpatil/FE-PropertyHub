@@ -67,9 +67,11 @@ class Allpropertys extends React.Component {
                     <thead className="text-primary font-weight-bold" style={{ border: '1px solid black' }}>
 
                       <tr >
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Owner Name</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Property Name</th>
-                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Property Type</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Property Address</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Amount</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>City</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>action</th>
                       </tr>
 
@@ -79,13 +81,19 @@ class Allpropertys extends React.Component {
                         return (
                           <tr key={`${key}-key`} className="text-left">
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                              {e.name}
+                              shailesh patil
                             </td>
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                              {e.type}
+                              {e.PropertyName}
                             </td>
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                              {e.amount}
+                              {e.FullAddress}
+                            </td>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                              {e.Price}
+                            </td>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                              {e.City}
                             </td>
                             <td className="text-center" style={styleMargin.borders}>
                               <Button className="btn-secondary" href="/visitor/display-property-by-single-page">View</Button>

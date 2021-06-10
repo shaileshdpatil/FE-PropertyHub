@@ -1,15 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import p1 from './img/p1.jpg';
-import p2 from './img/p2.jpg';
 import './img/main.css';
-import {HeaderNav} from './HeaderNav';
+import { HeaderNav } from './HeaderNav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './img/bootstrap.min.css';
 import { NavLink } from 'react-router-dom';
 import { Link } from "react-router-dom";
-import FooterNav from './FooterNav';
+import axios from 'axios';
+import './Dailog/inquery.css';
 
 const ListingProperty = () => {
+	const [property, setProperty] = React.useState([])
+
+	useEffect(() => {
+		axios.get('http://localhost:3000/api/propertyDisplay')
+			.then((response) => {
+				setProperty(response.data);
+			}).catch((error) => {
+				console.log(error);
+			})
+	}, [])
+
 	return (
 		<>
 			<HeaderNav />
@@ -26,16 +37,11 @@ const ListingProperty = () => {
 									<span className="icon-bar"></span>
 								</button>
 							</div>
-							<div classNameName="mainmenu pull-left">
+							<div className="mainmenu pull-left">
 								<ul className="nav navbar-nav collapse navbar-collapse">
-									<li><NavLink to="/visitor/display-HomePage">Home</NavLink></li>
-									<li><NavLink to="/owner/Login-owner">Insert property</NavLink></li>
+									<li id="btn"><NavLink to="/visitor/display-HomePage" >Home</NavLink></li>
+									<li id="btn"><NavLink to="/visitor/Login-owner">Insert a property</NavLink></li>
 								</ul>
-							</div>
-						</div>
-						<div classNameName="col-sm-3" style={{ marginTop: '10px' }}>
-							<div className="search_box pull-right">
-								<input type="text" placeholder="Search" />
 							</div>
 						</div>
 					</div>
@@ -81,112 +87,42 @@ const ListingProperty = () => {
 									</div>
 								</div>
 							</div>
-
-
-							<div className="brands_products">
-
-								<h2>Types</h2>
-								<div className="brands-name">
-									<ul className="nav nav-pills nav-stacked">
-										<li><Link > <span className="pull-right">(50)</span>Villa</Link></li>
-										<li><Link > <span className="pull-right">(56)</span>Row Houses</Link></li>
-									</ul>
-								</div>
-							</div>
-
-
 						</div>
 					</div>
-
 					<div className="col-sm-9 padding-right">
 						<div className="features_items">
 
 							<h2 className="title text-center">Features Items</h2>
 
+							{
+								property.map((prope, key) => {
+									return (
+										<div className="col-sm-4" key={`${key}-key`}>
+											<div className="product-image-wrapper">
+												<div className="single-products" >
+													<div className="productinfo text-center" >
+														<img src={p1} alt="data9" />
+														<p style={{ fontWeight: 'bold', marginTop: '5px' }} >{prope.PropertyName}</p>
+														<p style={{ marginTop: '-10px' }} >------{prope.City}------</p>
+														<h2 style={{ marginTop: '-10px' }} >Rs.{prope.Price}</h2>
 
-							<div className="col-sm-4">
-								<div className="product-image-wrapper">
-									<div className="single-products">
-										<div className="productinfo text-center">
-											<Link to="/visitor/display-property-by-single-page">
-												<img src={p1} alt="data" />
-											</Link>
-											<h2>$20000</h2>
-											<p>Row houses near you</p>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-							<div className="col-sm-4">
-								<div className="product-image-wrapper">
-									<div className="single-products">
-										<div className="productinfo text-center">
-											<Link to="/visitor/display-property-by-single-page">
-												<img src={p2} alt="data" />
-											</Link>
-											<h2>$61000</h2>
-											<p>Row houses near you</p>
-										</div>
-									</div>
-
-								</div>
-							</div>
-
-
-							<div className="col-sm-4">
-								<div className="product-image-wrapper">
-									<div className="single-products">
-										<div className="productinfo text-center">
-											<Link to="/visitor/display-property-by-single-page">
-												<img src={p1} alt="data" />
-											</Link>
-											<h2>$60000</h2>
-											<p>Row houses near you</p>
+														<Link to={`/visitor/display-property-by-single-page/${prope._id}`}>
+															<button>View Details</button>
+														</Link>
+													</div>
+												</div>
+											</div>
 										</div>
 
-									</div>
-
-								</div>
-							</div>
-
-
-							<div className="col-sm-4">
-								<div className="product-image-wrapper">
-									<div className="single-products">
-										<div className="productinfo text-center">
-											<Link to="/visitor/display-property-by-single-page">
-												<img src={p1} alt="data" />
-											</Link>
-											<h2>$56000</h2>
-											<p>Row houses near you</p>
-										</div>
-
-									</div>
-								</div>
-							</div>
-
-
-							<div className="col-sm-4">
-								<div className="product-image-wrapper">
-									<div className="single-products">
-										<div className="productinfo text-center">
-											<Link to="/visitor/display-property-by-single-page">
-												<img src={p2} alt="data" />
-											</Link>
-											<h2>$96000</h2>
-											<p>Row houses near you</p>
-										</div>
-									</div>
-
-								</div>
-							</div>
+									)
+								}
+								)
+							}
 						</div>
 					</div>
 				</div>
 			</div>
-			<FooterNav />
+			{/* <FooterNav /> */}
 		</>
 	);
 }

@@ -13,12 +13,16 @@ import CardTitle from 'reactstrap/lib/CardTitle';
 import Table from 'reactstrap/lib/Table';
 import InsertProperty from './Dailog/InsertProperty';
 import { Link } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
+const ownerID = cookies.get("ownerID",{path:'/owner'});
 
 const DisplayProperty = () => {
     const [proper, setProper] = useState([]);
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/propertyDisplay`)
+        axios.get(`http://localhost:3000/api/propertyDisplayForOwner/${ownerID}`)
             .then((res) => {
                 setProper(res.data);
             }).catch((error) => {
@@ -52,27 +56,43 @@ const DisplayProperty = () => {
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Address</th>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Price</th>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>City</th>
+                                            <th className="text-center font-weight-bold" style={marginfor.bordersHead}>floors</th>
+                                            <th className="text-center font-weight-bold" style={marginfor.bordersHead}>rooms</th>
+                                            <th className="text-center font-weight-bold" style={marginfor.bordersHead}>BedRooms</th>
+                                            <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Garage</th>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody className="text-primary font-weight-bold" >
                                         {
                                             proper.map((pro,key) =>
-                                                <tr className="text-center" key={`${key}-key`}>
-                                                    <td className="text-center" >
+                                                <tr className="text-center" key={`${key}-key`} id="border">
+                                                    <td className="text-center" id="border">
                                                         {pro.PropertyName}
                                                     </td>
-                                                    <td className="text-center" >
+                                                    <td className="text-center" id="border">
                                                         {pro.FullAddress}
                                                     </td>
-                                                    <td className="text-center"  >
+                                                    <td className="text-center" id="border">
                                                         {pro.Price}
                                                     </td>
-                                                    <td className="text-center" >
+                                                    <td className="text-center" id="border">
                                                         {pro.City}
                                                     </td>
+                                                    <td className="text-center" id="border">
+                                                        {pro.No_of_Floors}
+                                                    </td>
+                                                    <td className="text-center" id="border">
+                                                        {pro.No_of_Rooms}
+                                                    </td>
+                                                    <td className="text-center" id="border">
+                                                        {pro.No_of_BeedRoom}
+                                                    </td>
+                                                    <td className="text-center" id="border">
+                                                        {pro.No_of_Garage}
+                                                    </td>
                                                     <td className="text-center" >
-                                                        <Link to="/visitor/display-property-by-single-page">
+                                                        <Link to={`/visitor/display-property-by-single-page/${pro._id}`}>
                                                             <Button className="btn-danger" >view</Button>
                                                         </Link>
                                                     </td>

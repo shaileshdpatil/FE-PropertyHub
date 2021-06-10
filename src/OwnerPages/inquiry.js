@@ -16,31 +16,36 @@ import axios from "axios";
 import Table from "reactstrap/lib/Table";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Cookies from 'universal-cookie';
+const cookies =  new Cookies();
+
+const ownerID = cookies.get('ownerID',{path:'/owner'});
+console.log(ownerID);
 
 class inquiry extends React.Component {
   state = {
     inquirydata: []
   }
-
+  
   componentDidMount = () => {
     this.getInquirydata();
   }
-
+  
   getInquirydata = () => {
-    axios.get('http://localhost:3000/api/inquiryDisplay',
-      {
+    axios.get(`http://localhost:3000/api/propertyinqueryForOwner/${ownerID}`,
+    {
         headers: {
           'Content-Type': 'application/json'
         }
       }).then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         this.setState({ inquirydata: response.data })
       });
   }
 
   render() {
     const { inquirydata } = this.state;
-
+    
     const styleMargin = {
       bordersHead: {
         border: '1px solid black',
@@ -52,6 +57,7 @@ class inquiry extends React.Component {
     }
     return (
       <>
+      {/* console.log(ownerID); */}
         <PanelHeader size="sm" />
         <div className="content">
           <Row>
