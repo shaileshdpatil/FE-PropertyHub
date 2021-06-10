@@ -102,6 +102,7 @@ const ListingProperty = () => {
 												<div className="single-products" >
 													<div className="productinfo text-center" >
 														<img src={p1} alt="data9" />
+														{console.log('==>',prope.Images)}
 														<p style={{ fontWeight: 'bold', marginTop: '5px' }} >{prope.PropertyName}</p>
 														<p style={{ marginTop: '-10px' }} >------{prope.City}------</p>
 														<h2 style={{ marginTop: '-10px' }} >Rs.{prope.Price}</h2>

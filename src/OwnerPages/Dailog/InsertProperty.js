@@ -59,6 +59,7 @@ export default function InsertProperty() {
   const [open, setOpen] = React.useState(false);
   const [citys, setCitys] = React.useState([]);
 
+  const [FileName, setFileName ] = React.useState();
   // elemnets of 
   const [PropertyName, setPropertyName] = React.useState("");
   const [FullAddress, setFullAddress] = React.useState("");
@@ -75,6 +76,10 @@ export default function InsertProperty() {
   const [kitchen, setkitchen] = React.useState(0);
   const [City, setCity] = React.useState();
 
+  const onChangeFile = (e) => {
+    
+    setFileName(e.target.files[0])
+  };
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/citydisp')
@@ -91,12 +96,31 @@ export default function InsertProperty() {
   const handleClose = () => {
     setOpen(false);
   };
-
+  
   const submitForm = () => {
-    //
     const ownerID = cookies.get("ownerID", { path: '/owner' });
+    
+    const formData = new FormData();
+
+    formData.append("Images",FileName);
+     formData.append("PropertyName",PropertyName);
+    formData.append("FullAddress",FullAddress);
+    formData.append("description",description);
+    formData.append("No_of_Floors",No_of_Floors);
+    formData.append("No_of_Rooms",No_of_Rooms);
+    formData.append("No_of_BeedRoom",No_of_BeedRoom);
+    formData.append("No_of_Garage",No_of_Garage);
+    formData.append("No_of_Bathroom",No_of_Bathroom);
+    formData.append("No_of_Living_Room",No_of_Living_Room);
+    formData.append("sqrft",sqrft);
+    formData.append("location",location);
+    formData.append("kitchen",kitchen);
+    formData.append("Price",Price);
+    formData.append("ownerID",ownerID);
+    formData.append("City",City);
+    
     console.log(ownerID);
-    const data = { PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen, City, ownerID };
+    // const data = { PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen, City, ownerID };
     if (PropertyName.length < 8) {
       alert("property name should be 10 charector long")
     } else if (FullAddress.length < 15) {
@@ -105,7 +129,8 @@ export default function InsertProperty() {
       alert("price value should greater then 50000 rupees")
     }
     else {
-      axios.post("http://localhost:3000/api/insertpropertyData/Patil", data).then((res) => {
+      axios.post("http://localhost:3000/api/insertpropertyData/Patil", formData)
+      .then((res) => {
         handleClose();
         alert("successully inserted property");
       }).catch((error) => {
@@ -132,6 +157,7 @@ export default function InsertProperty() {
         <DialogContent dividers>
           <TextField id="name" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="address" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <input type="file" Filename="Images" onChange={onChangeFile} style={{width:'100%'}} />
           <select id="option" value={City} onChange={(e) => { setCity(e.target.value) }}>
             <option>Select city</option>
             {

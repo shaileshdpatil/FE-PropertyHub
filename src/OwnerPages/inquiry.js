@@ -20,7 +20,7 @@ import Cookies from 'universal-cookie';
 const cookies =  new Cookies();
 
 const ownerID = cookies.get('ownerID',{path:'/owner'});
-console.log(ownerID);
+// console.log(ownerID);
 
 class inquiry extends React.Component {
   state = {
@@ -32,13 +32,14 @@ class inquiry extends React.Component {
   }
   
   getInquirydata = () => {
+    // console.log(`http://localhost:3000/api/propertyinqueryForOwner/${ownerID}`)
     axios.get(`http://localhost:3000/api/propertyinqueryForOwner/${ownerID}`,
     {
         headers: {
           'Content-Type': 'application/json'
         }
       }).then((response) => {
-        console.log(response.data);
+        console.log('====>',response.data);
         this.setState({ inquirydata: response.data })
       });
   }

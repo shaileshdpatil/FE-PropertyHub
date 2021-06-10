@@ -6,11 +6,19 @@ import FooterNav from './FooterNav';
 import InquieryToOwner from './Dailog/inquieryToOwner';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
+
 
 const PorpertySingle = () => {
+    const userName = cookies.get("userName");
+
     const [single, setSingle] = useState('');
+    const [comment, setComment] = useState("");
+    const [review, setReview] = useState([]);
+
     const { id } = useParams();
-    // console.log(id);
+    const data = { comment, id, userName };
     useEffect(() => {
         axios.get(`http://localhost:3000/api/propertyDisplayForSingle/${id}`)
             .then((response) => {
@@ -18,10 +26,35 @@ const PorpertySingle = () => {
             }).catch((error) => {
                 console.log(error);
             })
+        // console.log(setSingle);
+        reviewBy();
+        // eslint-disable-next-line react-hooks/exhaustive-deps 
     }, [])
 
-    // console.log('$$$$$', single)
+    const reviewBy = () => {
+        axios.get(`http://localhost:3000/api/reviewByItId/${id}`)
+            .then((res) => {
+                setReview(res.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
 
+    const InsertComment = (prope) => {
+        const token = cookies.get("shailuKiCookie");
+        if (!token) {
+            alert("you should login first")
+        } else {
+            axios.post("http://localhost:3000/api/commentadd", data)
+                .then((res) => {
+                    alert("Your comment inserted successfully");
+                    window.location.reload();
+                }).catch((eror) => {
+                    console.log(eror);
+                })
+        }
+        
+    }
     return (
         <>
             <HeaderNav />
@@ -111,19 +144,22 @@ const PorpertySingle = () => {
                                         </div>
                                     </div>
                                     <div className="single-bg-white card" style={{ padding: '20px' }}>
-                                        <h3 className="post-content-title mb-4">user Reviews</h3>
-                                        <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }}>Shailesh Patil</h6>
-                                        <div className={styles.detailsList}>
-                                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, nemo? Cumque a assumenda molestiae reiciendis. Repellendus, deleniti culpa, veniam praesentium exercitationem animi corrupti laboriosam fugiat aspernatur dolor beatae maxime veritatis?</p>
-                                        </div>
-                                        <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }}>sunilbhai Patil</h6>
-                                        <div className={styles.detailsList}>
-                                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, nemo? Cumque a assumenda molestiae reiciendis. Repellendus, deleniti culpa, veniam praesentium exercitationem animi corrupti laboriosam fugiat aspernatur dolor beatae maxime veritatis?</p>
-                                        </div>
-                                        <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }}>maheshbhai Patil</h6>
-                                        <div className={styles.detailsList}>
-                                            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, nemo? Cumque a assumenda molestiae reiciendis. Repellendus, deleniti culpa, veniam praesentium exercitationem animi corrupti laboriosam fugiat aspernatur dolor beatae maxime veritatis?</p>
-                                        </div>
+                                        <textarea rows="3" placeholder="Enter your most important review here..!!" value={comment} onChange={(e) => { setComment(e.target.value) }} />
+                                        <button type="submit" className="btn btn-primary btn-style w-100" onClick={InsertComment}>comment</button>
+                                        <h3 className="post-content-title mb-4">Reviews by users</h3>
+                                        {
+                                            review.map((res,key) => {
+                                                return (
+                                                    <div key={`${key}-key`}>
+                                                        <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }} >{res.userName}</h6>
+                                                        <div className={styles.detailsList}>
+                                                            <p>{res.comment}</p>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })
+                                        }
+
                                     </div>
                                 </div>
 
