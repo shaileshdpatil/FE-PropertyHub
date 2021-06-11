@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import p1 from './img/p1.jpg';
 import './img/main.css';
+import p1 from './img/p1.jpg'
 import { HeaderNav } from './HeaderNav';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './img/bootstrap.min.css';
@@ -102,9 +102,8 @@ const ListingProperty = () => {
 												<div className="single-products" >
 													<div className="productinfo text-center" >
 														<img src={p1} alt="data9" />
-														{console.log('==>',prope.Images)}
 														<p style={{ fontWeight: 'bold', marginTop: '5px' }} >{prope.PropertyName}</p>
-														<p style={{ marginTop: '-10px' }} >------{prope.City}------</p>
+														<p style={{ marginTop: '-10px' }} >--------{prope.City}--------</p>
 														<h2 style={{ marginTop: '-10px' }} >Rs.{prope.Price}</h2>
 
 														<Link to={`/visitor/display-property-by-single-page/${prope._id}`}>

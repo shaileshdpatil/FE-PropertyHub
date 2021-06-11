@@ -11,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import './data.css'
+import Resizer from 'react-image-file-resizer';
 import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
@@ -58,8 +59,6 @@ const DialogActions = withStyles((theme) => ({
 export default function InsertProperty() {
   const [open, setOpen] = React.useState(false);
   const [citys, setCitys] = React.useState([]);
-
-  const [FileName, setFileName ] = React.useState();
   // elemnets of 
   const [PropertyName, setPropertyName] = React.useState("");
   const [FullAddress, setFullAddress] = React.useState("");
@@ -74,12 +73,19 @@ export default function InsertProperty() {
   const [location, setlocation] = React.useState("");
   const [sqrft, setsqrft] = React.useState(0);
   const [kitchen, setkitchen] = React.useState(0);
-  const [City, setCity] = React.useState();
+  const [City, setCity] = React.useState('');
+  const [Images,setImages] =React.useState();
 
   const onChangeFile = (e) => {
-    
-    setFileName(e.target.files[0])
+    Resizer.imageFileResizer(e.target.files[0], 720, 720, 'JPEG', 100, 0, (uri) => {
+      axios.post(`http://localhost:3000/api/uploadFile  `, { image: uri }).then(res => {
+          setImages(res.data)
+      }).catch(err => {
+          console.log("Image Upload Error: ", err);
+      })
+  }, 'base64')
   };
+
 
   useEffect(() => {
     axios.get('http://localhost:3000/api/citydisp')
@@ -96,31 +102,13 @@ export default function InsertProperty() {
   const handleClose = () => {
     setOpen(false);
   };
-  
-  const submitForm = () => {
-    const ownerID = cookies.get("ownerID", { path: '/owner' });
-    
-    const formData = new FormData();
 
-    formData.append("Images",FileName);
-     formData.append("PropertyName",PropertyName);
-    formData.append("FullAddress",FullAddress);
-    formData.append("description",description);
-    formData.append("No_of_Floors",No_of_Floors);
-    formData.append("No_of_Rooms",No_of_Rooms);
-    formData.append("No_of_BeedRoom",No_of_BeedRoom);
-    formData.append("No_of_Garage",No_of_Garage);
-    formData.append("No_of_Bathroom",No_of_Bathroom);
-    formData.append("No_of_Living_Room",No_of_Living_Room);
-    formData.append("sqrft",sqrft);
-    formData.append("location",location);
-    formData.append("kitchen",kitchen);
-    formData.append("Price",Price);
-    formData.append("ownerID",ownerID);
-    formData.append("City",City);
-    
-    console.log(ownerID);
-    // const data = { PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen, City, ownerID };
+  const submitForm = (e) => {
+    e.preventDefault();
+    const ownerID = cookies.get("ownerID", { path: '/owner' });
+    // console.log(ownerID);
+    const data = {PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen, City, ownerID,Images };
+    // console.log(Images);
     if (PropertyName.length < 8) {
       alert("property name should be 10 charector long")
     } else if (FullAddress.length < 15) {
@@ -129,13 +117,13 @@ export default function InsertProperty() {
       alert("price value should greater then 50000 rupees")
     }
     else {
-      axios.post("http://localhost:3000/api/insertpropertyData/Patil", formData)
-      .then((res) => {
-        handleClose();
-        alert("successully inserted property");
-      }).catch((error) => {
-        console.log("error");
-      })
+      axios.post("http://localhost:3000/api/insertpropertyData/Patil", data)
+        .then((res) => {
+          handleClose();
+          alert("successully inserted property");
+        }).catch((error) => {
+          console.log("error");
+        })
     }
   }
 
@@ -157,7 +145,7 @@ export default function InsertProperty() {
         <DialogContent dividers>
           <TextField id="name" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="address" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn} />
-          <input type="file" Filename="Images" onChange={onChangeFile} style={{width:'100%'}} />
+          <input type="file" filename="Images" onChange={onChangeFile} style={{width:'100%'}} />
           <select id="option" value={City} onChange={(e) => { setCity(e.target.value) }}>
             <option>Select city</option>
             {

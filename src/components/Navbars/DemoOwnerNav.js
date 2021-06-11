@@ -12,8 +12,10 @@ import {
   DropdownMenu,
   DropdownToggle
 } from "reactstrap";
-
+import history from './../../history';
 import routesOwner from "routesOwner.js";
+import Cookies from 'universal-cookie';
+const cookies = new Cookies();
 
 
 class Header extends React.Component {
@@ -96,6 +98,13 @@ class Header extends React.Component {
       this.sidebarToggle.current.classList.toggle("toggled");
     }
   }
+
+  Logout =() =>{
+    cookies.remove("OwnerLogin",{path:'/owner'});
+    cookies.remove("OwnerName",{path:'/owner'});
+    cookies.remove("ownerID",{path:'/owner'});
+    history.push('/visitor/Login-owner');
+  }
   render() {
     return (
       // add or remove classes depending if we are on full-screen-maps page or not
@@ -146,15 +155,14 @@ class Header extends React.Component {
                 isOpen={this.state.dropdownOpen}
                 toggle={(e) => this.dropdownToggle(e)}
               >
-                <DropdownToggle caret nav>
+              <DropdownToggle caret nav id="logout">
                 <i className="now-ui-icons users_single-02" />
                   <p>
                     <span className="d-lg-none d-md-block">Some Actions</span>
                   </p>
                 </DropdownToggle>
-                <DropdownMenu >
-                  <DropdownItem tag="a" href="http://localhost:3001/visitor/Login-owner">Logout</DropdownItem>
-                  
+                <DropdownMenu>
+                  <DropdownItem tag="a" onClick={this.Logout} id="logout">Logout</DropdownItem>
                 </DropdownMenu>
               </Dropdown>
         
