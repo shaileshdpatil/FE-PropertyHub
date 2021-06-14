@@ -2,35 +2,96 @@ import React, { Component } from "react";
 import "./userregist.css";
 import axios from 'axios';
 import history from '../../history';
-import {HeaderNav} from './HeaderNav';
+import { HeaderNav } from './HeaderNav';
 import { NavLink } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class userregist extends Component {
-    state = {
-      Fname: '',
-      Lname: '',
-      email: '',
-      phone: '',
-      password: '',
+  state = {
+    Fname: '',
+    Lname: '',
+    email: '',
+    phone: '',
+    password: '',
 
-    };
+  };
   submitForm = () => {
     const { Fname, Lname, email, phone, password } = this.state;
     const data = { Fname, Lname, email, phone, password }
 
     if (Fname?.length < 3 || password?.length <= 4) {
-      alert("please fill data properly");
+      toast.info('please fill data properly', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+    }
+    else if (phone?.length < 10) {
+      toast.info('please inter must be 10 digit', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+    }
+    else if (phone < 50000) {
+      toast.info('please enter proper number', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+    }
+    else if (!EMAIL_REGEX.test(email)) {
+      toast.info('enter valid email', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
     }
     else {
-      // console.log(data);
       axios.post("http://localhost:3000/api/user-reg", data)
         .then((res) => {
-          alert("successfully registered");
+          toast.success('successfully registered!', {
+						position: "top-center",
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					});
           history.push("/visitor/Login-user");
 
-        }).catch((error) => {
-          console.log(error);
+        }).catch((errs) => {
+          if (!errs.response.data.success) {
+            toast.error(errs.response.data.error, {
+              position: "top-center",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
         })
     }
   }
@@ -98,6 +159,7 @@ class userregist extends Component {
             </form>
           </div>
         </div>
+        <ToastContainer />
       </>
     );
   }

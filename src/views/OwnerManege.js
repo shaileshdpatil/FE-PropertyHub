@@ -64,7 +64,7 @@ class RegularTables extends React.Component {
     const styleMargin = {
       bordersHead: {
         border: '1px solid black',
-        backgroundColor:'#AFDCEC'
+        backgroundColor:'#AFDCEC',
       },
       borders: {
         border: '1px solid black'
@@ -88,6 +88,9 @@ class RegularTables extends React.Component {
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Email</th>
                         {/* <th className="text-center font-weight-bold">Gender</th> */}
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Phone No</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Package request</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>payment completed</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>transaction-ID</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Action</th>
                       </tr>
                     </thead>
@@ -103,6 +106,15 @@ class RegularTables extends React.Component {
                             </td>
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.phone}
+                            </td>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                              {e.packageName}
+                            </td>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                              {e.amount}
+                            </td>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                              {e.transactionID}
                             </td>
                             <td className="text-center" style={{ display: "flex", justifyContent: 'center',border:'1px solid black' }}>
                               {

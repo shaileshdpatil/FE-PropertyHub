@@ -1,13 +1,17 @@
+
+ html{
+   height: 100%;
+ }
  .container {
   height: 50%;
   width: 30%;
-  background-color: burlywood;
+  background-color: skyblue;
   border: 1px solid black;
   padding: 15px;
   position: relative;
   left:35%;
   margin-top:2%;
-  margin-bottom: 80px;
+  margin-bottom: 113px;
 }
 form h3 {
   display: flex;
@@ -39,6 +43,8 @@ fieldset button {
   width: 100%;
   padding: 8px;
   margin-top: 30px;
-  border: 1px solid black;
+  border: 2px solid white;
   font-weight: bolder;
+  background-color: #021847;
+  color:white;
 }

@@ -27,7 +27,7 @@ class RegularTables extends React.Component {
   }
 
   getDealData = () => {
-    axios.get('http://localhost:3000/api/dealDisplay',
+    axios.get(' http://localhost:3000/api/dealdisplayall/patil',
     {
       headers: {
         'Content-Type': 'application/json'
@@ -55,11 +55,11 @@ class RegularTables extends React.Component {
                     <thead className="text-primary font-weight-bold" style={{border: '1px solid black'}}>
                      
                       <tr>
-                        <th className="text-left font-weight-bold">Owner Name</th>
-                        <th className="text-left font-weight-bold">Customer Name</th>
-                        <th className="text-left font-weight-bold">Total Deal amount</th>
-                        <th className="text-left font-weight-bold">Phone</th>
-                        <th className="text-left font-weight-bold">Deal Date</th>
+                        <th className="text-center font-weight-bold">Owner Name</th>
+                        <th className="text-center font-weight-bold">Customer email</th>
+                        <th className="text-center font-weight-bold">Total Deal amount</th>
+                        <th className="text-center font-weight-bold">Deal Status</th>
+                        <th className="text-center font-weight-bold">Deal Date</th>
                       </tr>
              
                     </thead>
@@ -67,19 +67,19 @@ class RegularTables extends React.Component {
                       {dealData.map((e, key) => {
                         return (
                           <tr key={`${key}-key`} className="text-left">
-                           <td className="text-left font-weight-bold">
-                              {e.OwnerName}
+                           <td className="text-center font-weight-bold">
+                              {e.ownerName}
                             </td>
-                            <td className="text-left font-weight-bold">
-                              {e.customerName}
+                            <td className="text-center font-weight-bold">
+                              {e.userEmail}
                             </td>
-                            <td className="text-left font-weight-bold">
+                            <td className="text-center font-weight-bold">
                               {e.amount}
                             </td>
-                            <td className="text-right font-weight-bold">
-                              {e.phone}
+                            <td className="text-center font-weight-bold" style={{color:"green",fontSize:'20px'}}>
+                              {e.deal}  
                             </td>
-                            <td className="text-right font-weight-bold">
+                            <td className="text-center font-weight-bold">
                               {e.added_date}
                             </td>
                           </tr>

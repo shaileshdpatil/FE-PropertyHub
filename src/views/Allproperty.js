@@ -81,7 +81,7 @@ class Allpropertys extends React.Component {
                         return (
                           <tr key={`${key}-key`} className="text-left">
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                              shailesh patil
+                              {e.OwnerName}
                             </td>
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.PropertyName}

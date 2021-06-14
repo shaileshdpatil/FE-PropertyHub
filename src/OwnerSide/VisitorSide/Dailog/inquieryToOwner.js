@@ -7,6 +7,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import './inquery.css';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from 'react-router-dom';
 
 //axios
 import axios from 'axios';
@@ -15,39 +18,77 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 
 var userLogin = cookies.get('shailuKiCookie')
-var userName = cookies.get('userName',{ path: '/' });
-var userEmail = cookies.get('userEmail',{ path: '/' });
+var userName = cookies.get('userName', { path: '/' });
+var userEmail = cookies.get('userEmail', { path: '/' });
 
 export default function InquieryToOwner(props) {
   const [open, setOpen] = React.useState(false);
-  const [amount, setAmount] = React.useState();
-  const [message, setMessage] = React.useState("");
-  const [phone, setPhone] = React.useState();
+  const [amount, setAmount] = React.useState('');
+  const [message, setMessage] = React.useState('');
+  const [phone, setPhone] = React.useState('');
 
+  const {id} = useParams();
   const ownerID = props.ownerID;
-  const data = { userName,userEmail, amount, message, phone ,ownerID }
-  
+
   const handleClickOpen = () => {
-    console.log(ownerID);
+    // console.log(ownerID);
     userLogin
-    ? setOpen(true)
-    : alert("you should login first")
+      ? setOpen(true)
+      : alert("you should login first")
   };
-  
+
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   const SentData = () => {
-    // console.log(data);
-    if(message.length<10){
-      alert("Message must be 10 charector long");
-    }else if(phone<10){
-      alert("Phone number must be 10 Digit");
-    }else{
+    // console.log(id);
+    const propertyId = id;
+    const data = { userName, userEmail, amount, message, phone, ownerID , propertyId }
+    // console.log(ownerID);
+    if (message.length < 10) {
+      toast.info('Message must be 10 charector long', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+    } else if (phone < 10) {
+      toast.info('Phone number must be 10 Digit', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+    } else if (amount < 500) {
+      toast.info('enter valid amount', {
+				position: "top-center",
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+    }
+    else {
       axios.post("http://localhost:3000/api/inqueryProperty", data)
-      .then((res) => {
-        alert("message sent successfully.");
+        .then((res) => {
+          toast.success('message sent successfully!', {
+						position: "top-center",
+						autoClose: 5000,
+						hideProgressBar: false,
+						closeOnClick: true,
+						pauseOnHover: true,
+						draggable: true,
+						progress: undefined,
+					});
         }).catch((error) => {
           alert("failed to sent message");
         })
@@ -104,6 +145,7 @@ export default function InquieryToOwner(props) {
           </Button>
         </DialogActions>
       </Dialog>
+      <ToastContainer />
     </div>
   );
 }

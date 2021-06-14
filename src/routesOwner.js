@@ -2,6 +2,7 @@ import DisplayProperty from './OwnerPages/DisplayProperty'
 import inquiry from './OwnerPages/inquiry';
 import reviews from './OwnerPages/review';
 import OwnerProfile from './OwnerPages/OwnerProfile';
+import DealCompleted from './OwnerPages/DealCompleted';
 
 var dashRoutes = [
   {
@@ -23,6 +24,13 @@ var dashRoutes = [
     name: "All Reviews",
     icon: "business_badge",
     component: reviews,
+    layout: "/owner",
+  },
+  {
+    path: "/Your-Deals",
+    name: "Your-Deals",
+    icon: "business_briefcase-24",
+    component: DealCompleted,
     layout: "/owner",
   },
   {

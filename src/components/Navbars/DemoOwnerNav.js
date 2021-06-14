@@ -103,7 +103,8 @@ class Header extends React.Component {
     cookies.remove("OwnerLogin",{path:'/owner'});
     cookies.remove("OwnerName",{path:'/owner'});
     cookies.remove("ownerID",{path:'/owner'});
-    history.push('/visitor/Login-owner');
+    history.push('/visitor/display-HomePage');
+    window.location.reload();
   }
   render() {
     return (

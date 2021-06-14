@@ -21,7 +21,7 @@ const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 class city extends React.Component {
     state = {
         cityData: [],
-        StateData:[],
+        StateData: [],
         citys: '',
         states: ''
 
@@ -49,7 +49,7 @@ class city extends React.Component {
         const data = { citys, states }
         if (citys < 3 || states < 3) {
             alert("please fill the fields properly")
-        } else if (format.test(citys) || format.test(states)){
+        } else if (format.test(citys) || format.test(states)) {
             alert("City name or state name must not contain special character");
         } else {
             axios.post("http://localhost:3000/api/cityadd", data)
@@ -78,7 +78,7 @@ class city extends React.Component {
         })
     }
     render() {
-        const { cityData, citys,StateData } = this.state;
+        const { cityData, citys, StateData } = this.state;
         const marginfor = {
             margin1: {
                 marginRight: '15px',
@@ -94,10 +94,11 @@ class city extends React.Component {
                 border: '1px solid black',
                 backgroundColor: '#AFDCEC'
             },
-            options:{
-                marginBottom:'70px',
-                marginRight:'10px',
-                fontSize:'20px',
+            options: {
+                marginTop: '15px',
+                marginBottom: '70px',
+                marginRight: '10px',
+                fontSize: '20px',
             }
         }
         return (
@@ -120,9 +121,9 @@ class city extends React.Component {
                                             <div>
                                                 {/* <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state" variant="outlined" style={marginfor.margin1} />
                                                 <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p> */}
-                                                                                            <label >Select State</label><br />
+                                                <label style={{ marginTop: '15px'}}>Select State</label><br />
                                                 <select style={marginfor.options} value={this.states} onChange={(e) => this.setState({ states: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })}>
-                                                    {/* <option>Select category</option> */}
+                                                    <option>Select states</option>
                                                     {StateData.map((event, keys) => {
                                                         return (
                                                             <>
@@ -131,7 +132,7 @@ class city extends React.Component {
                                                         )
                                                     })
                                                     }
-                                                    </select>
+                                                </select>
                                             </div>
                                             <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
 

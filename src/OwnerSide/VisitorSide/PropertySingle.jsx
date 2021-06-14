@@ -1,49 +1,95 @@
 import React, { useEffect, useState } from 'react';
 import styles from './PropertySingle.module.css'
-import p1 from '../images/p1.jpg';
 import { HeaderNav } from './HeaderNav';
 import FooterNav from './FooterNav';
 import InquieryToOwner from './Dailog/inquieryToOwner';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const cookies = new Cookies();
 
+const userLogin = cookies.get('shailuKiCookie')
 
-const PorpertySingle = () => {
+
+const PorpertySingle = (prope) => {
     const userName = cookies.get("userName");
 
     const [single, setSingle] = useState('');
     const [comment, setComment] = useState("");
     const [review, setReview] = useState([]);
+    const [ownerD, setOwnerD] = useState([]);
 
     const { id } = useParams();
-    const data = { comment, id, userName };
+
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/propertyDisplayForSingle/${id}`)
-            .then((response) => {
-                setSingle(response.data);
-            }).catch((error) => {
-                console.log(error);
-            })
-        // console.log(setSingle);
+        propertyWala();
         reviewBy();
         // eslint-disable-next-line react-hooks/exhaustive-deps 
     }, [])
 
-    const reviewBy = () => {
-        axios.get(`http://localhost:3000/api/reviewByItId/${id}`)
-            .then((res) => {
-                setReview(res.data);
+    const propertyWala = (e) => {
+        axios.get(`http://localhost:3000/api/propertyDisplayForSingle/${id}`)
+            .then((response) => {
+                setSingle(response.data);
+                displayOwner(response.data);
             }).catch((error) => {
                 console.log(error);
             })
     }
+    // console.log('==>',ownerID);
+    const reviewBy = (e) => {
+        // const ownerID = ownerID;
+        // console.log(id);
+        axios.get(`http://localhost:3000/api/reviewByItId/${id}`)
+            .then((res) => {
+                setReview(res.data);
+                // console.log(res.data);
+            }).catch((error) => {
+                console.log(error);
+            })
+    }
+    const displayOwner = (e) => {
+        // console.log(e.ownerID);
+        const ownerID = e.ownerID
+        axios.get(`http://localhost:3000/api/propertyDisplayOwner/${ownerID}`)
+            .then((res) => {
+                setOwnerD(res.data);
+                // console.log(res.data);
+            }).catch((erro) => {
+                console.log(erro);
+            })
+    }
 
     const InsertComment = (prope) => {
+        const ownerID = single.ownerID;
+        const propertyId = single._id;
+        const data = { comment, ownerID, userName,propertyId };
+        // console.log('==>',ownerID);
         const token = cookies.get("shailuKiCookie");
         if (!token) {
-            alert("you should login first")
+            toast.error('you should login first', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+        }
+        else if (comment.length < 10) {
+            toast.error('You should enter minimum 10 charector', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
         } else {
             axios.post("http://localhost:3000/api/commentadd", data)
                 .then((res) => {
@@ -53,7 +99,7 @@ const PorpertySingle = () => {
                     console.log(eror);
                 })
         }
-        
+
     }
     return (
         <>
@@ -65,12 +111,12 @@ const PorpertySingle = () => {
                     </div>
                     <div className="details-propertys">
                         <div className={styles.categorys} style={{ display: 'flex' }}>
-                            <p>{single.FullAddress}</p>
+                            <p style={{width:'400px'}}>{single.FullAddress}</p>
                             <hr />
                             <div className={styles.details}>
                                 <p><span className="fa fa-bed"></span> {single.No_of_BeedRoom} BedRoom</p>
                                 <p><span className="fa fa-bath"></span> {single.No_of_Bathroom} Baths</p>
-                                <p><span className="fa fa-share-square-o"></span> 1258 sqrft</p>
+                                <p><span className="fa fa-share-square-o"></span> {single.sqrft} sqrft</p>
                             </div>
                             <div className="pricetag" style={{ marginLeft: '40%', fontSize: '25px', color: '#f93' }}>
                                 <p>Rs.{single.Price}</p>
@@ -84,7 +130,8 @@ const PorpertySingle = () => {
                                     <div className="owl-blog owl-carousel owl-theme">
                                         <div className="item">
                                             <div className="card">
-                                                <img src={p1} style={{ width: '100%', marginLeft: '-100px' }} className="img-fluid radius-image" alt="imagess" />
+                                                <img src={single.Images?.url} style={{ width: '100%', marginLeft: '-100px' }} className="img-fluid radius-image" alt="imagess" />
+                                                {/* {console.log('==>', single.Images)} */}
                                             </div>
                                         </div>
                                     </div>
@@ -101,9 +148,9 @@ const PorpertySingle = () => {
                                         <div className={styles.detailsList} >
                                             <div style={{ margin: '8px' }}>
                                                 {/* <p><strong>Property id :</strong> PRPT12345 </p> */}
-                                                <p><strong>Property size :</strong> 1200sqft </p>
-                                                <p><strong>Rooms :</strong> 2 </p>
-                                                <p><strong>Bedrooms :</strong> 5 </p>
+                                                <p><strong>Property size :</strong> {single.sqrft} </p>
+                                                <p><strong>Rooms :</strong> {single.No_of_Rooms} </p>
+                                                <p><strong>Bedrooms :</strong> {single.No_of_BeedRoom} </p>
                                                 <p><strong>Bathrooms :</strong> {single.No_of_Bathroom} </p>
                                             </div>
                                             <div style={{ margin: '8px' }}>
@@ -112,9 +159,11 @@ const PorpertySingle = () => {
                                                 {/* <p><strong>Garage size :</strong> 15 cars </p> */}
                                             </div>
                                             <div style={{ margin: '8px' }}>
-                                                <p><strong>Garages :</strong> 15 </p>
+                                                <p><strong>Garages :</strong> {single.No_of_Garage} </p>
                                                 <p><strong>Property Price :</strong> {single.Price} </p>
-                                                <p><strong>Built Year :</strong> 2018 </p>
+                                                <p><strong>Built Year :</strong> {single.builtyear} </p>
+                                                <p><strong>Sqrft :</strong>  {single.sqrft} sqrft </p>
+                                             
                                                 {/* <p><strong>Avaiable from :</strong> Aug 2019 </p> */}
                                             </div>
                                         </div>
@@ -140,7 +189,7 @@ const PorpertySingle = () => {
                                     <div className="single-bg-white card" style={{ padding: '20px' }}>
                                         <h3 className="post-content-title mb-4">Location Details</h3>
                                         <div className={styles.detailsList}>
-                                            <p>{single.description}</p>
+                                            <p>{single.FullAddress}</p>
                                         </div>
                                     </div>
                                     <div className="single-bg-white card" style={{ padding: '20px' }}>
@@ -148,22 +197,20 @@ const PorpertySingle = () => {
                                         <button type="submit" className="btn btn-primary btn-style w-100" onClick={InsertComment}>comment</button>
                                         <h3 className="post-content-title mb-4">Reviews by users</h3>
                                         {
-                                            review.map((res,key) => {
+                                            review.map((res, key) => {
                                                 return (
                                                     <div key={`${key}-key`}>
                                                         <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }} >{res.userName}</h6>
                                                         <div className={styles.detailsList}>
                                                             <p>{res.comment}</p>
+                                                        {/* {console.log(res.comment)} */}
                                                         </div>
                                                     </div>
                                                 )
                                             })
                                         }
-
                                     </div>
                                 </div>
-
-
                             </div>
                         </div>
 
@@ -173,13 +220,32 @@ const PorpertySingle = () => {
                                     <div className={styles.sidebarTitle}>
                                         <h4>Contact an Owner</h4>
                                     </div>
-
                                     <article className="post">
                                         <figure className="post-thumb"><img src="assets/images/l5.jpg" className="radius-image" alt="" />
                                         </figure>
                                         <div className="text mb-0">
-                                            <div className="post-info">+(12) 324 567 89</div>
-                                            <div className="post-info">companyrealty@mail.com</div>
+                                            {
+                                                userLogin
+                                                    ? <>
+                                                        {
+                                                            ownerD.map((shailu, key) =>{
+                                                             
+                                                            return(
+                                                                <div key={`${key}-key`}>
+                                                                    <p><strong>owner Name  :</strong> <strong style={{ color: 'green' }}> {shailu.names}</strong></p>
+                                                                    <p><strong>owner email      :</strong> <strong style={{ color: 'green' }}> {shailu.email}</strong></p>
+                                                                    <p><strong>owner Phone :</strong> <strong style={{ color: 'green' }}> {shailu.phone} </strong></p>
+                                                                </div>
+                                                            )}
+                                                            )
+                                                        }
+                                                        </>
+                                                    :
+                                                    <><p style={{ color: 'red' }}>You should login first then you can see owner Details.</p>
+                                                    </>
+                                            }
+                                            <p style={{ color: 'blue' }}>If you have any query then contact us</p>
+                                            <p>PropertyHub@gmail.com</p>
                                         </div>
                                     </article>
                                     {/* <button type="submit" className="btn btn-primary btn-style w-100">Chat with Seller</button> */}
@@ -192,6 +258,7 @@ const PorpertySingle = () => {
             </section>
 
             <FooterNav />
+            <ToastContainer />
         </>
     )
 }

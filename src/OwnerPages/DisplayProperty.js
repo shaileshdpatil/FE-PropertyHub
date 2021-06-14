@@ -13,30 +13,53 @@ import CardTitle from 'reactstrap/lib/CardTitle';
 import Table from 'reactstrap/lib/Table';
 import InsertProperty from './Dailog/InsertProperty';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'universal-cookie';
+import EditProperty from './Dailog/Editproperty';
 const cookies = new Cookies();
 
-const ownerID = cookies.get("ownerID",{path:'/owner'});
+const ownerID = cookies.get("ownerID", { path: '/owner' });
+
+
+const marginfor = {
+    bordersHead: {
+        border: '1px solid black',
+        backgroundColor: '#D7FFF1'
+    }
+}
 
 const DisplayProperty = () => {
     const [proper, setProper] = useState([]);
+    const [pass, setPass] = useState('')
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/propertyDisplayForOwner/${ownerID}`)
             .then((res) => {
                 setProper(res.data);
+                setPass(res.data);
             }).catch((error) => {
                 console.log(error);
             })
     }, [])
 
-    const marginfor = {
-        bordersHead: {
-            border: '1px solid black',
-            backgroundColor: '#D7FFF1'
-        },
+    const deleteporperty = () => {
+        const id = pass[0]._id;
+        axios.delete(`http://localhost:3000/api/deleteproperty/${id}`)
+            .then((res) => {
+                toast.error("deleted successfully !", {
+                    position: "top-center",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }).catch((error) => {
+                console.log(error);
+            })
     }
-
     return (
         <>
             <PanelHeader size="sm" />
@@ -65,38 +88,62 @@ const DisplayProperty = () => {
                                     </thead>
                                     <tbody className="text-primary font-weight-bold" >
                                         {
-                                            proper.map((pro,key) =>
-                                                <tr className="text-center" key={`${key}-key`} id="border">
-                                                    <td className="text-center" id="border">
-                                                        {pro.PropertyName}
-                                                    </td>
-                                                    <td className="text-center" id="border">
-                                                        {pro.FullAddress}
-                                                    </td>
-                                                    <td className="text-center" id="border">
-                                                        {pro.Price}
-                                                    </td>
-                                                    <td className="text-center" id="border">
-                                                        {pro.City}
-                                                    </td>
-                                                    <td className="text-center" id="border">
-                                                        {pro.No_of_Floors}
-                                                    </td>
-                                                    <td className="text-center" id="border">
-                                                        {pro.No_of_Rooms}
-                                                    </td>
-                                                    <td className="text-center" id="border">
-                                                        {pro.No_of_BeedRoom}
-                                                    </td>
-                                                    <td className="text-center" id="border">
-                                                        {pro.No_of_Garage}
-                                                    </td>
-                                                    <td className="text-center" >
-                                                        <Link to={`/visitor/display-property-by-single-page/${pro._id}`}>
-                                                            <Button className="btn-danger" >view</Button>
-                                                        </Link>
-                                                    </td>
-                                                </tr>
+                                            proper.map((pro, key) => {
+                                                const data = {
+                                                    _kitchen: pro.kitchen,
+                                                    _sqrft: pro.sqrft,
+                                                    _location: pro.location,
+                                                    _PropertyName: pro.PropertyName,
+                                                    _FullAddress: pro.FullAddress,
+                                                    _description: pro.description,
+                                                    _Price: pro.Price,
+                                                    _No_of_Floors: pro.No_of_Floors,
+                                                    _No_of_Rooms: pro.No_of_Rooms,
+                                                    _No_of_BeedRoom: pro.No_of_BeedRoom,
+                                                    _No_of_Garage: pro.No_of_Garage,
+                                                    _No_of_Bathroom: pro.No_of_Bathroom,
+                                                    _No_of_Living_Room: pro.No_of_Living_Room,
+                                                    _City: pro.City,
+                                                    _builtyear: pro.builtyear,
+                                                    _category: pro.category
+
+                                                }
+                                                return (
+                                                    <tr className="text-center" key={`${key}-key`} id="border">
+                                                        <td className="text-center" id="border">
+                                                            {pro.PropertyName}
+                                                        </td>
+                                                        <td className="text-center" id="border">
+                                                            {pro.FullAddress}
+                                                        </td>
+                                                        <td className="text-center" id="border">
+                                                            {pro.Price}
+                                                        </td>
+                                                        <td className="text-center" id="border">
+                                                            {pro.City}
+                                                        </td>
+                                                        <td className="text-center" id="border">
+                                                            {pro.No_of_Floors}
+                                                        </td>
+                                                        <td className="text-center" id="border">
+                                                            {pro.No_of_Rooms}
+                                                        </td>
+                                                        <td className="text-center" id="border">
+                                                            {pro.No_of_BeedRoom}
+                                                        </td>
+                                                        <td className="text-center" id="border">
+                                                            {pro.No_of_Garage}
+                                                        </td>
+                                                        <td className="text-center" style={{ display: 'flex' }}>
+                                                            <EditProperty propertyId={pro._id} proData={data} />
+                                                            <Button className="btn-danger" onClick={deleteporperty} style={{ marginLeft: '3px' }}>Delete</Button>
+                                                            <Link to={`/visitor/display-property-by-single-page/${pro._id}`}>
+                                                                <Button className="btn-warn" style={{marginLeft:'5px'}}>view</Button>
+                                                            </Link>
+                                                        </td>
+                                                    </tr>
+                                                )
+                                            }
                                             )
                                         }
                                     </tbody>
@@ -106,6 +153,7 @@ const DisplayProperty = () => {
                     </Col>
                 </Row>
             </div>
+            <ToastContainer />
         </>
     )
 }

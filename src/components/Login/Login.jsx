@@ -5,6 +5,9 @@ import history from '../../history';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
  import {NavLink} from 'react-router-dom';
+ import Cookies from 'universal-cookie';
+
+ const cookies = new Cookies();
 
 class Login extends Component {
   state = {
@@ -19,6 +22,8 @@ class Login extends Component {
     axios.post('http://localhost:3000/api/AdminLogin',body
       ).then((res) => {
         history.push("/admin/dashboard");
+        // console.log(res.data.token);
+        cookies.set('AdminCookiesToken',{path:'/admin/cookies'});
       }).catch((e)=>{
         toast.error('Email or password is wrong', {
           position: "top-center",

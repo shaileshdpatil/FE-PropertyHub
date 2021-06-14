@@ -64,13 +64,6 @@ export default () => {
               />
               <p style={{ marginTop: '-65px', padding: '8px' }}>CEO</p>
             </Col>
-            <Col lg={3}>
-              <Card
-                text="The Bali adventure was great. It has so much to offer culturally and spiritually."
-                name="Pankaj shah"
-              />
-              <p style={{ marginTop: '-65px', padding: '8px' }}>Maneger</p>
-            </Col>
           </Row>
         </Container>
       </div>

@@ -47,8 +47,18 @@ class LoginOwner extends Component {
               cookies.set('OwnerName',namesD,{path:'/owner'});
               cookies.set('ownerID',ownerID,{path:'/owner'});
               history.push("/owner/Dashboard");
+              window.location.reload()
             } else {
-              alert('User is not verified');
+              // alert('User is not verified');
+              toast.error('User is not verified!', {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                });
             }
           }).catch((e)=>{
             console.log(e);

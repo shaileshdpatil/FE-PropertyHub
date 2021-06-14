@@ -11,12 +11,10 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import './data.css'
-import Resizer from 'react-image-file-resizer';
-import Cookies from 'universal-cookie';
-import { ToastContainer, toast } from 'react-toastify';
+import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-const cookies = new Cookies();
+
 
 const styles = (theme) => ({
   root: {
@@ -58,53 +56,60 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function InsertProperty() {
+export default function EditProperty(props) {
+
+    const {_PropertyName,_FullAddress,_description,_Price,_No_of_Floors,_No_of_Rooms,_No_of_BeedRoom,_No_of_Garage,_No_of_Bathroom,_No_of_Living_Room,_City,_builtyear,_category,_location,_sqrft,_kitchen } = props.proData;
+
   const [open, setOpen] = React.useState(false);
   const [citys, setCitys] = React.useState([]);
-  // elemnets of 
-  const [PropertyName, setPropertyName] = React.useState("");
-  const [FullAddress, setFullAddress] = React.useState("");
-  const [description, setdescription] = React.useState("");
-  const [Price, setPrice] = React.useState(0);
-  const [No_of_Floors, setNo_of_Floors] = React.useState(0);
-  const [No_of_Rooms, setNo_of_Rooms] = React.useState(0);
-  const [No_of_BeedRoom, setNo_of_BeedRoom] = React.useState(0);
-  const [No_of_Garage, setNo_of_Garage] = React.useState(0);
-  const [No_of_Bathroom, setNo_of_Bathroom] = React.useState(0);
-  const [No_of_Living_Room, setNo_of_Living_Room] = React.useState(0);
-  const [location, setlocation] = React.useState("");
-  const [sqrft, setsqrft] = React.useState(0);
-  const [kitchen, setkitchen] = React.useState(0);
-  const [City, setCity] = React.useState('');
-  const [Images,setImages] =React.useState();
-  const [builtyear,setbuiltyear] =React.useState();
-  const [category, setcategory] = React.useState('');
   const [name, setname] = React.useState([]);
+  // elemnets of 
+  const [PropertyName, setPropertyName] = React.useState(_PropertyName);
+  const [FullAddress, setFullAddress] = React.useState(_FullAddress);
+  const [description, setdescription] = React.useState(_description);
+  const [Price, setPrice] = React.useState(_Price);
+  const [No_of_Floors, setNo_of_Floors] = React.useState(_No_of_Floors);
+  const [No_of_Rooms, setNo_of_Rooms] = React.useState(_No_of_Rooms);
+  const [No_of_BeedRoom, setNo_of_BeedRoom] = React.useState(_No_of_BeedRoom);
+  const [No_of_Garage, setNo_of_Garage] = React.useState(_No_of_Garage);
+  const [No_of_Bathroom, setNo_of_Bathroom] = React.useState(_No_of_Bathroom);
+  const [No_of_Living_Room, setNo_of_Living_Room] = React.useState(_No_of_Living_Room);
+  const [location, setlocation] = React.useState(_location);
+  const [sqrft, setsqrft] = React.useState(_sqrft);
+  const [kitchen, setkitchen] = React.useState(_kitchen);
+  const [City, setCity] = React.useState(_City);
+  const [category, setcategory] = React.useState(_category);
+  const [builtyear,setbuiltyear] =React.useState(_builtyear);
 
-  const onChangeFile = (e) => {
-    Resizer.imageFileResizer(e.target.files[0], 720, 720, 'JPEG', 500, 0, (uri) => {
-      axios.post(`http://localhost:3000/api/uploadFile`, { image: uri }).then(res => {
-          setImages(res.data)
-      }).catch(err => {
-          console.log("Image Upload Error: ", err);
+
+  useEffect(() => {
+    axios.get('http://localhost:3000/api/citydisp')
+      .then((res) => {
+        setCitys(res.data);
+      }).catch((error) => {
+        console.log(error);
       })
-  }, 'base64')
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const submitForm = (e) => {
-    const ownerID = cookies.get("ownerID", { path: '/owner' });
-    const OwnerName = cookies.get("OwnerName", { path: '/owner' });
-    // console.log(ownerID);
-    const data = {OwnerName,PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen, City, ownerID,Images,builtyear };
-    // console.log(Images);
-    if (PropertyName.length < 8) {
+    }, [])
+    
+    useEffect(() => {
+      axios.get('http://localhost:3000/api/categoryDisplay')
+      .then((res) => {
+        setname(res.data);
+      }).catch((error) => {
+        console.log(error);
+      })
+    }, [])
+    
+    const handleClickOpen = () => {
+      setOpen(true);
+    };
+    const handleClose = () => {
+      setOpen(false);
+    };
+    
+    const handleUpdate = () => {
+      const data ={kitchen,sqrft,location,PropertyName,FullAddress,description,Price,No_of_Floors,No_of_Rooms,No_of_BeedRoom,No_of_Garage,No_of_Bathroom,No_of_Living_Room,City,builtyear,category};
+      if (PropertyName.length < 8) {
       toast.info('property name should be 10 charector long', {
 				position: "top-center",
 				autoClose: 5000,
@@ -160,36 +165,15 @@ export default function InsertProperty() {
       alert("should be proper way!")
     }
     else {
-      // console.log(Images)
-      axios.post("http://localhost:3000/api/insertpropertyData/Patil", data)
-        .then((res) => {
-          handleClose();
-         alert("successfully inserted !");
-         window.location.reload();
-        }).catch((error) => {
-          console.log(error);
-        })
-     }
+      axios.put(`http://localhost:3000/api/updatepropertyp/${props.propertyId}/details`,data).then((res) => {
+         setOpen(false);
+         window.location.reload(false);
+       }).catch((resspo) => {
+          console.log("failed")
+         })
+      }
   }
 
-  useEffect(() => {
-    axios.get('http://localhost:3000/api/citydisp')
-      .then((res) => {
-        setCitys(res.data);
-      }).catch((error) => {
-        console.log(error);
-      })
-      categoryData();
-  }, [])
-
-  const categoryData = () =>{
-    axios.get('http://localhost:3000/api/categoryDisplay')
-    .then((res) => {
-      setname(res.data);
-    }).catch((error) => {
-      console.log(error);
-    })
-  }
   const marginfor = {
     marginBtn: {
       marginBottom: '5px',
@@ -198,54 +182,55 @@ export default function InsertProperty() {
   }
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleClickOpen} style={{ position: 'absolute', left: '85%', marginTop: '-25px' }}>
-        Insert a Property
+      {/* <Button className="btn-danger" onClick={handleClickOpen}>Edit</Button> */}
+      <Button variant="contained" color="primary" onClick={handleClickOpen} style={{height:'35px'}}>
+        Edit
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} >
         <DialogTitle id="customized-dialog-title" onClose={handleClose} style={{ width: '600px' }}>
-          Insert a Property
+          Edit property
         </DialogTitle>
         <DialogContent dividers>
           <TextField id="name" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn} />
-          <input type="file" filename="Images" accept="image/*" onChange={onChangeFile} style={{width:'100%'}} />
-          <select id="option" value={City} onChange={(e) => { setCity(e.target.value) }}>
+           <select id="option" value={City} onChange={(e) => { setCity(e.target.value) }}>
             <option>Select city</option>
             {
               citys.map((cityData, key) =>
-                <option value={cityData.citys} key={`${key}-key`}>{cityData.citys}</option>
+              <option value={cityData.citys} key={`${key}-key`}>{cityData.citys}</option>
               )
             }
           </select>
+
           <select id="option" value={category} onChange={(e) => { setcategory(e.target.value) }}>
             <option>Select Category</option>
             {
               name.map((cat, key) =>
-                <option value={cat.name} key={`${key}-key`}>{cat.name}</option>
+              <option value={cat.name} key={`${key}-key`}>{cat.name}</option>
               )
             }
           </select>
           <textarea rows="3" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} placeholder="Enter your Full address here..!!" style={{width:'100%',marginBottom:'5px'}} />
-          <textarea rows="8" value={description} onChange={(e) => setdescription(e.target.value)} placeholder="Enter your Full description here..!!" style={{width:'100%'}} />
-          <TextField id="location" value={location} onChange={(e) => setlocation(e.target.value)} label="localtion" variant="outlined" fullWidth style={marginfor.marginBtn} />
-          <TextField id="buildyear" value={builtyear} onChange={(e) => setbuiltyear(e.target.value)} type="Number" label="buil tyear" variant="outlined" fullWidth style={marginfor.marginBtn} />
+            {/* <TextField id="address" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn} />          */}
+          <textarea rows="8" value={description} onChange={(e) => setdescription(e.target.value)}placeholder="Enter your Description here..!!" style={{width:'100%'}} />
           {/* <TextField id="Description" value={description} onChange={(e) => setdescription(e.target.value)} label="Description" variant="outlined" fullWidth style={marginfor.marginBtn} /> */}
-          <TextField id="Price" value={Price} onChange={(e) => setPrice(e.target.value)} type="Number" label="Price" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="olocation" value={location} onChange={(e) => setlocation(e.target.value)} label="location" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="buildyear" value={builtyear} onChange={(e) => setbuiltyear(e.target.value)} type="Number" label="buil tyear" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="sqrft" value={sqrft} onChange={(e) => setsqrft(e.target.value)} label="sqrft" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="Price" value={Price} onChange={(e) => setPrice(e.target.value)} type="Number" label="Price" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="floor" value={No_of_Floors} onChange={(e) => setNo_of_Floors(e.target.value)} type="Number" label="No of Floors" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="room" value={No_of_Rooms} onChange={(e) => setNo_of_Rooms(e.target.value)} type="Number" label="No of Rooms" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="bed" value={No_of_BeedRoom} onChange={(e) => setNo_of_BeedRoom(e.target.value)} type="Number" label="No of BeedRoom" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="garage" value={No_of_Garage} onChange={(e) => setNo_of_Garage(e.target.value)} type="Number" label="No of Garage" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="bath" value={No_of_Bathroom} onChange={(e) => setNo_of_Bathroom(e.target.value)} type="Number" label="No of Bathroom" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="living" value={No_of_Living_Room} onChange={(e) => setNo_of_Living_Room(e.target.value)} type="Number" label="No of Living-Room" variant="outlined" fullWidth style={marginfor.marginBtn} />
-          <TextField id="kitchen" value={kitchen} onChange={(e) => setkitchen(e.target.value)} label="kitchen" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="kitchen" value={kitchen} onChange={(e) => setkitchen(e.target.value)} type="Number" label="kitchen" variant="outlined" fullWidth style={marginfor.marginBtn} />
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={submitForm} color="primary">
+          <Button autoFocus onClick={handleUpdate} color="primary">
             Save changes
           </Button>
         </DialogActions>
       </Dialog>
-      <ToastContainer />
     </div>
   );
 }

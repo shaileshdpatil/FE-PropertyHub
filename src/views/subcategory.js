@@ -156,11 +156,10 @@ class subcategory extends React.Component {
                                             <div>
                                                 <label >Select category</label><br />
                                                 <select style={marginfor.options} value={this.category} onChange={(e) => this.setState({ category: e.target.value })}>
-                                                    {/* <option>Select category</option> */}
+                                                    <option>Select category</option>
                                                     {categoryData.map((event, keys) => {
                                                         return (
                                                             <>
-
                                                                 <option key={`${keys}-key`} value={event.name}>{event.name}</option>
                                                             </>
                                                         )

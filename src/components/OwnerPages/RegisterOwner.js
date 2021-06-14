@@ -2,10 +2,10 @@ import React from 'react'
 import styles from './allinone.module.css'
 import axios from 'axios';
 import history from '../../history';
-import { ToastContainer } from 'react-toastify';
+import { ToastContainer ,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from 'react-router-dom'
-import {HeaderNav} from '../../OwnerSide/VisitorSide/HeaderNav';
+import { HeaderNav } from '../../OwnerSide/VisitorSide/HeaderNav';
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -34,18 +34,34 @@ class ownerRegister extends React.Component {
         else {
             if (names?.length < 3 || password?.length <= 4) {
                 alert("please fill data properly")
-            } else if (phone?.length < 10 || phone < 500000) {
-                alert("Phone number must contain 10 digits")
-            }else if(!EMAIL_REGEX.test(email)){
+            } else if (phone?.length < 10 ) {
+                alert("Phone number must contain 10 digits");
+            }else if (phone?.length >= 11 ) {
+                alert("Phone number must contain 10 digits");
+            }else if (!EMAIL_REGEX.test(email)) {
                 alert("enter valid email");
+            } else if (phone < 50000) {
+                alert("please enter proper number ")
             }
             else {
                 axios.post("http://localhost:3000/api/ownerRegister", data)
                     .then((res) => {
-                        alert("successfully registered");
-                        history.push("/visitor/Login-owner");
+                        alert("successfully registered")
+                        // history.push("/visitor/Login-owner");
+                        // console.log(res.data.user.id);
+                        const id = res.data.user.id
+                        history.push(`/visitor/Regisetered-payment/${id}`);
 
                     }).catch((error) => {
+                        toast.success(error.response.data.error, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
                         console.log(error);
                     })
             }
@@ -80,7 +96,7 @@ class ownerRegister extends React.Component {
                             <span></span>
                             <label>Password</label>
                         </div>
-                        <NavLink to="/owner/Login-owner" style={{ color: 'black', fontWeight: 'bolder' }}>Alredy have an account</NavLink>
+                        <NavLink to="/visitor/Login-owner" style={{ color: 'black', fontWeight: 'bolder' }}>Alredy have an account</NavLink>
                         {/* <button type="submit" value="Register" name="register" style={{ marginBottom: '40px' }} /> */}
                         <button type="button" onClick={this.submitForm} style={{ width: '300px', marginTop: '15px', marginBottom: '15px', height: '35px', borderRadius: '10px', backgroundColor: 'skyblue' }}>Register</button>
                     </form>

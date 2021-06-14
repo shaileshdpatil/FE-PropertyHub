@@ -24,6 +24,9 @@ export const HeaderNav = () => {
   const Logout = () =>{
       cookies.remove("shailuKiCookie",{ path: '/'});
       cookies.remove("userId",{ path: '/'});
+      cookies.remove("userName",{ path: '/'});
+      cookies.remove("userEmail",{ path: '/'});
+
       alert("logout successfully");
       window.location.reload();
   }
@@ -40,7 +43,11 @@ export const HeaderNav = () => {
           <NavLink to="/visitor/display-contactus">Contact us</NavLink>
           {
           user
-          ?<button style={btnClass.btnData} onClick={Logout}>Logout</button>
+          ?
+          <>
+            <NavLink to="/visitor/response-from-owner">response</NavLink>
+            <button style={btnClass.btnData} onClick={Logout}>Logout</button>
+          </>
           :<NavLink className={styles.registerBtn} to="/visitor/Login-user">Login & Signup</NavLink>
           }
           </div>
