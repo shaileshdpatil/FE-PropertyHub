@@ -5,7 +5,10 @@ import history from '../../history';
 import { ToastContainer ,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { NavLink } from 'react-router-dom'
+import Cookies from 'universal-cookie';
 import { HeaderNav } from '../../OwnerSide/VisitorSide/HeaderNav';
+
+const cookies = new Cookies();
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -47,9 +50,9 @@ class ownerRegister extends React.Component {
                 axios.post("http://localhost:3000/api/ownerRegister", data)
                     .then((res) => {
                         alert("successfully registered")
-                        // history.push("/visitor/Login-owner");
-                        // console.log(res.data.user.id);
+                        console.log(res.data);
                         const id = res.data.user.id
+                        cookies.set('ownerID',id);
                         history.push(`/visitor/Regisetered-payment/${id}`);
 
                     }).catch((error) => {

@@ -8,6 +8,7 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Card } from 'reactstrap';
 
 const cookies = new Cookies();
 
@@ -66,7 +67,7 @@ const PorpertySingle = (prope) => {
     const InsertComment = (prope) => {
         const ownerID = single.ownerID;
         const propertyId = single._id;
-        const data = { comment, ownerID, userName,propertyId };
+        const data = { comment, ownerID, userName, propertyId };
         // console.log('==>',ownerID);
         const token = cookies.get("shailuKiCookie");
         if (!token) {
@@ -78,7 +79,7 @@ const PorpertySingle = (prope) => {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-              });
+            });
         }
         else if (comment.length < 10) {
             toast.error('You should enter minimum 10 charector', {
@@ -89,7 +90,7 @@ const PorpertySingle = (prope) => {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-              });
+            });
         } else {
             axios.post("http://localhost:3000/api/commentadd", data)
                 .then((res) => {
@@ -111,7 +112,7 @@ const PorpertySingle = (prope) => {
                     </div>
                     <div className="details-propertys">
                         <div className={styles.categorys} style={{ display: 'flex' }}>
-                            <p style={{width:'400px'}}>{single.FullAddress}</p>
+                            <p style={{ width: '400px' }}>{single.FullAddress}</p>
                             <hr />
                             <div className={styles.details}>
                                 <p><span className="fa fa-bed"></span> {single.No_of_BeedRoom} BedRoom</p>
@@ -126,23 +127,24 @@ const PorpertySingle = (prope) => {
                     <div className="row">
                         <div className="col-lg-8 w3l-news">
                             <div className="blog-single-post">
-                                <div className="single-post-image mb-5">
+                                <div className="single-post-image mb-6">
                                     <div className="owl-blog owl-carousel owl-theme">
                                         <div className="item">
-                                            <div className="card">
-                                                <img src={single.Images?.url} style={{ width: '100%', marginLeft: '-100px' }} className="img-fluid radius-image" alt="imagess" />
-                                                {/* {console.log('==>', single.Images)} */}
-                                            </div>
+                                            <Card>
+                                                <img src={single.Images?.url} style={{ width: '100%', marginLeft: '-100px' }} className="img-fluid radius-image" id="shailupatil" alt="imagess" />
+                                            </Card>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className={styles.singlePostContent}>
-                                    <h3>Description</h3>
-                                    <div className={styles.detailsofData}>
-                                        <p >{single.description}</p>
-                                        {/* <p className="mb-4">/p> */}
-                                    </div>
+                                    <Card style={{ padding: '20px' }}>
+                                        <h3>Description</h3>
+                                        <div className={styles.detailsofData}>
+                                            <p >{single.description}</p>
+                                            {/* <p className="mb-4">/p> */}
+                                        </div>
+                                    </Card>
                                     <div className="single-bg-white card" style={{ padding: '20px' }}>
                                         <h3 className="post-content-title mb-4">Property detail</h3>
                                         <div className={styles.detailsList} >
@@ -162,13 +164,13 @@ const PorpertySingle = (prope) => {
                                                 <p><strong>Garages :</strong> {single.No_of_Garage} </p>
                                                 <p><strong>Property Price :</strong> {single.Price} </p>
                                                 <p><strong>Built Year :</strong> {single.builtyear} </p>
-                                                <p><strong>Sqrft :</strong>  {single.sqrft} sqrft </p>
-                                             
+                                                <p><strong>Sqrft :</strong>  {single.sqrft} </p>
+
                                                 {/* <p><strong>Avaiable from :</strong> Aug 2019 </p> */}
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="single-bg-white card" style={{ padding: '20px' }}>
+                                    {/* <div className="single-bg-white card" style={{ padding: '20px' }}>
                                         <h3 className="post-content-title mb-4">Features</h3>
                                         <div className={styles.detailsList}>
                                             <div style={{ margin: '8px' }}>
@@ -185,7 +187,7 @@ const PorpertySingle = (prope) => {
                                                 <p><strong>Internet and wifi </strong> </p>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                     <div className="single-bg-white card" style={{ padding: '20px' }}>
                                         <h3 className="post-content-title mb-4">Location Details</h3>
                                         <div className={styles.detailsList}>
@@ -193,8 +195,15 @@ const PorpertySingle = (prope) => {
                                         </div>
                                     </div>
                                     <div className="single-bg-white card" style={{ padding: '20px' }}>
-                                        <textarea rows="3" placeholder="Enter your most important review here..!!" value={comment} onChange={(e) => { setComment(e.target.value) }} />
-                                        <button type="submit" className="btn btn-primary btn-style w-100" onClick={InsertComment}>comment</button>
+                                        {
+                                            userLogin
+                                                ? <>
+                                                    <textarea rows="3" placeholder="Enter your most important review here..!!" value={comment} onChange={(e) => { setComment(e.target.value) }} />
+                                                    <button type="submit" className="btn btn-primary btn-style w-100" onClick={InsertComment}>comment</button>
+                                                </>
+                                                : <p style={{color:'red',fontWeight:'bolder',textAlign:'center'}}>You should login first then you can comment here down ...!</p>
+                                        }
+
                                         <h3 className="post-content-title mb-4">Reviews by users</h3>
                                         {
                                             review.map((res, key) => {
@@ -203,7 +212,7 @@ const PorpertySingle = (prope) => {
                                                         <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }} >{res.userName}</h6>
                                                         <div className={styles.detailsList}>
                                                             <p>{res.comment}</p>
-                                                        {/* {console.log(res.comment)} */}
+                                                            {/* {console.log(res.comment)} */}
                                                         </div>
                                                     </div>
                                                 )
@@ -228,18 +237,19 @@ const PorpertySingle = (prope) => {
                                                 userLogin
                                                     ? <>
                                                         {
-                                                            ownerD.map((shailu, key) =>{
-                                                             
-                                                            return(
-                                                                <div key={`${key}-key`}>
-                                                                    <p><strong>owner Name  :</strong> <strong style={{ color: 'green' }}> {shailu.names}</strong></p>
-                                                                    <p><strong>owner email      :</strong> <strong style={{ color: 'green' }}> {shailu.email}</strong></p>
-                                                                    <p><strong>owner Phone :</strong> <strong style={{ color: 'green' }}> {shailu.phone} </strong></p>
-                                                                </div>
-                                                            )}
+                                                            ownerD.map((shailu, key) => {
+
+                                                                return (
+                                                                    <div key={`${key}-key`}>
+                                                                        <p><strong>owner Name  :</strong> <strong style={{ color: 'green' }}> {shailu.names}</strong></p>
+                                                                        <p><strong>owner email      :</strong> <strong style={{ color: 'green' }}> {shailu.email}</strong></p>
+                                                                        <p><strong>owner Phone :</strong> <strong style={{ color: 'green' }}> {shailu.phone} </strong></p>
+                                                                    </div>
+                                                                )
+                                                            }
                                                             )
                                                         }
-                                                        </>
+                                                    </>
                                                     :
                                                     <><p style={{ color: 'red' }}>You should login first then you can see owner Details.</p>
                                                     </>

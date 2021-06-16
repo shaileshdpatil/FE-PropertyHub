@@ -10,6 +10,7 @@ import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
+
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 class LoginOwner extends Component {
@@ -46,10 +47,10 @@ class LoginOwner extends Component {
               cookies.set('OwnerLogin',token,{path:'/owner'});
               cookies.set('OwnerName',namesD,{path:'/owner'});
               cookies.set('ownerID',ownerID,{path:'/owner'});
+              cookies.remove('ownerID', { path: '/' });
               history.push("/owner/Dashboard");
               window.location.reload()
             } else {
-              // alert('User is not verified');
               toast.error('User is not verified!', {
                 position: "top-center",
                 autoClose: 5000,

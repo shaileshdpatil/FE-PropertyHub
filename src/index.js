@@ -37,7 +37,7 @@ ReactDOM.render(
       <Route path="/visitor/owner-wait/hours" component={Single} />
       <Route path={`/visitor/Regisetered-payment/:id`} component={Payment} />
 
-      <Route path="/data/admin/safe-Login" component={Login} />
+      <Route path="/Login" component={Login} />
 
       <Route path="/visitor/Login-owner" component={LoginOwner} />
       <Route path="/visitor/register-owner" component={RegisterOwner} />

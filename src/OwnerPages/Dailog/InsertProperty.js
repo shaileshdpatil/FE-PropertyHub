@@ -82,7 +82,7 @@ export default function InsertProperty() {
   const [name, setname] = React.useState([]);
 
   const onChangeFile = (e) => {
-    Resizer.imageFileResizer(e.target.files[0], 720, 720, 'JPEG', 500, 0, (uri) => {
+    Resizer.imageFileResizer(e.target.files[0], 500, 2180, 'JPEG',1080, 0, (uri) => {
       axios.post(`http://localhost:3000/api/uploadFile`, { image: uri }).then(res => {
           setImages(res.data)
       }).catch(err => {
@@ -144,7 +144,7 @@ export default function InsertProperty() {
 				draggable: true,
 				progress: undefined,
 			});
-    } else if(No_of_Floors<0 || No_of_Rooms<0 || No_of_BeedRoom<0 || No_of_Garage<0 || No_of_Bathroom<0 || No_of_Living_Room<0 || kitchen<0){
+    } else if(No_of_Floors<0 || No_of_Rooms<1 || No_of_BeedRoom<0 || No_of_Garage<0 || No_of_Bathroom<0 || No_of_Living_Room<0 || kitchen<0){
       toast.info('cannot be less then 0', {
 				position: "top-center",
 				autoClose: 5000,

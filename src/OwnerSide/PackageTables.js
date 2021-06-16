@@ -14,7 +14,7 @@ const Tables = () => {
 				console.log(err);
 			})
 	}, [])
-	console.log(data);
+	// console.log(data);
 	return (
 		<>
 			{/* /className={styles.main} */}
@@ -26,9 +26,9 @@ const Tables = () => {
 						<small>It will give you special privilages.</small>
 					</div>
 					<div className="row justify-content-md-center">
-					{
-						data.map((res, key) =>
-								<div className="col-md-5 col-lg-3"  key={`${key}-key`}>
+						{
+							data.map((res, key) =>
+								<div className="col-md-5 col-lg-3" key={`${key}-key`}>
 									<div className={styles.item}>
 										<div className={styles.heading}>
 											<h3>{res.name}</h3>
@@ -46,9 +46,9 @@ const Tables = () => {
 										</Link>
 									</div>
 								</div>
-						)
-						
-					}
+							)
+
+						}
 					</div>
 				</div>
 			</section>

@@ -15,6 +15,7 @@ import {
 // core components
 import PanelHeader from "components/PanelHeader/PanelHeader.js";
 import axios from "axios";
+import {Link} from 'react-router-dom';
 
 
 class Allpropertys extends React.Component {
@@ -96,7 +97,9 @@ class Allpropertys extends React.Component {
                               {e.City}
                             </td>
                             <td className="text-center" style={styleMargin.borders}>
-                              <Button className="btn-secondary" href="/visitor/display-property-by-single-page">View</Button>
+                              <Link to={`/visitor/display-property-by-single-page/${e._id}`}>
+                              <Button className="btn-secondary" >View</Button>
+                              </Link>
                             </td>
                           </tr>
                         );

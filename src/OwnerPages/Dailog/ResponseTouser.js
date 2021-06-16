@@ -56,7 +56,6 @@ const DialogActions = withStyles((theme) => ({
 }))(MuiDialogActions);
 
 export default function ResponseTouser(prope) {
-  
   const [message, setResponse] = useState('');
   const [amount, setAmount] = useState('');
   const [open, setOpen] = React.useState(false);
@@ -67,34 +66,35 @@ export default function ResponseTouser(prope) {
   const handleClose = () => {
     setOpen(false);
   };
-  
+
   const sentResponse = () => {
+    const inqueryID = prope.inqueryID;
     const userEmail = prope.email;
     const propertyId = prope.propertyId;
     const ownerID = cookies.get('ownerID', { path: '/owner' });
-    const ownerName = cookies.get('OwnerName',{path:'/owner'});
+    const ownerName = cookies.get('OwnerName', { path: '/owner' });
     // console.log(ownerName);
-    const data ={message,ownerID,userEmail,ownerName,amount,propertyId}
+    const data = { message, ownerID, userEmail, ownerName, amount, propertyId,inqueryID }
 
 
-    if(message.length < 10){
+    if (message.length < 10) {
       alert('minimum 10 character required');
-    }else if(amount < 40000){
+    } else if (amount < 40000) {
       alert('amount should greater then 40,000')
-    }else{
-      axios.post('http://localhost:3000/api/insertResponse',data)
-      .then((res) => {
-        alert('message sent successfully');
-        window.location.reload();
-      }).catch((erro) => {
-        console.log(erro);
-      })
+    } else {
+      axios.post('http://localhost:3000/api/insertResponse', data)
+        .then((res) => {
+          alert('message sent successfully');
+          window.location.reload();
+        }).catch((erro) => {
+          console.log(erro);
+        })
       handleClose();
     }
   }
   return (
     <div>
-      <Button type="button" className="btn btn-danger" onClick={handleClickOpen} style={{ marginRight: '5px',marginLeft:'5px' }}>response</Button>
+      <Button type="button" className="btn btn-danger" onClick={handleClickOpen} style={{ marginRight: '5px', marginLeft: '5px' }}>response</Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open}>
         <DialogTitle id="customized-dialog-title" onClose={handleClose} style={{ width: '500px', fontSize: '15px' }}>
           Modal title
@@ -106,10 +106,10 @@ export default function ResponseTouser(prope) {
             variant="filled"
             autoFocus
             label="Enter your Your last response amount"
-         
+
             type="text"
             fullWidth
-           
+
           />
           <TextField
             value={message}

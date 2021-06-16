@@ -60,7 +60,7 @@ export default () => {
             <Col lg={3}>
               <Card
                 text="I loved the entire process of booking. I was given multiple options for hotels and activities"
-                name="Vaidehi K"
+                name="pankaj"
               />
               <p style={{ marginTop: '-65px', padding: '8px' }}>CEO</p>
             </Col>

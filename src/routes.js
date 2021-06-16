@@ -15,13 +15,13 @@ import city from "./views/city";
 import state from "./views/state"
 
 var dashRoutes = [
-  {
-    path: "/dashboard",
-    name: "Dashboard",
-    icon: "design_app",
-    component: Dashboard,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/dashboard",
+  //   name: "Dashboard",
+  //   icon: "design_app",
+  //   component: Dashboard,
+  //   layout: "/admin",
+  // },
   // {
   //   path: "/maps",
   //   name: "Maps",
@@ -30,7 +30,7 @@ var dashRoutes = [
   //   layout: "/admin",
   // },
   {
-    path: "/All-propertys",
+    path: "/dashboard",
     name: "All-propertys",
     icon: "files_paper",
     component: Allpropertys,

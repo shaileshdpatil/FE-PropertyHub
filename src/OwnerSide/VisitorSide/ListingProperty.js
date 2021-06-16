@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import './Dailog/inquery.css';
+import { Card } from 'reactstrap'
 
 const ListingProperty = () => {
 	const [property, setProperty] = React.useState([])
@@ -19,7 +20,6 @@ const ListingProperty = () => {
 				console.log(error);
 			})
 	}, [])
-
 	return (
 		<>
 			<HeaderNav />
@@ -59,8 +59,8 @@ const ListingProperty = () => {
 										<h4 className="panel-title">
 											<Link to="/visitor/display-property-by-single-page" data-toggle="collapse" data-parent="#accordian">
 												<span className="badge pull-right"></span>
-											Villa
-										</Link>
+												Villa
+											</Link>
 										</h4>
 									</div>
 								</div>
@@ -69,8 +69,8 @@ const ListingProperty = () => {
 										<h4 className="panel-title">
 											<Link to="/visitor/display-property-by-single-page" data-toggle="collapse" data-parent="#accordian" >
 												<span className="badge pull-right"></span>
-											Row Houses
-										</Link>
+												Row Houses
+											</Link>
 										</h4>
 									</div>
 								</div>
@@ -80,8 +80,8 @@ const ListingProperty = () => {
 										<h4 className="panel-title">
 											<Link to="/visitor/display-property-by-single-page" data-toggle="collapse" data-parent="#accordian">
 												<span className="badge pull-right"></span>
-											Residential
-										</Link>
+												Residential
+											</Link>
 										</h4>
 									</div>
 								</div>
@@ -96,22 +96,26 @@ const ListingProperty = () => {
 							{
 								property.map((prope, key) => {
 									return (
-										<div className="col-sm-4" key={`${key}-key`}>
-											<div className="product-image-wrapper">
-												<div className="single-products" >
-													<div className="productinfo text-center" >
-														<img src={prope.Images?.url} alt="data9" />
-														<p style={{ fontWeight: 'bold', marginTop: '5px' }} >{prope.PropertyName}</p>
-														<p style={{ marginTop: '-10px' }} >--------{prope.City}--------</p>
-														<h2 style={{ marginTop: '-10px' }} >Rs.{prope.Price}</h2>
-														<Link to={`/visitor/display-property-by-single-page/${prope._id}`}>
-															<button id="shailuBtn">View Details</button>
-														</Link>
+										<>
+											<div className="col-sm-4 card" key={`${key}-key`} style={{ padding: '5px', height: '350px',margin:'0px'}} >
+												<div className="product-image-wrapper">
+													<div className="single-products" >
+														<div className="productinfo text-center" >
+															<Link to={`/visitor/display-property-by-single-page/${prope._id}`}>
+																<img src={prope.Images?.url} alt="data9" style={{ height: '150px' }} />
+															</Link>
+
+															<p style={{ fontWeight: 'bold', marginTop: '5px',height:'50px',textTransform:'capitalize' }}>{prope.PropertyName}</p>
+															<p style={{ marginTop: '-10px' }} >--------{prope.City}--------</p>
+															<h2 style={{ marginTop: '-10px' }} >Rs.{prope.Price}</h2>
+															<Link to={`/visitor/display-property-by-single-page/${prope._id}`}>
+																<button id="shailuBtn" style={{ width: '100%' }}>View Details</button>
+															</Link>
+														</div>
 													</div>
 												</div>
 											</div>
-										</div>
-
+										</>
 									)
 								}
 								)

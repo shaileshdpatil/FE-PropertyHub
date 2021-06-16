@@ -23,11 +23,9 @@ const cookies = new Cookies();
 
 const ownerID = cookies.get('ownerID', { path: '/owner' });
 const ownerName = cookies.get('OwnerName', { path: '/owner' });
-// console.log(ownerID);
-
 class inquiry extends React.Component {
   state = {
-    inquirydata: [],
+    inquirydata: []
   }
 
   componentDidMount = () => {
@@ -36,33 +34,23 @@ class inquiry extends React.Component {
 
 
   getInquirydata = () => {
-    // console.log(`http://localhost:3000/api/propertyinqueryForOwner/${ownerID}`)
-    axios.get(`http://localhost:3000/api/propertyinqueryForOwner/${ownerID}`,
-      {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      }).then((response) => {
-        // console.log('====>',response.data);
+    axios.get(`http://localhost:3000/api/propertyinqueryForOwner/${ownerID}`)
+      .then((response) => {
         this.setState({ inquirydata: response.data })
       });
   }
 
 
   dealComplete = (e) => {
-    // console.log(ownerName) 
     const userEmail = e._userEmail;
     const propertyId = e._propertyId;
     const amount = e._amount;
     const ownerID = e._ownerID;
     const id = e.id;
 
-    // console.log(id);
     const data = { userEmail, propertyId, amount, ownerID, ownerName }
     axios.post('http://localhost:3000/api/insertDealWithLove/Shailu', data)
       .then((res) => {
-
-
         axios.put(`http://localhost:3000/api/dealActivated/${id}/isCompleted`)
           .then((res) => {
             alert("your deal now completed successully.");
@@ -70,7 +58,6 @@ class inquiry extends React.Component {
           }).catch((err) => {
             console.log(err);
           })
-
       }).catch((err) => {
         console.log(err);
       })
@@ -121,6 +108,7 @@ class inquiry extends React.Component {
                           _amount: e.amount,
                           _ownerID: e.ownerID
                         }
+
                         return (
                           <tr key={`${key}-key`} className="text-center">
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
@@ -138,20 +126,16 @@ class inquiry extends React.Component {
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
                               {e.message}
                             </td>
-                            <td className="text-center font-weight-bold" style={{ display: 'flex',alignItems:'center' }}>
-                              {/* {e.Added_date} */}
+                            <td className="text-center font-weight-bold" style={{ display: 'flex', alignItems: 'center' }}>
                               {
                                 e.isCompleted
-                                  ? <p style={{ color: "green",fontSize:'19px' }}>Deal completed</p>
+                                  ? <p style={{ color: "green", fontSize: '19px' }}>Deal completed</p>
                                   : <>
-                                    <ResponseTouser email={e.userEmail} propertyId={e.propertyId} />
                                     <Button type="button" className="text-center btn btn-success" onClick={() => { this.dealComplete(data) }}>Accept deal</Button>
+                                    <ResponseTouser email={e.userEmail} propertyId={e.propertyId} inqueryID={e._id} />
                                   </>
                               }
                             </td>
-                            {/* <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                            </td> */}
-
                           </tr>
                         );
                       })}
