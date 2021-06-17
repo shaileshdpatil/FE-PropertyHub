@@ -107,7 +107,7 @@ class reviews extends React.Component {
                               {e.date}
                             </td>
                             <td className="text-center font-weight-bold" style={styleMargin.borders}>
-                              <Link to={`/visitor/display-property-by-single-page/${e.propertyId}`}>
+                              <Link to={`/owner/shailu/property-Detail/${e.propertyId}`}>
                                 <Button type="button" className="btn btn-info" style={{ marginRight: '5px' }}>View property</Button>
                               </Link>
                               <Button type="button" className="btn btn-danger" style={{ marginRight: '5px' }} onClick={() => this.deleteData(e._id)}>Delete</Button>

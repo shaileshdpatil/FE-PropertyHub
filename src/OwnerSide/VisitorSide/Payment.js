@@ -5,8 +5,8 @@ import { HeaderNav } from './HeaderNav';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import history from "../../history";
 import Cookies from 'universal-cookie';
+import history from "./../../history";
 const cookies = new Cookies();
 
 const Payment = () => {
@@ -14,11 +14,12 @@ const Payment = () => {
   const [packageName, setPackage] = useState('');
   const [transactionID, setTransaction] = useState('');
   const [amount, setAmount] = useState('');
+  const [no_of_ads, setNo_of_ads] = useState('');
 
 
   const { id } = useParams();
   const submitRequest = () => {
-    const data = { packageName, transactionID, amount };
+    const data = { packageName, transactionID, amount, no_of_ads };
     if (packageName.length < 0) {
       toast.info('kindly select your package', {
         position: "top-center",
@@ -62,8 +63,8 @@ const Payment = () => {
             draggable: true,
             progress: undefined,
           });
-          cookies.remove('ownerID');
-          // history.push('/visitor/owner-wait/hours');
+          cookies.remove('ownerID', { path: '/visitor' });
+          history.push('/visitor/owner-wait/hours');
         }).catch((err) => {
           toast.error('price value should greater then 50000 rupees', {
             position: "top-center",
@@ -103,13 +104,15 @@ const Payment = () => {
                 pack.filter((ele, index) => {
                   if (ele.name === e.target.value) {
                     setAmount(ele.amount)
+                    setNo_of_ads(ele.no_of_ads)
                   }
-                })
+                }
+                )
               }}>
                 <option>Select Package</option>
                 {
                   pack.map((shailu, key) =>
-                    <option value={shailu.name} key={`${key}-key`}>{shailu.name} - ₹.{shailu.amount}</option>
+                    <option value={shailu.name} key={`${key}-key`}>{shailu.name} - ₹.{shailu.amount} = {shailu.no_of_ads} property</option>
                     // = {shailu.no_of_ads}-property
                   )
                 }
@@ -122,7 +125,7 @@ const Payment = () => {
                 placeholder="transection id"
                 type="text"
                 value={transactionID} onChange={(e) => setTransaction(e.target.value)}
-                />
+              />
             </div>
             <div className="createAccount">
               <button type="button" onClick={submitRequest}>submit</button>

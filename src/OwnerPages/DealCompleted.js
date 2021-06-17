@@ -15,6 +15,8 @@ import PanelHeader from "components/PanelHeader/PanelHeader.js";
 import axios from "axios";
 import Table from "reactstrap/lib/Table";
 import Cookies from 'universal-cookie'
+import { Link } from "react-router-dom";
+import {Button} from 'reactstrap'
 const cookies = new Cookies();
 
 const ownerID = cookies.get('ownerID', { path: '/owner' })
@@ -29,12 +31,8 @@ class DealCompleted extends React.Component {
     }
 
     getReviewdata = () => {
-        axios.get(`http://localhost:3000/api/dealDisplayForOwner/${ownerID}`,
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then((response) => {
+        axios.get(`http://localhost:3000/api/dealDisplayForOwner/${ownerID}`,)
+            .then((response) => {
                 this.setState({ reviewdata: response.data })
             });
     }
@@ -70,13 +68,14 @@ class DealCompleted extends React.Component {
                                                 <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>Amount</th>
                                                 <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>deal status</th>
                                                 <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>deal Date</th>
+                                                <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>View</th>
                                             </tr>
 
                                         </thead>
                                         <tbody style={{ border: '1px solid black' }}>
                                             {
-                                                reviewdata.map((res) =>
-                                                    <tr className="text-center">
+                                                reviewdata.map((res, key) =>
+                                                    <tr className="text-center" key={`${key}-key`}>
                                                         <td className="text-center font-weight-bold" style={styleMargin.borders}>
                                                             {res.ownerName}
                                                         </td>
@@ -86,14 +85,19 @@ class DealCompleted extends React.Component {
                                                         <td className="text-center font-weight-bold" style={styleMargin.borders}>
                                                             {res.amount}
                                                         </td>
-                                                        <td className="text-center font-weight-bold" style={{color:"green",fontSize:'20px'}}>
+                                                        <td className="text-center font-weight-bold" style={{ color: "green", fontSize: '20px' }}>
                                                             {res.deal}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={styleMargin.borders}>
                                                             {res.added_date}
-                                                        </td>    
+                                                        </td>
+                                                        <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                                                            <Link to={`/owner/shailu/property-Detail/${res.propertyId}`}>
+                                                                <Button>View</Button>
+                                                            </Link>
+                                                        </td>
                                                     </tr>
-                                                        )
+                                                )
                                             }
                                         </tbody>
                                     </Table>

@@ -17,6 +17,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'universal-cookie';
 import EditProperty from './Dailog/Editproperty';
+// import SidebarOwner from 'components/Sidebar/SidebarOwner';
 const cookies = new Cookies();
 
 const ownerID = cookies.get("ownerID", { path: '/owner' });
@@ -38,11 +39,13 @@ const DisplayProperty = () => {
             .then((res) => {
                 setProper(res.data);
                 setPass(res.data);
+
             }).catch((error) => {
                 console.log(error);
             })
-    }, [])
 
+
+    }, [])
     const deleteporperty = () => {
         const id = pass[0]._id;
         axios.delete(`http://localhost:3000/api/deleteproperty/${id}`)
@@ -69,10 +72,12 @@ const DisplayProperty = () => {
                         <Card>
                             <CardHeader>
                                 <CardTitle tag="h4">Your Propertys</CardTitle>
-                                <InsertProperty />
+
+                                <InsertProperty propertylength={proper?.length} />
                             </CardHeader>
                             <CardBody>
-                                <Table responsive >
+                                {/* {console.log(owner.data[0].no_of_ads)} */}
+                                <Table responsive  >
                                     <thead className="text-primary font-weight-bold" >
                                         <tr>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>PropertyName</th>
@@ -105,8 +110,8 @@ const DisplayProperty = () => {
                                                     _No_of_Living_Room: pro.No_of_Living_Room,
                                                     _City: pro.City,
                                                     _builtyear: pro.builtyear,
-                                                    _category: pro.category
-
+                                                    _category: pro.category,
+                                                    _Images: pro.Images
                                                 }
                                                 return (
                                                     <tr className="text-center" key={`${key}-key`} id="border">
@@ -137,8 +142,11 @@ const DisplayProperty = () => {
                                                         <td className="text-center" style={{ display: 'flex' }}>
                                                             <EditProperty propertyId={pro._id} proData={data} />
                                                             <Button className="btn-danger" onClick={deleteporperty} style={{ marginLeft: '3px' }}>Delete</Button>
-                                                            <Link to={`/visitor/display-property-by-single-page/${pro._id}`}>
+                                                            {/* <Link to={`/visitor/display-property-by-single-page/${pro._id}`}>
                                                                 <Button className="btn-warn" style={{marginLeft:'5px'}}>view</Button>
+                                                            </Link> */}
+                                                            <Link to={`/owner/shailu/property-Detail/${pro._id}`}>
+                                                                <Button className="btn-warn" style={{ marginLeft: '5px' }}>view</Button>
                                                             </Link>
                                                         </td>
                                                     </tr>

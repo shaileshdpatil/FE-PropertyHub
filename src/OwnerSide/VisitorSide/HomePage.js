@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 import '@brainhubeu/react-carousel/lib/style.css';
 import Tables from '../PackageTables';
 import FooterNav from './FooterNav';
-import ReviewsByUser from './ReviewsByUser';
+// import ReviewsByUser from './ReviewsByUser';
 import Property from './Property';
 export class HomePage extends Component {
 
@@ -27,7 +27,7 @@ export class HomePage extends Component {
                 <Property />
                 <Tables />
 
-                <ReviewsByUser />
+                {/* <ReviewsByUser /> */}
 
                 <FooterNav />
             </>

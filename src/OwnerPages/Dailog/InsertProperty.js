@@ -18,6 +18,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const cookies = new Cookies();
 
+const ownerID = cookies.get("ownerID", { path: '/owner' });
+
 const styles = (theme) => ({
   root: {
     margin: 0,
@@ -58,7 +60,7 @@ const DialogActions = withStyles((theme) => ({
   },
 }))(MuiDialogActions);
 
-export default function InsertProperty() {
+export default function InsertProperty({ propertylength }) {
   const [open, setOpen] = React.useState(false);
   const [citys, setCitys] = React.useState([]);
   // elemnets of 
@@ -76,19 +78,23 @@ export default function InsertProperty() {
   const [sqrft, setsqrft] = React.useState(0);
   const [kitchen, setkitchen] = React.useState(0);
   const [City, setCity] = React.useState('');
-  const [Images,setImages] =React.useState();
-  const [builtyear,setbuiltyear] =React.useState();
+  const [Images, setImages] = React.useState();
+  const [builtyear, setbuiltyear] = React.useState(0);
   const [category, setcategory] = React.useState('');
   const [name, setname] = React.useState([]);
 
+  const [owner, setOwnerData] = React.useState([]);
+
+  const ads = owner[0]?.no_of_ads;
+
   const onChangeFile = (e) => {
-    Resizer.imageFileResizer(e.target.files[0], 500, 2180, 'JPEG',1080, 0, (uri) => {
+    Resizer.imageFileResizer(e.target.files[0], 500, 2180, 'JPEG', 1080, 0, (uri) => {
       axios.post(`http://localhost:3000/api/uploadFile`, { image: uri }).then(res => {
-          setImages(res.data)
+        setImages(res.data)
       }).catch(err => {
-          console.log("Image Upload Error: ", err);
+        console.log("Image Upload Error: ", err);
       })
-  }, 'base64')
+    }, 'base64')
   };
 
   const handleClickOpen = () => {
@@ -98,78 +104,110 @@ export default function InsertProperty() {
     setOpen(false);
   };
 
+
   const submitForm = (e) => {
     const ownerID = cookies.get("ownerID", { path: '/owner' });
     const OwnerName = cookies.get("OwnerName", { path: '/owner' });
-    // console.log(ownerID);
-    const data = {OwnerName,PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen, City, ownerID,Images,builtyear };
-    // console.log(Images);
-    if (PropertyName.length < 8) {
-      toast.info('property name should be 10 charector long', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
+    const data = { OwnerName, PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen, City, ownerID, Images, builtyear, category };
+
+
+    // console.log(ads);
+    if(propertylength <= ads){
+      alert("you should update your package!")
+    }
+    else if (PropertyName.length < 5) {
+      toast.info('property name should be 5 charector long', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else if (FullAddress.length < 15) {
       toast.info('peoprty Full address should be 15 charector long', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
-    }else if(description.length < 15 ){
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (description.length < 15) {
       toast.info('peoprty description should be 15 charector long', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else if (Price < 50000) {
       toast.info('price value should greater then 50000 rupees', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
-    } else if(No_of_Floors<0 || No_of_Rooms<1 || No_of_BeedRoom<0 || No_of_Garage<0 || No_of_Bathroom<0 || No_of_Living_Room<0 || kitchen<0){
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (No_of_Floors < 0 || No_of_Rooms < 1) {
+      toast.info('Rooms cannot be less then 0', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (No_of_BeedRoom < 0 || No_of_Garage < 0 || No_of_Bathroom < 0 || No_of_Living_Room < 0 || kitchen < 0) {
       toast.info('cannot be less then 0', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
-    } else if(sqrft < 100){
-      alert("sqerft should be grater then 100")
-    }else if(builtyear<1700 || builtyear >2020){
-      alert("should be proper way!")
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (sqrft < 50) {
+      toast.info('sqerft should be grater then 50', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (builtyear < 1700 || builtyear > 2020) {
+      toast.info('build year should be proper way!', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     }
     else {
-      // console.log(Images)
       axios.post("http://localhost:3000/api/insertpropertyData/Patil", data)
         .then((res) => {
           handleClose();
-         alert("successfully inserted !");
-         window.location.reload();
+          alert("successfully inserted !");
+          window.location.reload();
         }).catch((error) => {
           console.log(error);
         })
-     }
+
+
+    }
   }
 
   useEffect(() => {
@@ -179,17 +217,28 @@ export default function InsertProperty() {
       }).catch((error) => {
         console.log(error);
       })
-      categoryData();
+    categoryData();
+    getOwnerDatas();
   }, [])
 
-  const categoryData = () =>{
+  const categoryData = () => {
     axios.get('http://localhost:3000/api/categoryDisplay')
-    .then((res) => {
-      setname(res.data);
-    }).catch((error) => {
-      console.log(error);
-    })
+      .then((res) => {
+        setname(res.data);
+      }).catch((error) => {
+        console.log(error);
+      })
   }
+
+  const getOwnerDatas = () => {
+    axios.get(`http://localhost:3000/api/ownerFind/${ownerID}`)
+      .then((res) => {
+        setOwnerData(res.data);
+      }).catch((error) => {
+        console.log(error);
+      })
+  }
+
   const marginfor = {
     marginBtn: {
       marginBottom: '5px',
@@ -207,7 +256,7 @@ export default function InsertProperty() {
         </DialogTitle>
         <DialogContent dividers>
           <TextField id="name" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn} />
-          <input type="file" filename="Images" accept="image/*" onChange={onChangeFile} style={{width:'100%'}} />
+          <input type="file" filename="Images" accept="image/*" onChange={onChangeFile} style={{ width: '100%' }} />
           <select id="option" value={City} onChange={(e) => { setCity(e.target.value) }}>
             <option>Select city</option>
             {
@@ -224,8 +273,8 @@ export default function InsertProperty() {
               )
             }
           </select>
-          <textarea rows="3" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} placeholder="Enter your Full address here..!!" style={{width:'100%',marginBottom:'5px'}} />
-          <textarea rows="8" value={description} onChange={(e) => setdescription(e.target.value)} placeholder="Enter your Full description here..!!" style={{width:'100%'}} />
+          <textarea rows="3" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} placeholder="Enter your Full address here..!!" style={{ width: '100%', marginBottom: '5px' }} />
+          <textarea rows="8" value={description} onChange={(e) => setdescription(e.target.value)} placeholder="Enter your Full description here..!!" style={{ width: '100%' }} />
           <TextField id="location" value={location} onChange={(e) => setlocation(e.target.value)} label="localtion" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="buildyear" value={builtyear} onChange={(e) => setbuiltyear(e.target.value)} type="Number" label="buil tyear" variant="outlined" fullWidth style={marginfor.marginBtn} />
           {/* <TextField id="Description" value={description} onChange={(e) => setdescription(e.target.value)} label="Description" variant="outlined" fullWidth style={marginfor.marginBtn} /> */}

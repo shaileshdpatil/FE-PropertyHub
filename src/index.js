@@ -21,9 +21,7 @@ import AboutUs from './OwnerSide/VisitorSide/AboutUs';
 import LoginUser from './OwnerSide/VisitorSide/userlogin';
 import userregist from './OwnerSide/VisitorSide/userregist';
 import Payment from './OwnerSide/VisitorSide/Payment';
-import Response from './OwnerSide/VisitorSide/Response'
-// import Cookies from "universal-cookie";
-// const cookies = new Cookies();
+import Response from './OwnerSide/VisitorSide/Response';
 
 ReactDOM.render(
   <Router history={history}>
@@ -46,8 +44,6 @@ ReactDOM.render(
       <Route path="/visitor/Regiset-user" component={userregist} />
       <Route path="/visitor/Regiset-user" component={userregist} />
       <Route path="/visitor/response-from-owner" component={Response} />
-
-
 
       <Route path={`/visitor/display-property-by-single-page/:id`} component={PorpertySingle} />
 

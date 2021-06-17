@@ -13,6 +13,7 @@ import axios from 'axios';
 import './data.css'
 import {toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import Resizer from 'react-image-file-resizer';
 
 
 
@@ -80,6 +81,17 @@ export default function EditProperty(props) {
   const [City, setCity] = React.useState(_City);
   const [category, setcategory] = React.useState(_category);
   const [builtyear,setbuiltyear] =React.useState(_builtyear);
+  // const [Images,setImages] =React.useState(_Images);
+
+  // const onChangeFile = (e) => {
+  //   Resizer.imageFileResizer(e.target.files[0], 720, 720, 'JPEG', 500, 0, (uri) => {
+  //     axios.post(`http://localhost:3000/api/uploadFile`, { image: uri }).then(res => {
+  //       setImages(res.data)
+  //     }).catch(err => {
+  //       console.log("Image Upload Error: ", err);
+  //     })
+  //   }, 'base64')
+  //   };
 
 
   useEffect(() => {
@@ -192,6 +204,7 @@ export default function EditProperty(props) {
         </DialogTitle>
         <DialogContent dividers>
           <TextField id="name" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          {/* <input type="file" filename="Images" accept="image/*" onChange={onChangeFile} style={{ width: '100%' }} /> */}
            <select id="option" value={City} onChange={(e) => { setCity(e.target.value) }}>
             <option>Select city</option>
             {

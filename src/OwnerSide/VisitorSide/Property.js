@@ -6,6 +6,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import styles from './modules/Property.module.css';
+import {Link} from "react-router-dom";
 
 const Property = () => {
 
@@ -26,7 +27,7 @@ const Property = () => {
           <h1 style={{fontWeight:'bold'}}>PLEASE SELECT YOUR FAVOURITE CATEGORY</h1>
           <div className={styles.ShailuData} style={{marginTop:'10px'}}>
           <Grid item xs={12} sm={6} md={4}>
-                {/* <Link to="/visitor/display-property-by-single-page"> */}
+                <Link to="/visitor/display-ListingProperty">
             <Card style={classes.card}>
               <CardActionArea>
                 <CardMedia
@@ -43,10 +44,10 @@ const Property = () => {
               </CardActionArea>
             
             </Card>
-            {/* </Link> */}
+            </Link>
           </Grid>
              <Grid item xs={12} sm={6} md={4}>
-          {/* <Link to="/visitor/display-property-by-single-page"> */}
+          <Link to="/visitor/display-ListingProperty">
             <Card style={classes.card}>
               <CardActionArea>
                 <CardMedia
@@ -63,10 +64,10 @@ const Property = () => {
               </CardActionArea>
             
             </Card>
-            {/* </Link> */}
+            </Link>
           </Grid>
              <Grid item xs={12} sm={6} md={4}>
-             {/* <Link to="/visitor/display-property-by-single-page"> */}
+             <Link to="/visitor/display-ListingProperty">
             <Card style={classes.card}>
               <CardActionArea>
                 <CardMedia
@@ -83,10 +84,10 @@ const Property = () => {
               </CardActionArea>
             
             </Card>
-            {/* </Link> */}
+            </Link>
           </Grid>
              <Grid item xs={12} sm={6} md={4}>
-             {/* <Link to="/visitor/display-property-by-single-page"> */}
+             <Link to="/visitor/display-ListingProperty">
             <Card style={classes.card}>
               <CardActionArea>
                 <CardMedia
@@ -103,7 +104,7 @@ const Property = () => {
               </CardActionArea>
             
             </Card>
-            {/* </Link> */}
+            </Link>
           </Grid>
           </div>
         </div>

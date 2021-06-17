@@ -3,6 +3,7 @@ import inquiry from './OwnerPages/inquiry';
 import reviews from './OwnerPages/review';
 import OwnerProfile from './OwnerPages/OwnerProfile';
 import DealCompleted from './OwnerPages/DealCompleted';
+import ShailuDeal from './OwnerPages/ShailuDeal';
 
 var dashRoutes = [
   {
@@ -40,5 +41,10 @@ var dashRoutes = [
     component: OwnerProfile,
     layout: "/owner",
   },
+  {
+    path: "/shailu/property-Detail/:id",
+    component: ShailuDeal,
+    layout: "/owner",
+  }
 ];
 export default dashRoutes;

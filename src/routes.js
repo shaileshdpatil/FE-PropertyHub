@@ -1,5 +1,5 @@
 
-import Dashboard from "views/Dashboard.js";
+// import Dashboard from "views/Dashboard.js";
 import Notifications from "views/feedback";
 // import Typography from "views/Typography.js";
 import TableList from "views/TableList.js";
@@ -13,22 +13,9 @@ import category from './views/category';
 import subcategory from './views/subcategory';
 import city from "./views/city";
 import state from "./views/state"
+import ProprtyDetail from './views/ProprtyDetail';
 
 var dashRoutes = [
-  // {
-  //   path: "/dashboard",
-  //   name: "Dashboard",
-  //   icon: "design_app",
-  //   component: Dashboard,
-  //   layout: "/admin",
-  // },
-  // {
-  //   path: "/maps",
-  //   name: "Maps",
-  //   icon: "location_map-big",
-  //   component: Maps,
-  //   layout: "/admin",
-  // },
   {
     path: "/dashboard",
     name: "All-propertys",
@@ -71,7 +58,7 @@ var dashRoutes = [
     component: subcategory,
     layout: "/admin",
   },
-
+  
   {
     path: "/notifications",
     name: "Feedback",
@@ -100,5 +87,10 @@ var dashRoutes = [
   //   component: UserPage,
   //   layout: "/admin",
   // },
+  {
+    path: "/propertyDetail/:id",
+    component: ProprtyDetail,
+    layout: "/admin",
+  },
 ];
 export default dashRoutes;

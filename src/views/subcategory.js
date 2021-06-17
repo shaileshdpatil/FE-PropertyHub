@@ -27,7 +27,6 @@ class subcategory extends React.Component {
             categoryData: [],
             names: '',
             category: '',
-
         }
     }
 
@@ -43,7 +42,6 @@ class subcategory extends React.Component {
                     'Content-Type': 'application/json'
                 }
             }).then((response) => {
-                // console.log(response.data);
                 this.setState({ subcategoryData: response.data })
             });
     }
@@ -56,7 +54,7 @@ class subcategory extends React.Component {
     submitForm = () => {
         const { names, category } = this.state;
         const data = { names, category }
-        // console.log((data));
+        console.log(data);
         if (names?.lenght <= 3 || names?.lenght >= 15 || category?.lenght <= 3 || category?.lenght >= 15) {
             alert("please fill fields property")
         } else {
@@ -74,11 +72,8 @@ class subcategory extends React.Component {
                     });
                     this.getsubcategoryData()
                 }).catch((errs) => {
-                    if (!errs.response.data.success) {
-                        alert(errs.response.data.error)
-                    }
+                   console.log(errs);
                 })
-
         }
     }
 

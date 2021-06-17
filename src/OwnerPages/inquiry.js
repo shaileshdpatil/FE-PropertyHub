@@ -19,6 +19,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ResponseTouser from './Dailog/ResponseTouser';
 import Cookies from 'universal-cookie';
+import {Link} from 'react-router-dom';
 const cookies = new Cookies();
 
 const ownerID = cookies.get('ownerID', { path: '/owner' });
@@ -96,6 +97,7 @@ class inquiry extends React.Component {
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>inquiry amount</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>inquiry</th>
                         <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>response</th>
+                        <th className="text-center font-weight-bold" style={styleMargin.bordersHead}>View</th>
                       </tr>
 
                     </thead>
@@ -135,6 +137,11 @@ class inquiry extends React.Component {
                                     <ResponseTouser email={e.userEmail} propertyId={e.propertyId} inqueryID={e._id} />
                                   </>
                               }
+                            </td>
+                            <td className="text-center font-weight-bold" style={styleMargin.borders}>
+                            <Link to={`/owner/shailu/property-Detail/${e.propertyId}`}>
+                              <Button>View</Button>
+                            </Link>
                             </td>
                           </tr>
                         );

@@ -47,7 +47,7 @@ class LoginOwner extends Component {
               cookies.set('OwnerLogin',token,{path:'/owner'});
               cookies.set('OwnerName',namesD,{path:'/owner'});
               cookies.set('ownerID',ownerID,{path:'/owner'});
-              cookies.remove('ownerID', { path: '/' });
+              cookies.remove('ownerID',{path:'/visitor'});
               history.push("/owner/Dashboard");
               window.location.reload()
             } else {

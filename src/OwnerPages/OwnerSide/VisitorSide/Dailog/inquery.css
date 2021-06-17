@@ -1,0 +1,22 @@
+#btn{
+    margin: 10px;
+    font-weight: bolder;
+}
+#btn:hover{
+    color:green;
+    font-weight: bolder;
+
+}
+
+#shailuBtn{
+    height: 30px;
+    width: 120px;
+    border-radius: 5px;
+    background-color: #2EC4B6;
+    border:1px solid black;
+}
+
+#shailuBtn:hover{
+    background-color: skyblue;
+    border:1px solid black;
+}
