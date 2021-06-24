@@ -17,6 +17,8 @@ import PorpertySingle from './OwnerSide/VisitorSide/PropertySingle'
 import HomePage from './OwnerSide/VisitorSide/HomePage';
 import ContactUs from './OwnerSide/VisitorSide/ContactUs';
 import ListingProperty from './OwnerSide/VisitorSide/ListingProperty';
+import ListingPropertyData from './OwnerSide/VisitorSide/ListingPropertyData';
+import ListingData from './OwnerSide/VisitorSide/ListingData';
 import AboutUs from './OwnerSide/VisitorSide/AboutUs';
 import LoginUser from './OwnerSide/VisitorSide/userlogin';
 import userregist from './OwnerSide/VisitorSide/userregist';
@@ -51,6 +53,8 @@ ReactDOM.render(
       <Route path="/visitor/display-HomePage" component={HomePage} />
       <Route path="/visitor/display-contactus" component={ContactUs} />
       <Route path="/visitor/display-ListingProperty" component={ListingProperty} />
+      <Route path="/visitor/display-ListingPropertyData/:name" component={ListingPropertyData} />
+      <Route path="/visitor/display-ListingData/:name" component={ListingData} />
       <Route path="/visitor/display-about" component={AboutUs} />
       <Redirect to="/visitor/display-HomePage" />
     </Switch>

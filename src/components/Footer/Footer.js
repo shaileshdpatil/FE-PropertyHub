@@ -33,7 +33,7 @@ class Footer extends React.Component {
               <li>
                 <a
                   href="#"
-                  target="_blank"
+                  target="http://localhost:3001/visitor/display-HomePage"
                 >
                   PropertyHub
                 </a>
@@ -41,7 +41,7 @@ class Footer extends React.Component {
               <li>
                 <a
                   href="#"
-                  target="_blank"
+                  target="http://localhost:3001/visitor/display-about"
                 >
                   About Us
                 </a>

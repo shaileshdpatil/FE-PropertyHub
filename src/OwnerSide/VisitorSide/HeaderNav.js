@@ -41,8 +41,10 @@ export const HeaderNav = () => {
   }
   return (
 
-    <header>
+    <header style={{boxShadow:'25px black'}}>
+      <NavLink to="/visitor/display-HomePage">
       <div className={styles.logo}><span className={styles.detailLogo}>PROPERTYHUB</span><br /></div>
+      </NavLink>
       <nav>
         <div className={styles.navbar}>
           {

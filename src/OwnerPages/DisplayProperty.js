@@ -17,6 +17,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from 'universal-cookie';
 import EditProperty from './Dailog/Editproperty';
+// import Single from 'components/OwnerPages/Wait';
 // import SidebarOwner from 'components/Sidebar/SidebarOwner';
 const cookies = new Cookies();
 
@@ -43,8 +44,6 @@ const DisplayProperty = () => {
             }).catch((error) => {
                 console.log(error);
             })
-
-
     }, [])
     const deleteporperty = () => {
         const id = pass[0]._id;
@@ -86,7 +85,7 @@ const DisplayProperty = () => {
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>City</th>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>floors</th>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>rooms</th>
-                                            <th className="text-center font-weight-bold" style={marginfor.bordersHead}>BedRooms</th>
+                                            {/* <th className="text-center font-weight-bold" style={marginfor.bordersHead}>BedRooms</th> */}
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Garage</th>
                                             <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Action</th>
                                         </tr>
@@ -116,13 +115,14 @@ const DisplayProperty = () => {
                                                 return (
                                                     <tr className="text-center" key={`${key}-key`} id="border">
                                                         <td className="text-center" id="border">
-                                                            {pro.PropertyName}
+                                                            <p style={{ textTransform: 'capitalize' }}>{pro.PropertyName}</p>
+                                                            <img style={{ height: '100px' }} src={pro.Images?.url} alt="patil1" />
                                                         </td>
                                                         <td className="text-center" id="border">
                                                             {pro.FullAddress}
                                                         </td>
                                                         <td className="text-center" id="border">
-                                                            {pro.Price}
+                                                            ₹.{pro.Price}
                                                         </td>
                                                         <td className="text-center" id="border">
                                                             {pro.City}
@@ -133,18 +133,15 @@ const DisplayProperty = () => {
                                                         <td className="text-center" id="border">
                                                             {pro.No_of_Rooms}
                                                         </td>
-                                                        <td className="text-center" id="border">
+                                                        {/* <td className="text-center" id="border">
                                                             {pro.No_of_BeedRoom}
-                                                        </td>
+                                                        </td> */}
                                                         <td className="text-center" id="border">
                                                             {pro.No_of_Garage}
                                                         </td>
                                                         <td className="text-center" style={{ display: 'flex' }}>
                                                             <EditProperty propertyId={pro._id} proData={data} />
                                                             <Button className="btn-danger" onClick={deleteporperty} style={{ marginLeft: '3px' }}>Delete</Button>
-                                                            {/* <Link to={`/visitor/display-property-by-single-page/${pro._id}`}>
-                                                                <Button className="btn-warn" style={{marginLeft:'5px'}}>view</Button>
-                                                            </Link> */}
                                                             <Link to={`/owner/shailu/property-Detail/${pro._id}`}>
                                                                 <Button className="btn-warn" style={{ marginLeft: '5px' }}>view</Button>
                                                             </Link>

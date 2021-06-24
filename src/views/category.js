@@ -72,10 +72,8 @@ class category extends React.Component {
                         progress: undefined,
                         });
                     this.getcategoryData();
-                }).catch((errs) => {
-                    if (!errs.response.data.success) {
-                        alert(errs.response.data.error)
-                    }
+                }).catch((error) => {
+                    alert('category Already Exist!')
                 })
 
         }
@@ -156,7 +154,7 @@ class category extends React.Component {
                                                 } 
                                                 return (
                                                     <tr key={`${key}-key`} className="text-left">
-                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
+                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black'}}>
                                                             {e.name}
                                                         </td>
                                                        

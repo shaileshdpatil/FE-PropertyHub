@@ -6,11 +6,11 @@ import TableList from "views/TableList.js";
 import OwnerManage from "views/OwnerManege";
 // import Maps from "views/Maps.js";
 // import Upgrade from "views/Upgrade.js";
-// import UserPage from "views/UserPage.js";
+import UserPage from "views/UserPage.js";
 import Allpropertys from './views/Allproperty'
 import Packages from './views/allpackages' 
 import category from './views/category';
-import subcategory from './views/subcategory';
+// import subcategory from './views/subcategory';
 import city from "./views/city";
 import state from "./views/state"
 import ProprtyDetail from './views/ProprtyDetail';
@@ -51,17 +51,17 @@ var dashRoutes = [
     component: category,
     layout: "/admin",
   },
-  {
-    path: "/sub-categorys",
-    name: "sub-category",
-    icon: "business_chart-bar-32",
-    component: subcategory,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/sub-categorys",
+  //   name: "sub-category",
+  //   icon: "business_chart-bar-32",
+  //   component: subcategory,
+  //   layout: "/admin",
+  // },
   
   {
     path: "/notifications",
-    name: "Feedback",
+    name: "Contact us",
     icon: "ui-1_bell-53",
     component: Notifications,
     layout: "/admin",
@@ -80,13 +80,13 @@ var dashRoutes = [
     component: city,
     layout: "/admin",
   },
-  // {
-  //   path: "/user-page",
-  //   name: "Profile",
-  //   icon: "users_single-02",
-  //   component: UserPage,
-  //   layout: "/admin",
-  // },
+  {
+    path: "/user-page",
+    name: "Profile",
+    icon: "users_single-02",
+    component: UserPage,
+    layout: "/admin",
+  },
   {
     path: "/propertyDetail/:id",
     component: ProprtyDetail,

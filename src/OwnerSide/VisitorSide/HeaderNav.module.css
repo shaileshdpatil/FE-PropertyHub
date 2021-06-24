@@ -1,15 +1,16 @@
 header {
-    background: #021847;
+    background: #6AAFE6;
     color: #fff;
-    overflow: auto;
+    overflow: none;
     padding: 20px 15px;
-    /* position: absolute; */
+    height:65px;
     width: 100%;
-    /* margin-top: -70px; */
     z-index: 1;
-    box-shadow: 25px white !important;
+    box-shadow: 25px grey !important;
   }
   header .logo {
+    color: black;
+    font-weight: bolder;
     float: left;
     padding-left: 100px;
     text-align: right;
@@ -23,16 +24,18 @@ header {
     align-items: center;
   }
   .navbar a {
-    color: #fff;
+    color: black;
     padding: 7px 20px;
     text-transform: capitalize;
     font-weight: 300;
     font-size: 15px;
-    font-weight: bold;
+    font-weight: bolder;
 }
 header nav a:hover {
     text-decoration: none;
-    color: skyblue;
+    color: white;
+    font-size: 17px;
+    border-radius: 20px;
   }
   header nav a.registerBtn {
     background: #639;

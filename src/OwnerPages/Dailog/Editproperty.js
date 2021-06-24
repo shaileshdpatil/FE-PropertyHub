@@ -11,11 +11,9 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import './data.css'
-import {toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import Resizer from 'react-image-file-resizer';
-
-
+import Resizer from 'react-image-file-resizer';
 
 const styles = (theme) => ({
   root: {
@@ -59,7 +57,7 @@ const DialogActions = withStyles((theme) => ({
 
 export default function EditProperty(props) {
 
-    const {_PropertyName,_FullAddress,_description,_Price,_No_of_Floors,_No_of_Rooms,_No_of_BeedRoom,_No_of_Garage,_No_of_Bathroom,_No_of_Living_Room,_City,_builtyear,_category,_location,_sqrft,_kitchen } = props.proData;
+  const { _PropertyName, _FullAddress, _description, _Price, _No_of_Floors, _No_of_Rooms, _No_of_BeedRoom, _No_of_Garage, _No_of_Bathroom, _No_of_Living_Room, _City, _builtyear, _category, _location, _sqrft, _kitchen, _Images } = props.proData;
 
   const [open, setOpen] = React.useState(false);
   const [citys, setCitys] = React.useState([]);
@@ -80,18 +78,18 @@ export default function EditProperty(props) {
   const [kitchen, setkitchen] = React.useState(_kitchen);
   const [City, setCity] = React.useState(_City);
   const [category, setcategory] = React.useState(_category);
-  const [builtyear,setbuiltyear] =React.useState(_builtyear);
-  // const [Images,setImages] =React.useState(_Images);
+  const [builtyear, setbuiltyear] = React.useState(_builtyear);
+  const [Images, setImages] = React.useState(_Images);
 
-  // const onChangeFile = (e) => {
-  //   Resizer.imageFileResizer(e.target.files[0], 720, 720, 'JPEG', 500, 0, (uri) => {
-  //     axios.post(`http://localhost:3000/api/uploadFile`, { image: uri }).then(res => {
-  //       setImages(res.data)
-  //     }).catch(err => {
-  //       console.log("Image Upload Error: ", err);
-  //     })
-  //   }, 'base64')
-  //   };
+  const onChangeFile = (e) => {
+    Resizer.imageFileResizer(e.target.files[0], 500, 2180, 'JPEG', 1080, 0, (uri) => {
+      axios.post(`http://localhost:3000/api/uploadFile`, { image: uri }).then(res => {
+        setImages(res.data);
+      }).catch(err => {
+        console.log("Image Upload Error: ", err);
+      })
+    }, 'base64')
+  };
 
 
   useEffect(() => {
@@ -101,89 +99,91 @@ export default function EditProperty(props) {
       }).catch((error) => {
         console.log(error);
       })
-    }, [])
-    
-    useEffect(() => {
-      axios.get('http://localhost:3000/api/categoryDisplay')
+
+      propertyData();
+  }, [])
+
+  const propertyData = () => {
+    axios.get('http://localhost:3000/api/categoryDisplay')
       .then((res) => {
         setname(res.data);
       }).catch((error) => {
         console.log(error);
       })
-    }, [])
-    
-    const handleClickOpen = () => {
-      setOpen(true);
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
-    
-    const handleUpdate = () => {
-      const data ={kitchen,sqrft,location,PropertyName,FullAddress,description,Price,No_of_Floors,No_of_Rooms,No_of_BeedRoom,No_of_Garage,No_of_Bathroom,No_of_Living_Room,City,builtyear,category};
-      if (PropertyName.length < 8) {
+  }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleUpdate = (e) => {
+    const data = { Images, kitchen, sqrft, location, PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, City, builtyear, category };
+    console.log(Images);
+    if (PropertyName.length < 8) {
       toast.info('property name should be 10 charector long', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else if (FullAddress.length < 15) {
       toast.info('peoprty Full address should be 15 charector long', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
-    }else if(description.length < 15 ){
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (description.length < 15) {
       toast.info('peoprty description should be 15 charector long', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     } else if (Price < 50000) {
       toast.info('price value should greater then 50000 rupees', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
-    } else if(No_of_Floors<0 || No_of_Rooms<0 || No_of_BeedRoom<0 || No_of_Garage<0 || No_of_Bathroom<0 || No_of_Living_Room<0 || kitchen<0){
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (No_of_Floors < 0 || No_of_Rooms < 0 || No_of_BeedRoom < 0 || No_of_Garage < 0 || No_of_Bathroom < 0 || No_of_Living_Room < 0 || kitchen < 0) {
       toast.info('cannot be less then 0', {
-				position: "top-center",
-				autoClose: 5000,
-				hideProgressBar: false,
-				closeOnClick: true,
-				pauseOnHover: true,
-				draggable: true,
-				progress: undefined,
-			});
-    } else if(sqrft < 100){
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    } else if (sqrft < 100) {
       alert("sqerft should be grater then 100")
-    }else if(builtyear<1700 || builtyear >2020){
+    } else if (builtyear < 1700 || builtyear > 2020) {
       alert("should be proper way!")
     }
     else {
-      axios.put(`http://localhost:3000/api/updatepropertyp/${props.propertyId}/details`,data).then((res) => {
-         setOpen(false);
-         window.location.reload(false);
-       }).catch((resspo) => {
-          console.log("failed")
-         })
-      }
+      axios.put(`http://localhost:3000/api/updatepropertyp/${props.propertyId}/details`, data).then((res) => {
+        setOpen(false);
+         window.location.reload();  
+      }).catch((resspo) => {
+        console.log("failed")
+      })
+    }
   }
 
   const marginfor = {
@@ -195,7 +195,7 @@ export default function EditProperty(props) {
   return (
     <div>
       {/* <Button className="btn-danger" onClick={handleClickOpen}>Edit</Button> */}
-      <Button variant="contained" color="primary" onClick={handleClickOpen} style={{height:'35px'}}>
+      <Button variant="contained" color="primary" onClick={handleClickOpen} style={{ height: '35px' }}>
         Edit
       </Button>
       <Dialog onClose={handleClose} aria-labelledby="customized-dialog-title" open={open} >
@@ -204,12 +204,12 @@ export default function EditProperty(props) {
         </DialogTitle>
         <DialogContent dividers>
           <TextField id="name" value={PropertyName} onChange={(e) => setPropertyName(e.target.value)} label="Property-Name" variant="outlined" fullWidth style={marginfor.marginBtn} />
-          {/* <input type="file" filename="Images" accept="image/*" onChange={onChangeFile} style={{ width: '100%' }} /> */}
-           <select id="option" value={City} onChange={(e) => { setCity(e.target.value) }}>
+          <input type="file" filename="Images" accept="image/*" onChange={onChangeFile} style={{ width: '100%' }} />
+          <select id="option" value={City} onChange={(e) => { setCity(e.target.value) }}>
             <option>Select city</option>
             {
               citys.map((cityData, key) =>
-              <option value={cityData.citys} key={`${key}-key`}>{cityData.citys}</option>
+                <option value={cityData.citys} key={`${key}-key`}>{cityData.citys}</option>
               )
             }
           </select>
@@ -218,15 +218,15 @@ export default function EditProperty(props) {
             <option>Select Category</option>
             {
               name.map((cat, key) =>
-              <option value={cat.name} key={`${key}-key`}>{cat.name}</option>
+                <option value={cat.name} key={`${key}-key`}>{cat.name}</option>
               )
             }
           </select>
-          <textarea rows="3" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} placeholder="Enter your Full address here..!!" style={{width:'100%',marginBottom:'5px'}} />
-            {/* <TextField id="address" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn} />          */}
-          <textarea rows="8" value={description} onChange={(e) => setdescription(e.target.value)}placeholder="Enter your Description here..!!" style={{width:'100%'}} />
+          <textarea rows="3" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} placeholder="Enter your Full address here..!!" style={{ width: '100%', marginBottom: '5px' }} />
+          {/* <TextField id="address" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} label="Full-Address" variant="outlined" fullWidth style={marginfor.marginBtn} />          */}
+          <textarea rows="8" value={description} onChange={(e) => setdescription(e.target.value)} placeholder="Enter your Description here..!!" style={{ width: '100%' }} />
           {/* <TextField id="Description" value={description} onChange={(e) => setdescription(e.target.value)} label="Description" variant="outlined" fullWidth style={marginfor.marginBtn} /> */}
-          <TextField id="olocation" value={location} onChange={(e) => setlocation(e.target.value)} label="location" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="olocation" value={location} onChange={(e) => setlocation(e.target.value)} label="short location" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="buildyear" value={builtyear} onChange={(e) => setbuiltyear(e.target.value)} type="Number" label="buil tyear" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="sqrft" value={sqrft} onChange={(e) => setsqrft(e.target.value)} label="sqrft" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="Price" value={Price} onChange={(e) => setPrice(e.target.value)} type="Number" label="Price" variant="outlined" fullWidth style={marginfor.marginBtn} />

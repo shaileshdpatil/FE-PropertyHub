@@ -51,7 +51,7 @@ const propertyWala = (e) => {
               </CardHeader>
               <CardBody style={{ display: 'flex' }}>
                 <Card style={{ width: '900px', padding: '10px' }}>
-                  <img src={single.Images?.url} alt="lavdalasan" />
+                  <img src={single.Images?.url} alt="patil" />
                   <h3 className="post-content-title mb-4 font-weight-bold">Description</h3>
                   <p style={{ color: 'black', backgroundColor: '#E0E3DA', padding: '5px' }}>Live in a world of comfort and style at Ganga Acropolis located in Baner, Pune. Book your 2 BHK apartment now. Sprawling across a carpet area of 558.97 sq. ft, it is an under construction property available for Rs. 74.14 Lac.The project has 6 towers, each of them with aesthetically crafted interiors as well as exteriors The project has the latest Fire Fighting Systems, an exclusive Car wash area, Swimming Pool, Indoor Games, Jacuzzi, Lawn Tennis Court, etc.</p>
                 </Card>

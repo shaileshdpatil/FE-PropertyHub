@@ -7,7 +7,7 @@ const ReviewsByUser = () => {
             <div className={styles.revSection}>
 
                 <h2 className={styles.title}>Our Guests Love Us</h2>
-                <p className={styles.note}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil laboriosam possimus perferendis non error neque.</p>
+                <p className={styles.note}>OUR GUEST ARE IMPRESSED!</p>
                 <div className={styles.shailu}>
                     <div className={styles.reviews}>
                         <div className={styles.review}>
@@ -22,7 +22,7 @@ const ReviewsByUser = () => {
                                     <i className="fas fa-star" />
                                     <i className="fas fa-star-half" />
                                 </div>
-                                <div className={styles.descReview}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati eligendi suscipit illum officia ex eos.</div>
+                                <div className={styles.descReview}>"Very impressed how quickly and effective they are straight to the point and Impressive"</div>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@ const ReviewsByUser = () => {
                                     <i className="fas fa-star" />
                                     <i className="fas fa-star-half" />
                                 </div>
-                                <div className={styles.descReview}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati eligendi suscipit illum officia ex eos.</div>
+                                <div className={styles.descReview}>"We worked with Katrina for about 8 months before we finally bought our house!"</div>
                             </div>
                         </div>
                     </div>
@@ -52,7 +52,7 @@ const ReviewsByUser = () => {
                                 <div className={styles.rating}>
                                         <i className="fas fa-star" />
                                 </div>
-                                <div className={styles.descReview}>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati eligendi suscipit illum officia ex eos.</div>
+                                <div className={styles.descReview}>"The home was competitively priced, expertly staged, and sold quick, with multiple ..."</div>
                             </div>
                         </div>
                     </div>

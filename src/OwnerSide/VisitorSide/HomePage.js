@@ -7,12 +7,14 @@ import Tables from '../PackageTables';
 import FooterNav from './FooterNav';
 // import ReviewsByUser from './ReviewsByUser';
 import Property from './Property';
+import Slider from './slider';
 export class HomePage extends Component {
 
     render() {
         return (
             <>
                 <HeaderNav />
+                <Slider />
                 <div className={styles.headersps}>
                     <div className={styles.container}>
                         <div className={styles.row}>

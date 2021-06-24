@@ -7,21 +7,31 @@ import { NavLink } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import './Dailog/inquery.css';
-// import { Card } from 'reactstrap'
+// import history from '../../history';	
+import { useParams } from 'react-router-dom';
 
-const ListingProperty = () => {
+const ListingPropertyData = () => {
 	const [property, setProperty] = React.useState([])
 	const [category, setCategory] = React.useState([])
+	// const [property, setProperty] = React.useState([])
+
+	const { name } = useParams();
 
 	useEffect(() => {
-		axios.get('http://localhost:3000/api/propertyDisplay')
+		propertyData();
+		CategoryData();
+		
+		 // eslint-disable-next-line
+	}, [])
+
+	const propertyData = () => {
+		axios.get(`http://localhost:3000/api/searchbycategory/${name}`)
 			.then((response) => {
 				setProperty(response.data);
 			}).catch((error) => {
 				console.log(error);
 			})
-		CategoryData();
-	}, [])
+	}
 
 	const CategoryData = () => {
 		axios.get('http://localhost:3000/api/categoryDisplay')
@@ -31,7 +41,10 @@ const ListingProperty = () => {
 				console.log(err);
 			})
 	}
-	// console.log(category);
+	const reloadOnce = () => {
+		console.log('patil');
+	}
+
 	return (
 		<>
 			<HeaderNav />
@@ -71,7 +84,7 @@ const ListingProperty = () => {
 										category.map((cat) =>
 											<div className="panel-heading">
 												<h4 className="panel-title">
-													<Link to={`/visitor/display-ListingPropertyData/${cat.name}`} data-toggle="collapse" data-parent="#accordian">
+													<Link to={`/visitor/display-ListingData/${cat.name}`} data-toggle="collapse" data-parent="#accordian" onClick={reloadOnce}>
 														<span className="badge pull-right"></span>
 														{cat.name}
 													</Link>
@@ -91,20 +104,20 @@ const ListingProperty = () => {
 
 							{
 								property.map((prope, key) => {
+									// window.location.reload()
 									return (
 										<>
 											<div className="col-sm-4 card" key={`${key}-key`} style={{ padding: '5px', height: '350px', margin: '0px' }} >
 												<div className="product-image-wrapper">
 													<div className="single-products" >
-														<div className="productinfo text-center">
+														<div className="productinfo text-center" >
 															<Link to={`/visitor/display-property-by-single-page/${prope._id}`}>
-																<img src={prope.Images?.url} alt="data9" style={{ height: '165px' }} />
+																<img src={prope.Images?.url} alt="data9" style={{ height: '150px' }} />
 															</Link>
 
-															<p style={{ fontWeight: 'bold', marginTop: '5px', height: '10px', textTransform: 'capitalize',borderTop:'2px solid grey' }}>{prope.PropertyName}</p>
-															<p>IN</p>
-															<p style={{ marginTop: '-10px',textTransform:'uppercase' }} >--------{prope.City}--------</p>
-															<h2 style={{ marginTop: '-10px' }} >₹.{prope.Price}</h2>
+															<p style={{ fontWeight: 'bold', marginTop: '5px', height: '50px', textTransform: 'capitalize' }}>{prope.PropertyName}</p>
+															<p style={{ marginTop: '-10px' }} >--------{prope.City}--------</p>
+															<h2 style={{ marginTop: '-10px' }} >Rs.{prope.Price}</h2>
 															<Link to={`/visitor/display-property-by-single-page/${prope._id}`}>
 																<button id="shailuBtn" style={{ width: '100%' }}>View Details</button>
 															</Link>
@@ -126,4 +139,4 @@ const ListingProperty = () => {
 	);
 }
 
-export default ListingProperty;
+export default ListingPropertyData;

@@ -191,14 +191,14 @@ class Packages extends React.Component {
 													_description: e.description
 												}
 												return (
-													<tr key={`${key}-key`} className="text-left">
+													<tr key={`${key}-key`} className="text-left" style={{textTransform:'uppercase'}}>
 														<td className="text-center font-weight-bold" style={styleMargin.borders}>{e.name}</td>
 														<td className="text-center font-weight-bold" style={styleMargin.borders}>{e.duration}</td>
 														<td className="text-center font-weight-bold" style={styleMargin.borders}>{e.no_of_ads}</td>
 														<td className="text-center font-weight-bold" style={styleMargin.borders}>{e.amount}</td>
 														<td className="text-center font-weight-bold" style={styleMargin.borders}>{e.description}</td>
 														<td className="text-left" style={{ border: '1px solid black', display: 'flex', justifyContent: 'center' }}>
-															<CustomizedDialogs packageId={e._id} dialogueData={data} />
+															{/* <CustomizedDialogs packageId={e._id} dialogueData={data} /> */}
 															<ButtonM  startIcon={<DeleteIcon />} variant="contained" color="secondary" size="small" onClick={() => this.deleteData(e._id)} style={{ marginLeft: '10px' }}>Delete</ButtonM>
 														</td>
 													</tr>

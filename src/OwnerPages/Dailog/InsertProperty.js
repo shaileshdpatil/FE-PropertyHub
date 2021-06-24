@@ -88,6 +88,7 @@ export default function InsertProperty({ propertylength }) {
   const ads = owner[0]?.no_of_ads;
 
   const onChangeFile = (e) => {
+    e.preventDefault();
     Resizer.imageFileResizer(e.target.files[0], 500, 2180, 'JPEG', 1080, 0, (uri) => {
       axios.post(`http://localhost:3000/api/uploadFile`, { image: uri }).then(res => {
         setImages(res.data)
@@ -109,10 +110,8 @@ export default function InsertProperty({ propertylength }) {
     const ownerID = cookies.get("ownerID", { path: '/owner' });
     const OwnerName = cookies.get("OwnerName", { path: '/owner' });
     const data = { OwnerName, PropertyName, FullAddress, description, Price, No_of_Floors, No_of_Rooms, No_of_BeedRoom, No_of_Garage, No_of_Bathroom, No_of_Living_Room, sqrft, location, kitchen, City, ownerID, Images, builtyear, category };
-
-
-    // console.log(ads);
-    if(propertylength <= ads){
+    
+    if(propertylength >= ads){
       alert("you should update your package!")
     }
     else if (PropertyName.length < 5) {
@@ -275,7 +274,7 @@ export default function InsertProperty({ propertylength }) {
           </select>
           <textarea rows="3" value={FullAddress} onChange={(e) => setFullAddress(e.target.value)} placeholder="Enter your Full address here..!!" style={{ width: '100%', marginBottom: '5px' }} />
           <textarea rows="8" value={description} onChange={(e) => setdescription(e.target.value)} placeholder="Enter your Full description here..!!" style={{ width: '100%' }} />
-          <TextField id="location" value={location} onChange={(e) => setlocation(e.target.value)} label="localtion" variant="outlined" fullWidth style={marginfor.marginBtn} />
+          <TextField id="location" value={location} onChange={(e) => setlocation(e.target.value)} label="short localtion" variant="outlined" fullWidth style={marginfor.marginBtn} />
           <TextField id="buildyear" value={builtyear} onChange={(e) => setbuiltyear(e.target.value)} type="Number" label="buil tyear" variant="outlined" fullWidth style={marginfor.marginBtn} />
           {/* <TextField id="Description" value={description} onChange={(e) => setdescription(e.target.value)} label="Description" variant="outlined" fullWidth style={marginfor.marginBtn} /> */}
           <TextField id="Price" value={Price} onChange={(e) => setPrice(e.target.value)} type="Number" label="Price" variant="outlined" fullWidth style={marginfor.marginBtn} />

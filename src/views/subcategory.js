@@ -26,7 +26,7 @@ class subcategory extends React.Component {
             subcategoryData: [],
             categoryData: [],
             names: '',
-            category: '',
+            // category: '',
         }
     }
 
@@ -36,12 +36,8 @@ class subcategory extends React.Component {
     }
 
     getsubcategoryData = () => {
-        axios.get('http://localhost:3000/api/subcategorydisp',
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then((response) => {
+        axios.get('http://localhost:3000/api/subcategorydisp')
+        .then((response) => {
                 this.setState({ subcategoryData: response.data })
             });
     }
@@ -52,15 +48,13 @@ class subcategory extends React.Component {
     }
 
     submitForm = () => {
-        const { names, category } = this.state;
-        const data = { names, category }
-        console.log(data);
-        if (names?.lenght <= 3 || names?.lenght >= 15 || category?.lenght <= 3 || category?.lenght >= 15) {
+        const { names } = this.state;
+        const data = { names }
+        if (names?.lenght <= 3 || names?.lenght >= 15) {
             alert("please fill fields property")
         } else {
             axios.post("http://localhost:3000/api/subcategoryadd", data)
                 .then((respo) => {
-                    // console.log(data);
                     toast.success('successfully inserted!', {
                         position: "top-center",
                         autoClose: 5000,
@@ -72,7 +66,7 @@ class subcategory extends React.Component {
                     });
                     this.getsubcategoryData()
                 }).catch((errs) => {
-                   console.log(errs);
+                    alert("sub category is already exist");
                 })
         }
     }
@@ -96,7 +90,7 @@ class subcategory extends React.Component {
     }
 
     render() {
-        const { subcategoryData, names, categoryData } = this.state;
+        const { subcategoryData, names } = this.state;
         const marginfor = {
             margin1: {
                 marginRight: '15px',
@@ -148,11 +142,12 @@ class subcategory extends React.Component {
                                                 <p className="alert-msg">{names?.length <= 3 && 'minimum length 3'}</p>
                                                 <p className="alert-msg">{names?.length >= 15 && 'maximum length 15'}</p>
                                             </div>
-                                            <div>
+                                            {/* <div>
                                                 <label >Select category</label><br />
                                                 <select style={marginfor.options} value={this.category} onChange={(e) => this.setState({ category: e.target.value })}>
                                                     <option>Select category</option>
-                                                    {categoryData.map((event, keys) => {
+                                                    {
+                                                    categoryData.map((event, keys) => {
                                                         return (
                                                             <>
                                                                 <option key={`${keys}-key`} value={event.name}>{event.name}</option>
@@ -162,7 +157,7 @@ class subcategory extends React.Component {
                                                     }
                                                 </select>
 
-                                            </div>
+                                            </div> */}
                                             {/* <Button type="submit" variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button> */}
                                             <button type="button" style={marginfor.btninsert} onClick={this.submitForm}>Insert</button>
 
@@ -180,7 +175,7 @@ class subcategory extends React.Component {
                                             <tr>
                                                 <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Sub-category Name</th>
                                                 {/* <th className="text-center font-weight-bold" style={{ border: '1px solid black' }}>category Name</th> */}
-                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Category</th>
+                                                {/* <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Category</th> */}
                                                 <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Action</th>
                                             </tr>
 
@@ -195,11 +190,10 @@ class subcategory extends React.Component {
                                                     <tr key={`${key}-key`} className="text-center">
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.names}
-                                                        </td>
-
-                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
+                                                        </td>   
+                                                        {/* <td className="text-center font-weight-bold" style={{ border: '1px solid black',textTransform:'lowercase' }}>
                                                             {e.category}
-                                                        </td>
+                                                        </td> */}
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black', display: 'flex', justifyContent: 'center' }}>
                                                             <Subcategory subcatId={e._id} subCatData={data} />
                                                             <Button variant="contained" color="secondary" className="btn-danger" startIcon={<DeleteIcon />} size="small" onClick={() => this.deleteData(e._id)} style={{ marginLeft: '5px' }}>Delete</Button>

@@ -7,7 +7,7 @@ export default class FooterNav extends Component {
             <footer>
                 <div className={styles.FooterNav}>
                     <p>
-                        Copyrights to © Patil. All Rights Reserved and Contact Us: +91 90000 00000
+                        Copyrights to © Propertyhub. All Rights Reserved and Contact Us: +91 90000 00000
                     </p>
                 </div>
             </footer>

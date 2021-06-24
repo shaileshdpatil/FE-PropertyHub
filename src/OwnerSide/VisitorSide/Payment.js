@@ -94,17 +94,17 @@ const Payment = () => {
       <div className="c1">
         <h1>Please confirm your payment</h1>
         <p>Pay to this account and fill the form</p>
-        <p>account No : 4270XXXXXXXX76</p>
+        <p>account No : 42708100002376</p>
         <div className="d1">
           <form >
             <div className="email">
               <label htmlFor="packages">Select your package</label>
               <select name="packages" id="packages" value={packageName} onChange={(e) => {
                 setPackage(e.target.value)
-                pack.filter((ele, index) => {
+                pack.filter((ele) => {
                   if (ele.name === e.target.value) {
-                    setAmount(ele.amount)
-                    setNo_of_ads(ele.no_of_ads)
+                    setAmount(ele.amount);
+                    setNo_of_ads(ele.no_of_ads);
                   }
                 }
                 )

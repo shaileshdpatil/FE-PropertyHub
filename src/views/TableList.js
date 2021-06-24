@@ -67,7 +67,7 @@ class RegularTables extends React.Component {
                       </tr>
 
                     </thead>
-                    <tbody style={{ border: '1px solid black' }}>
+                    <tbody style={{ border: '1px solid black',textTransform:'uppercase' }}>
                       {dealData.map((e, key) => {
                         return (
                           <tr key={`${key}-key`} className="text-left">
@@ -80,7 +80,7 @@ class RegularTables extends React.Component {
                             <td className="text-center font-weight-bold">
                               {e.amount}
                             </td>
-                            <td className="text-center font-weight-bold" >
+                            <td className="text-center font-weight-bold" style={{color:'green',fontSize:'20px'}}>
                               {e.deal}
                             </td>
                             <td className="text-center font-weight-bold">

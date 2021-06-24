@@ -108,7 +108,7 @@ const PorpertySingle = (prope) => {
             <section className="w3l-blog post-content py-5" style={{ marginLeft: '70px', marginRight: '70px' }}>
                 <div className={styles.container}>
                     <div className={styles.titleSingle} key={single.id}>
-                        <h2>Get your dream home in your Location</h2>
+                        <h2 style={{textTransform:'capitalize'}}>{single.PropertyName} in {single.City}</h2>
                     </div>
                     <div className="details-propertys">
                         <div className={styles.categorys} style={{ display: 'flex' }}>
@@ -209,7 +209,7 @@ const PorpertySingle = (prope) => {
                                             review.map((res, key) => {
                                                 return (
                                                     <div key={`${key}-key`}>
-                                                        <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px' }} >{res.userName}</h6>
+                                                        <h6 style={{ fontWeight: 'bold', fontSize: '15px', marginLeft: '5px', color: 'green', backgroundColor: 'skyblue', padding: '10px',borderRadius:'5px' }} >{res.userName}</h6>
                                                         <div className={styles.detailsList}>
                                                             <p>{res.comment}</p>
                                                             {/* {console.log(res.comment)} */}

@@ -44,17 +44,17 @@ class state extends React.Component {
     submitForm = () => {
         const { country, states } = this.state;
         const data = { country, states }
-        if (country <= 3 || states <= 3) {
+        if ( states <= 3) {
             alert("please fill fields property");
-        } else if (format.test(country) || format.test(states)){
-            alert("Country name or state name must not contain special character");
         } else {
             axios.post("http://localhost:3000/api/stateadd", data)
-                .then((response) => {
+                .then((res) => {
                     alert("successfully inserted");
                     this.getstateData();
                 }).catch((errs) => {
-                    alert("failed");
+                    if (!errs.response.data.success) {
+                        alert(errs.response.data.error)
+                    }
                 })
 
         }
@@ -68,7 +68,8 @@ class state extends React.Component {
         })
     }
     render() {
-        const { stateData, country, states } = this.state;
+        //country
+        const { stateData, states } = this.state;
         const marginfor = {
             margin1: {
                 marginRight: '15px',    
@@ -98,13 +99,14 @@ class state extends React.Component {
                                 </CardHeader>
                                 <CardBody>
                                     <form noValidate autoComplete="off" >
+                                            <p>You can sell your property India only..!</p><br />
                                         <div style={{ alignItems: 'center', display: 'flex' }} className="anchor">
 
-                                            <div>
+                                            {/* <div>
                                                 <TextField id="outlined-basic" onChange={(e) => this.setState({ country: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })} label="country" variant="outlined" style={marginfor.margin1} required />
                                                 <p className="alert-msg">{country?.length <= 3 && 'minimum length 3'}</p>
 
-                                            </div>
+                                            </div> */}
                                             <div>
                                                 <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })} label="state name" variant="outlined" style={marginfor.margin1} required />
                                                 <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p>
@@ -138,7 +140,7 @@ class state extends React.Component {
                                                     _country: e.country
                                                 };
                                                 return (
-                                                    <tr key={`${key}-key`} className="text-center">
+                                                    <tr key={`${key}-key`} className="text-center" style={{textTransform:'uppercase'}}>
 
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.country}

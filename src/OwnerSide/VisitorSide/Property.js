@@ -21,13 +21,16 @@ const Property = () => {
       // margin:'20px'
     },
   }
+  const RESIDENTAL = 'RESIDENTAL';
+  const SPECIALPURPOSE = 'SPECIALPURPOSE';
+  const INDUSTRIAL = 'INDUSTRIAL';
 
     return (
         <div>
           <h1 style={{fontWeight:'bold'}}>PLEASE SELECT YOUR FAVOURITE CATEGORY</h1>
           <div className={styles.ShailuData} style={{marginTop:'10px'}}>
           <Grid item xs={12} sm={6} md={4}>
-                <Link to="/visitor/display-ListingProperty">
+                <Link to={`/visitor/display-ListingPropertyData/${RESIDENTAL}`}>
             <Card style={classes.card}>
               <CardActionArea>
                 <CardMedia
@@ -38,7 +41,7 @@ const Property = () => {
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    Villa
+                  RESIDENTAL
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -47,7 +50,7 @@ const Property = () => {
             </Link>
           </Grid>
              <Grid item xs={12} sm={6} md={4}>
-          <Link to="/visitor/display-ListingProperty">
+          <Link to={`/visitor/display-ListingPropertyData/${SPECIALPURPOSE}`}>
             <Card style={classes.card}>
               <CardActionArea>
                 <CardMedia
@@ -58,7 +61,7 @@ const Property = () => {
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    Row houses
+                  SPECIALPURPOSE
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -67,7 +70,7 @@ const Property = () => {
             </Link>
           </Grid>
              <Grid item xs={12} sm={6} md={4}>
-             <Link to="/visitor/display-ListingProperty">
+             <Link to={`/visitor/display-ListingPropertyData/${INDUSTRIAL}`}>
             <Card style={classes.card}>
               <CardActionArea>
                 <CardMedia
@@ -78,7 +81,7 @@ const Property = () => {
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    Banglow 
+                  INDUSTRIAL 
                   </Typography>
                 </CardContent>
               </CardActionArea>
@@ -98,7 +101,7 @@ const Property = () => {
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    Etc
+                    All over
                   </Typography>
                 </CardContent>
               </CardActionArea>

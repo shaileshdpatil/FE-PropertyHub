@@ -21,15 +21,15 @@ const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
 class city extends React.Component {
     state = {
         cityData: [],
-        StateData: [],
+        // StateData: [],
         citys: '',
-        states: ''
+        // states: ''
 
     }
 
     componentDidMount = () => {
         this.getcityData();
-        this.getStateData();
+        // this.getStateData();
     }
 
     getcityData = () => {
@@ -45,29 +45,30 @@ class city extends React.Component {
     }
 
     submitForm = () => {
-        const { citys, states } = this.state;
-        const data = { citys, states }
-        if (citys < 3 || states < 3) {
+        const { citys } = this.state;
+        const data = { citys }
+        if (citys < 3) {
             alert("please fill the fields properly")
-        } else if (format.test(citys) || format.test(states)) {
+        } else if (format.test(citys)) {
             alert("City name or state name must not contain special character");
         } else {
             axios.post("http://localhost:3000/api/cityadd", data)
-                .then((response) => {
+                .then((res) => {
                     this.getcityData();
                     alert("successfully inserted");
-
-                }).catch((error) => {
-                    console.log(error);
+                }).catch((errs) => {
+                    if (!errs.response.data.success) {
+                        alert(errs.response.data.error)
+                    }
                 })
 
         }
     }
-    getStateData = () => {
-        axios.get('http://localhost:3000/api/statedisp').then((response) => {
-            this.setState({ StateData: response.data })
-        });
-    }
+    // getStateData = () => {
+    //     axios.get('http://localhost:3000/api/statedisp').then((response) => {
+    //         this.setState({ StateData: response.data })
+    //     });
+    // }
 
     deleteData = (id) => {
         axios.delete(`http://localhost:3000/api/deletecityy/${id}`).then((resonsee) => {
@@ -78,7 +79,8 @@ class city extends React.Component {
         })
     }
     render() {
-        const { cityData, citys, StateData } = this.state;
+        // StateData
+        const { cityData, citys } = this.state;
         const marginfor = {
             margin1: {
                 marginRight: '15px',
@@ -121,7 +123,7 @@ class city extends React.Component {
                                             <div>
                                                 {/* <TextField id="outlined-basic" onChange={(e) => this.setState({ states: e.target.value })} label="state" variant="outlined" style={marginfor.margin1} />
                                                 <p className="alert-msg">{states?.length <= 3 && 'minimum length 3'}</p> */}
-                                                <label style={{ marginTop: '15px'}}>Select State</label><br />
+                                                {/* <label style={{ marginTop: '15px'}}>Select State</label><br />
                                                 <select style={marginfor.options} value={this.states} onChange={(e) => this.setState({ states: e.target.value.replace(/[^a-zA-Z0-9]/g, '') })}>
                                                     <option>Select states</option>
                                                     {StateData.map((event, keys) => {
@@ -132,7 +134,7 @@ class city extends React.Component {
                                                         )
                                                     })
                                                     }
-                                                </select>
+                                                </select> */}
                                             </div>
                                             <Button variant="contained" color="primary" style={marginfor.btnsize} onClick={this.submitForm}>Insert</Button>
 
@@ -149,7 +151,7 @@ class city extends React.Component {
                                         <thead className="text-primary font-weight-bold" style={marginfor.bordersHead}>
                                             <tr>
                                                 <th className="text-center font-weight-bold" style={marginfor.bordersHead}>city</th>
-                                                <th className="text-center font-weight-bold" style={marginfor.bordersHead}>state</th>
+                                                {/* <th className="text-center font-weight-bold" style={marginfor.bordersHead}>state</th> */}
                                                 <th className="text-center font-weight-bold" style={marginfor.bordersHead}>Action</th>
                                             </tr>
 
@@ -157,16 +159,12 @@ class city extends React.Component {
                                         <tbody style={{ border: '1px solid black' }}>
                                             {cityData.map((e, key) => {
                                                 const data = {
-                                                    _citys: e.citys,
-                                                    _states: e.states
+                                                    _citys: e.citys
                                                 }
                                                 return (
-                                                    <tr key={`${key}-key`} className="text-center">
+                                                    <tr key={`${key}-key`} className="text-center" style={{textTransform:'uppercase'}}>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
                                                             {e.citys}
-                                                        </td>
-                                                        <td className="text-center font-weight-bold" style={{ border: '1px solid black' }}>
-                                                            {e.states}
                                                         </td>
                                                         <td className="text-center font-weight-bold" style={{ border: '1px solid black', display: 'flex', justifyContent: 'center' }}>
                                                             <CityDailog cityId={e._id} cityData={data} />

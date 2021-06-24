@@ -38,8 +38,57 @@
   display: flex;
   flex-direction: column;
 }
+.card1{
+  padding: 20px 8px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.card2{
+  padding: 20px 8px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+.card3{
+  padding: 20px 8px;
+  border-radius: 10px;
+  border: 1px solid lightgray;
+  width: 100%;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
 
 .card img{
+  height: 16rem;
+  width: 16rem;
+  align-self: center;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.card1 img{
+  height: 16rem;
+  width: 16rem;
+  align-self: center;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+.card2 img{
+  height: 16rem;
+  width: 16rem;
+  align-self: center;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+.card3 img{
   height: 16rem;
   width: 16rem;
   align-self: center;

@@ -87,7 +87,8 @@ export default function CustomizedDialogs(props) {
     } else {
       const data = { name, amount, no_of_ads, description, duration }
       // console.log('=========>', props.packageId);
-      axios.put(`http://localhost:3000/api/updatePackage/${props.packageId}/details`, data).then((res) => {
+      axios.put(`http://localhost:3000/api/updatePackage/${props.packageId}/details`, data)
+      .then((res) => {
         toast.success('Successfully updated!', {
           position: "top-center",
           autoClose: 5000,
@@ -97,6 +98,7 @@ export default function CustomizedDialogs(props) {
           draggable: true,
           progress: undefined,
         });
+        window.location.reload();
         setOpen(false);
       }).catch((errs) => {
         alert(errs.response.data.error)
@@ -122,11 +124,11 @@ export default function CustomizedDialogs(props) {
           update packages
         </DialogTitle>
         <DialogContent dividers>
-          <TextField id="standard-required" value={name} onChange={(e) => setname(e.target.value)} variant="outlined" label="Package Name" fullWidth style={marginfor.margins} required />
-          <TextField id="standard-required" value={amount} onChange={(e) => setamount(e.target.value)} type="Number" variant="outlined" label="Amount" fullWidth style={marginfor.margins} required />
-          <TextField id="standard-required" value={no_of_ads} onChange={(e) => setno_of_ads(e.target.value)} type="Number" variant="outlined" label="No of ads" fullWidth style={marginfor.margins} required />
-          <TextField id="standard-required" value={description} onChange={(e) => setdescription(e.target.value)} variant="outlined" label="Description" fullWidth style={marginfor.margins} required />
-          <TextField id="standard-required" value={duration} onChange={(e) => setduration(e.target.value)} type="Number" variant="outlined" label="Duration" fullWidth style={marginfor.margins} required />
+          <TextField id="standard" value={name} onChange={(e) => setname(e.target.value)} variant="outlined" label="Package Name" fullWidth style={marginfor.margins} required />
+          <TextField id="standard1" value={amount} onChange={(e) => setamount(e.target.value)} type="Number" variant="outlined" label="Amount" fullWidth style={marginfor.margins} required />
+          <TextField id="standard2" value={no_of_ads} onChange={(e) => setno_of_ads(e.target.value)} type="Number" variant="outlined" label="No of ads" fullWidth style={marginfor.margins} required />
+          <TextField id="standard3" value={description} onChange={(e) => setdescription(e.target.value)} variant="outlined" label="Description" fullWidth style={marginfor.margins} required />
+          <TextField id="standard4" value={duration} onChange={(e) => setduration(e.target.value)} type="Number" variant="outlined" label="Duration" fullWidth style={marginfor.margins} required />
         </DialogContent>
         <DialogActions>
           <Button autoFocus startIcon={<SaveIcon />} onClick={handleUpdate} color="primary">
